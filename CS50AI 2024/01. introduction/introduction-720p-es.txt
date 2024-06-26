@@ -1,0 +1,2237 @@
+<img src="https://prod-edx-ai-translations-assets.s3.amazonaws.com/google-translate.png" alt="Traducido por el logotipo de Google"><br><br>[GENERADO AUTOMÁTICAMENTE ]<br>[MÚSICA]
+BRIAN YU: Muy bien.
+Bienvenidos todos a una Introducción a la Inteligencia Artificial con Python.
+Mi nombre es Brian Yu.
+Y en esta clase, exploraremos algunas de las ideas y técnicas,
+y algoritmos que son la base de la inteligencia artificial.
+Ahora bien, la inteligencia artificial abarca una amplia variedad de tipos de técnicas.
+Cada vez que ves que una computadora hace algo que
+parece ser inteligente o racional de alguna manera,
+como reconocer el rostro de alguien en una foto,
+o poder jugar un juego mejor que la gente,
+o ser capaz de entender el lenguaje humano cuando hablamos con nuestros teléfonos
+y entienden lo que queremos decir y son capaces de respondernos,
+Todos estos son ejemplos de IA o inteligencia artificial.
+Y en esta clase exploraremos algunas de las ideas que hacen posible esa IA.
+Entonces comenzaremos nuestras conversaciones con la búsqueda.
+El problema es que tenemos una IA y lo haríamos.
+como la IA para poder buscar soluciones a algún tipo de problema,
+no importa cuál pueda ser ese problema.
+Ya sea tratando de obtener indicaciones para llegar en automóvil desde el punto A al punto B,
+o tratando de descubrir cómo jugar un juego,
+dar un juego de tres en raya, por ejemplo, descubrir qué movimiento
+debería hacer.
+Después de eso, veremos el conocimiento.
+Idealmente, queremos que nuestra IA pueda conocer información,
+para poder representar esa información,
+y lo que es más importante, poder sacar inferencias a partir de esa información.
+Ser capaz de utilizar la información que conoce y sacar conclusiones adicionales.
+Así que hablaremos sobre cómo se puede programar la IA para hacer precisamente eso.
+Luego exploraremos el tema de la incertidumbre.
+Hablando de ideas sobre qué sucede si una computadora no está segura de un hecho
+¿Pero tal vez sólo sea seguro con cierta probabilidad?
+Entonces hablaremos sobre algunas de las ideas detrás de la probabilidad.
+y cómo las computadoras pueden comenzar a lidiar con eventos inciertos
+para ser un poquito más inteligente también en ese sentido.
+Después de eso, centraremos nuestra atención en la optimización.
+Problemas cuando la computadora intenta optimizarse para algún tipo de objetivo,
+especialmente en una situación en la que podría haber
+Habrá múltiples formas en que una computadora podría resolver un problema.
+pero estamos buscando una mejor manera o, potencialmente, la mejor manera
+si eso es posible.
+Luego veremos el aprendizaje automático o el aprendizaje en general.
+Al observar cómo cuando tenemos acceso a los datos
+Nuestras computadoras pueden programarse para que sean bastante inteligentes aprendiendo de los datos.
+y aprender de la experiencia, poder realizar una tarea cada vez mejor
+basado en un mayor acceso a los datos.
+Entonces, su correo electrónico, por ejemplo, donde su bandeja de entrada de alguna manera
+sabe cuáles de sus correos electrónicos son buenos y cuáles son spam.
+Todos estos son ejemplos de computadoras que
+capaz de aprender de experiencias y datos pasados.
+También veremos cómo las computadoras pueden inspirarse
+Desde la inteligencia humana, observando la estructura del cerebro humano.
+y cómo las redes neuronales pueden ser una computadora análoga a ese tipo de idea.
+¿Y cómo, aprovechando cierto tipo de estructura de una computadora?
+programa, podemos escribir redes neuronales que
+son capaces de realizar tareas muy, muy eficazmente.
+Y finalmente, centraremos nuestra atención en el lenguaje.
+No lenguajes de programación, sino lenguajes humanos que hablamos todos los días.
+Y echando un vistazo a los desafíos que vienen
+Cómo una computadora intenta comprender el lenguaje natural.
+y cómo es algo del lenguaje natural
+procesamiento que ocurre en la inteligencia artificial moderna
+realmente puede funcionar.
+Pero hoy nuestra conversación comenzará con la búsqueda.
+Este problema de tratar de descubrir qué
+hacer cuando tenemos algún tipo de situación en la que se encuentra la computadora,
+algún tipo de entorno en el que se encuentra un agente, por así decirlo.
+Y nos gustaría que ese agente pudiera de alguna manera buscar una solución.
+a ese problema.
+Ahora bien, estos problemas pueden presentarse en diferentes tipos de formatos.
+Un ejemplo, por ejemplo, podría ser algo como este clásico 15
+rompecabezas con las fichas deslizantes que podrías
+has visto, donde intentas deslizar los mosaicos para asegurarte
+que todos los números se alineen en orden.
+Este es un ejemplo de lo que podría llamarse un problema de búsqueda.
+El rompecabezas de los 15 comienza en un estado inicialmente confuso.
+y necesitamos alguna forma de encontrar movimientos a seguir para regresar
+el rompecabezas a su estado resuelto.
+Pero existen problemas similares que se pueden plantear de otras maneras.
+Tratar de encontrar el camino a través de un laberinto, por ejemplo,
+es otro ejemplo de un problema de búsqueda.
+Comienzas en un lugar, tienes una meta a la que intentas llegar,
+y necesitas descubrir la secuencia correcta de acciones que te llevarán
+desde ese estado inicial hasta la meta.
+Y si bien esto es un poco abstracto, en cualquier momento
+Hablamos de resolución de laberintos en esta clase.
+puedes traducirlo a algo un poco más real,
+algo así como indicaciones para llegar en coche.
+Si alguna vez te preguntas cómo es capaz Google Maps de descubrir qué
+es la mejor manera de llegar del punto A al punto B
+y qué giros hacer, a qué hora, dependiendo del tráfico, por ejemplo.
+A menudo es algún tipo de algoritmo de búsqueda.
+Tienes una IA que intenta llegar desde una posición inicial.
+a algún tipo de objetivo mediante la realización de alguna secuencia de acciones.
+Así que hoy comenzaremos nuestras conversaciones pensando
+sobre este tipo de problemas de búsqueda y qué
+va a resolver un problema de búsqueda como este para que una IA
+para poder encontrar una buena solución.
+Sin embargo, para lograrlo necesitaremos
+introducir un poco de terminología, parte de la cual
+Ya lo he usado.
+Pero la primera vez que tendremos que pensar es en un agente.
+Un agente es simplemente una entidad que percibe su entorno,
+de alguna manera es capaz de percibir las cosas que lo rodean,
+y actuar sobre ese entorno de alguna manera.
+Así, en el caso de las indicaciones para llegar en coche,
+su agente podría ser alguna representación de un automóvil que
+está tratando de determinar qué acciones tomar para
+para llegar a un destino.
+En el caso del rompecabezas de 15 con fichas deslizantes,
+el agente podría ser la IA o la persona que intenta resolver ese rompecabezas,
+tratando de descubrir qué fichas mover para llegar a esa solución.
+A continuación, introducimos la idea de estado.
+Un estado es simplemente alguna configuración del agente en su entorno.
+Entonces, en el rompecabezas 15, por ejemplo, cualquier estado podría ser cualquiera de estos tres
+Por ejemplo.
+Un estado es solo una configuración de los mosaicos.
+Cada uno de estos estados es diferente y va
+requerir una solución ligeramente diferente.
+En cada uno de ellos será necesaria una secuencia diferente de acciones para
+para llegar desde este estado inicial a la meta, que
+es donde estamos tratando de llegar.
+El estado inicial entonces.
+¿Qué es eso?
+El estado inicial es simplemente el estado donde comienza el agente.
+Es uno de esos estados desde donde vamos a comenzar.
+y este será el punto de partida de nuestro algoritmo de búsqueda,
+por así decirlo.
+Vamos a empezar con este estado inicial.
+y luego empezar a razonar sobre ello, a pensar qué acciones podríamos aplicar
+a ese estado inicial para descubrir cómo llegar desde el principio
+hasta el final, desde la posición inicial hasta cualquiera que sea nuestro objetivo.
+¿Y cómo avanzamos desde esa posición inicial hasta la meta?
+Bueno, en última instancia, se trata de tomar medidas.
+Las acciones son simplemente elecciones que podemos hacer en cualquier estado determinado.
+Y en IA, siempre intentaremos formalizar un poco estas ideas.
+más precisamente de tal manera que pudiéramos programarlos un poco más
+matemáticamente, por así decirlo.
+Entonces este será un tema recurrente y podremos definir acciones con mayor precisión.
+como una función.
+Vamos a definir efectivamente una función llamada acciones.
+que toma una entrada S, donde S será algún estado que existe dentro
+de nuestro entorno, y las acciones de S tomarán el estado como entrada
+y devolver como salida el conjunto de todas las acciones que
+puede ejecutarse en ese estado.
+Y entonces es posible que algunas acciones solo sean válidas en ciertos estados.
+y no en otros estados.
+Y pronto también veremos ejemplos de eso.
+Entonces, en el caso del rompecabezas de los 15, por ejemplo,
+Generalmente serán cuatro acciones posibles.
+que podemos hacer la mayor parte del tiempo.
+Podemos deslizar un mosaico hacia la derecha, deslizar un mosaico hacia la izquierda,
+deslizar un mosaico hacia arriba o deslizar un mosaico hacia abajo, por ejemplo.
+Y esas serán las acciones que estarán disponibles para nosotros.
+Entonces, de alguna manera nuestra IA, nuestro programa, necesita algo de codificación.
+del estado, que a menudo estará en algún formato numérico,
+y alguna codificación de estas acciones.
+Pero también necesita cierta codificación de la relación entre estas cosas,
+¿Cómo se relacionan los estados y las acciones entre sí?
+Y para hacer eso, le presentaremos nuestra IA.
+un modelo de transición, que será una descripción de en qué estado
+obtenemos después de realizar alguna acción disponible en algún otro estado.
+Y nuevamente, podemos ser un poco más precisos sobre esto,
+definir este modelo de transición un poco más formalmente, nuevamente,
+como una función.
+La función será una función llamada resultado,
+que esta vez toma dos entradas.
+La entrada número uno es S, algún estado.
+Y la entrada número dos es A, alguna acción.
+Y el resultado de esta función es
+nos dará el estado que obtenemos después de realizar la acción A en el estado
+S. Así que echemos un vistazo a un ejemplo para ver con mayor precisión qué es esto realmente.
+medio.
+Aquí hay un ejemplo de un rompecabezas del estado del 15, por ejemplo.
+Y aquí hay un ejemplo de una acción: deslizar un mosaico hacia la derecha.
+¿Qué sucede si los pasamos como entradas a la función de resultado?
+Nuevamente, la función de resultado toma este tablero, este estado, como su primera entrada.
+Y requiere una acción como segunda entrada.
+Y, por supuesto, aquí estoy describiendo las cosas visualmente para que
+que puedas ver visualmente cuál es el estado y cuál es la acción.
+En una computadora, podrías representar una de estas acciones.
+como solo un número que representa la acción.
+O si está familiarizado con enumeraciones que permiten
+Si enumeras múltiples posibilidades, podría ser algo así.
+Y el estado podría representarse simplemente como una matriz, o una matriz bidimensional,
+de todos estos números que existen.
+Pero aquí te lo vamos a mostrar visualmente para que puedas verlo.
+Cuando tomamos este estado y esta acción, lo pasamos a la función de resultado,
+la salida es un nuevo estado.
+El estado que obtenemos después de tomar un mosaico y deslizarlo hacia la derecha, y esto
+es el estado que obtenemos como resultado.
+Si tuviéramos una acción diferente y un estado diferente, por ejemplo,
+y lo pasó a la función de resultado,
+obtendríamos una respuesta completamente diferente.
+Entonces la función de resultado debe tener cuidado
+de descubrir cómo tomar un estado y tomar una acción y obtener qué resultados.
+Y este será nuestro modelo de transición que
+Describe cómo es que los estados y las acciones se relacionan entre sí.
+Si tomamos este modelo de transición y lo pensamos de manera más general
+y a lo largo de todo el problema, podemos formar lo que podríamos llamar un espacio de estados,
+el conjunto de todos los estados que podemos obtener del estado inicial
+a través de cualquier secuencia de acciones, tomando cero o uno o dos o más
+acciones además de eso, por lo que podríamos dibujar un diagrama
+eso se parece a esto.
+Donde cada estado está representado aquí por un tablero de juego.
+Y hay flechas que conectan cada estado con todos los demás estados que conocemos.
+Puede obtener dos de ese estado.
+Y el espacio de estados es mucho más grande de lo que se ve aquí.
+Esto es sólo una muestra de cómo podría verse realmente el espacio de estados.
+Y, en general, en muchos problemas de búsqueda,
+ya sean estos 15 acertijos en particular o direcciones de manejo
+o algo más, el espacio de estados se verá así.
+Tenemos estados individuales y flechas que los conectan.
+Y muchas veces, sólo por simplicidad,
+simplificar nuestra representación de todo esto
+como gráfico, alguna secuencia de nodos y aristas que conectan nodos.
+Pero puedes pensar en esta representación más abstracta como exactamente la misma idea.
+Cada uno de estos pequeños círculos, o nodos, es
+va a representar uno de los estados dentro de nuestro problema.
+Y las flechas aquí representan las acciones.
+que podemos tomar en cualquier estado en particular,
+llevándonos de un estado particular a otro, por ejemplo.
+Está bien.
+Ahora tenemos esta idea de nodos que representan estos estados,
+acciones que nos pueden llevar de un estado a otro,
+y un modelo de transición que defina lo que sucede
+después de realizar una acción particular.
+Así que el siguiente paso que debemos resolver es
+cómo sabemos cuándo la IA ha terminado de resolver el problema.
+La IA necesita alguna forma de saber cuándo llega a la meta,
+que ha encontrado la meta.
+Entonces, lo siguiente que necesitaremos codificar en nuestra inteligencia artificial
+Es una prueba de objetivo, alguna forma de determinar si un estado determinado es un estado objetivo.
+En el caso de algo como las indicaciones para llegar en coche, puede ser bastante fácil.
+Si estás en un estado que corresponde a lo que sea
+el usuario escribió como su destino previsto, bueno,
+entonces sabes que estás en un estado objetivo.
+En el rompecabezas del 15, podría ser comprobar los números.
+para asegurarse de que estén todos en orden ascendente.
+Pero la IA necesita alguna forma de codificar si
+cualquier estado en el que se encuentren es una meta.
+Y algunos problemas pueden tener un objetivo, como un laberinto.
+donde tienes una posición inicial y una posición final
+y ese es el objetivo.
+En otros problemas más complejos, es posible que
+Imagina que hay múltiples objetivos posibles, que hay múltiples formas
+Resolver un problema.
+Y puede que no nos importe cuál encuentra la computadora como
+siempre y cuando encuentre un objetivo particular.
+Sin embargo, a veces a una computadora no sólo le importa encontrar un objetivo,
+pero encontrando bien un objetivo, o uno de bajo coste.
+Y es por eso que la última pieza
+de terminología que utilizamos para definir estos problemas de búsqueda
+es algo que se llama costo de ruta.
+Se podría imaginar que en el caso de las indicaciones para llegar en coche,
+Sería bastante molesto si dijera que quiero indicaciones desde el punto A.
+al punto B, y la ruta que me dio Google Maps era una ruta larga con muchas
+de desvíos innecesarios, que tardaron más de lo debido
+tengo para llegar a ese destino.
+Y es por esa razón que cuando formulamos problemas de búsqueda,
+A menudo le damos a cada ruta algún tipo de costo numérico, algún número que nos diga
+lo caro que es tomar esta opción en particular.
+Y luego decirle a nuestra IA que en lugar de simplemente encontrar una solución,
+alguna forma de llegar desde el estado inicial a la meta,
+Realmente nos gustaría encontrar uno que minimice el costo de este camino, que
+es menos costoso, toma menos tiempo o minimiza
+algún otro valor numérico.
+Podemos representar esto gráficamente, si volvemos a mirar este gráfico.
+E imagina que cada una de estas flechas, cada una de estas acciones
+que podemos llevar de un estado a otro,
+tiene algún tipo de número asociado,
+ese número es el costo de la ruta de esta acción en particular donde
+algunos de los costos de cualquier acción en particular
+podría ser más caro que el costo de alguna otra acción, por ejemplo.
+Aunque esto sólo sucederá en algunos tipos de problemas.
+En otros problemas podemos simplificar el diagrama.
+y simplemente asuma que el costo de cualquier acción en particular es el mismo.
+Y este es probablemente el caso en algo como el rompecabezas de los 15,
+por ejemplo, donde realmente no hace ninguna diferencia si estoy
+moviéndose hacia la derecha o hacia la izquierda.
+Lo único que importa es el número total de pasos.
+que tengo que dar para llegar del punto A al punto B. Y cada uno de esos pasos
+es de igual costo.
+Podemos asumir que es un costo constante, como uno.
+Y esto ahora forma la base de lo que
+podría considerarse un problema de búsqueda.
+Un problema de búsqueda tiene algún tipo de estado inicial, algún lugar donde
+comenzamos, algún tipo de acción que podemos tomar
+o múltiples acciones que podemos tomar en cualquier estado dado,
+y tiene un modelo de transición, alguna forma de definir
+¿Qué sucede cuando pasamos de un estado y tomamos una acción?
+¿En qué estado terminamos como resultado?
+Además de eso, necesitamos alguna prueba de objetivos para saber si
+hemos alcanzado una meta.
+Y luego necesitamos una función de costo de ruta que nos indique para cualquier ruta en particular,
+siguiendo alguna secuencia de acciones, qué caro es ese camino.
+¿Cuál es su costo en términos de dinero o tiempo?
+o algún otro recurso que estemos tratando de minimizar nuestro uso.
+El objetivo, en última instancia, es encontrar una solución, donde en este caso la solución
+es solo una secuencia de acciones que nos llevarán desde el estado inicial
+al estado objetivo.
+E, idealmente, nos gustaría encontrar no cualquier solución, sino la solución óptima,
+que es una solución que tiene el costo de ruta más bajo entre todas
+de las posibles soluciones.
+Y en algunos casos, puede haber múltiples soluciones óptimas,
+pero una solución óptima sólo significa que hay
+No hay manera de que hubiésemos podido hacerlo mejor en términos de encontrar esa solución.
+Ahora hemos definido el problema.
+Y ahora tenemos que empezar a descubrir cómo
+es que vamos a resolver este tipo de problema de búsqueda.
+Y para ello probablemente te imagines
+que nuestra computadora va a necesitar para representar una gran cantidad de datos
+sobre este problema en particular.
+Necesitamos representar datos sobre dónde nos encontramos en el problema.
+Y es posible que debamos considerar varias opciones diferentes a la vez.
+Y muchas veces, cuando intentamos empaquetar una gran cantidad de datos relacionados
+a un estado juntos, lo haremos usando una estructura de datos
+que vamos a llamar nodo.
+Un nodo es una estructura de datos que simplemente va
+para realizar un seguimiento de una variedad de valores diferentes,
+y específicamente en el caso de un problema de búsqueda,
+realizará un seguimiento de estos cuatro valores en particular.
+Cada nodo realizará un seguimiento de un estado, el estado en el que nos encontramos actualmente.
+Y cada nodo también realizará un seguimiento de un padre.
+Un padre es el estado que tenemos ante nosotros, o el nodo.
+que utilizamos para llegar a este estado actual.
+Y esto va a ser relevante porque eventualmente,
+una vez que lleguemos al nodo objetivo, una vez que lleguemos al final,
+queremos saber qué secuencia de acciones utilizamos para llegar a ese objetivo.
+Y la forma en que lo sabremos es mirando a estos padres.
+para realizar un seguimiento de lo que nos llevó a la meta y de lo que nos llevó a ese estado,
+y qué nos llevó al estado anterior a eso, y así sucesivamente,
+retrocediendo nuestro camino hasta el principio para que
+conocer la secuencia completa de acciones que necesitábamos para
+para llegar desde el principio hasta el final.
+El nodo también realizará un seguimiento de las acciones que tomamos para obtener
+desde el padre hasta el estado actual.
+Y el nodo también realizará un seguimiento del costo de la ruta.
+En otras palabras, realizará un seguimiento del número que
+representa cuánto tiempo tomó llegar del estado inicial al estado
+en el que nos encontramos actualmente.
+Y veremos por qué esto es relevante cuando comencemos a hablar de algunos
+de las optimizaciones que podemos hacer en cuanto a estos problemas de búsqueda más
+generalmente.
+Esta es la estructura de datos a la que vamos.
+utilizar para resolver el problema.
+Y ahora hablemos del enfoque, ¿cómo podríamos
+¿Comenzar realmente a resolver el problema?
+Bueno, como puedes imaginar, lo que vamos a hacer
+¿Vamos a comenzar en un estado en particular?
+y simplemente vamos a explorar desde allí.
+La intuición es que desde un estado dado,
+tenemos múltiples opciones que podríamos tomar,
+y vamos a explorar esas opciones.
+Y una vez que exploremos esas opciones, encontraremos que hay más opciones que esas.
+van a ponerse a disposición.
+Y vamos a considerar todas las opciones disponibles.
+para almacenarse dentro de una única estructura de datos que llamaremos frontera.
+La frontera va a representar todas las cosas.
+que podríamos explorar a continuación, que aún no hemos explorado o visitado.
+Entonces, en nuestro enfoque, comenzaremos esta búsqueda
+algoritmo comenzando con una frontera que solo contiene un estado.
+La frontera va a contener el estado inicial porque al principio,
+ese es el único estado que conocemos.
+Ese es el único estado que existe.
+Y luego nuestro algoritmo de búsqueda efectivamente seguirá un bucle.
+Vamos a repetir algún proceso una y otra y otra vez.
+Lo primero que haremos es que si la frontera está vacía,
+entonces no hay solución.
+Y podemos informar que no hay forma de llegar a la meta.
+Y eso es ciertamente posible.
+Hay ciertos tipos de problemas que una IA podría
+intenta explorar y date cuenta de que no hay forma de resolver ese problema.
+Y esa es información útil que los humanos también deben conocer.
+Entonces, si alguna vez la frontera está vacía, significa que no queda nada por explorar.
+y todavía no hemos encontrado una solución, así que no hay solución.
+No queda nada por explorar.
+De lo contrario, lo que haremos será eliminar un nodo de la frontera.
+Así que ahora mismo, al principio, la frontera
+solo contiene un nodo que representa el estado inicial.
+Pero con el tiempo, la frontera podría crecer.
+Puede contener varios estados.
+Y aquí simplemente vamos a eliminar un solo nodo de esa frontera.
+Si ese nodo resulta ser un objetivo, entonces encontramos una solución.
+Entonces eliminamos un nodo de la frontera y nos preguntamos: ¿es este el objetivo?
+Y lo hacemos aplicando la prueba de objetivos de la que hablamos antes,
+preguntando si estamos en el destino o preguntando si todos los números del 15
+El rompecabezas está en orden.
+Entonces, si el nodo contiene el objetivo, encontramos una solución.
+Excelente.
+Hemos terminado.
+Y de lo contrario, lo que tendremos que hacer es expandir el nodo.
+Y este es un término de inteligencia artificial.
+Expandir el nodo simplemente significa mirar a todos los vecinos de ese nodo.
+En otras palabras, considere todas las acciones posibles.
+que podría tomar del estado en el que este nodo representa
+y a qué nodos podría llegar desde allí.
+Vamos a tomar todos esos nodos, los siguientes nodos
+que puedo llegar desde este actual que estoy mirando,
+y agregarlos a la frontera.
+Y luego repetiremos este proceso.
+Entonces, a un nivel muy alto, la idea es que comencemos con una frontera que
+contiene el estado inicial.
+Y estamos constantemente eliminando un nodo de la frontera,
+mirando a dónde podemos llegar a continuación y agregando esos nodos a la frontera,
+repitiendo este proceso una y otra vez hasta que eliminemos
+un nodo de la frontera y contiene un objetivo, lo que significa que hemos resuelto
+el problema.
+O nos topamos con una situación en la que la frontera está vacía, momento en el que
+nos quedamos sin solución.
+Así que intentemos tomar el pseudocódigo,
+Póngalo en práctica observando un ejemplo de un problema de búsqueda de muestra.
+Aquí tengo un gráfico de muestra.
+A está conectado a B a través de esta acción, B está conectado al nodo C y D, C
+está conectado a D, E está conectado a F. Y lo que me gustaría hacer
+es hacer que mi IA encuentre un camino de A a E. Queremos salir de este estado inicial
+a este estado objetivo.
+Entonces, ¿cómo vamos a hacer eso?
+Bueno, vamos a empezar con la frontera que
+contiene el estado inicial.
+Esto va a representar nuestra frontera.
+Entonces nuestra frontera, inicialmente, contendrá solo A, ese estado inicial
+donde vamos a empezar.
+Y ahora repetiremos este proceso.
+Si la frontera está vacía, no hay solución.
+Eso no es un problema porque la frontera no está vacía.
+Así que eliminaremos un nodo de la frontera como el que consideraremos a continuación.
+Sólo hay un nodo en la frontera.
+Así que seguiremos adelante y lo eliminaremos de la frontera.
+Pero ahora A, este nodo inicial, este es el nodo que estamos considerando actualmente.
+Seguimos el siguiente paso.
+Nos preguntamos, ¿es este nodo el objetivo?
+No, no es.
+A no es el objetivo.
+E es el objetivo.
+Entonces no devolvemos la solución.
+Entonces, en lugar de eso, vamos a este último paso, expandir el nodo
+y agregue los nodos resultantes a la frontera.
+¿Qué significa eso?
+Bueno, significa tomar este estado A y considerar hacia dónde podríamos llegar a continuación.
+Y después de A lo que podemos llegar a continuación es sólo
+B. Eso es lo que obtenemos cuando expandimos A. Encontramos B.
+Y sumamos B a la frontera.
+Y ahora B está en la frontera y repetimos el proceso nuevamente.
+Nosotros decimos, está bien.
+La frontera no está vacía.
+Entonces eliminemos B de la frontera.
+B es ahora el nodo que estamos considerando.
+Nos preguntamos: ¿es B el objetivo?
+No, no es.
+Entonces seguimos adelante, expandimos B y agregamos sus nodos resultantes a la frontera.
+¿Qué sucede cuando expandimos B?
+En otras palabras, ¿a qué nodos podemos llegar desde B?
+Bueno, podemos llegar a C y D. Así que seguiremos adelante.
+y agregue C y D desde la frontera.
+Y ahora tenemos dos nodos en la frontera, C y D.
+Y volvemos a repetir el proceso.
+Eliminamos un nodo de la frontera, por ahora lo haremos
+hágalo arbitrariamente simplemente eligiendo C.
+Veremos por qué más adelante cómo elegir qué nodo eliminar de la frontera.
+En realidad, es una parte bastante importante del algoritmo.
+Pero por ahora eliminaré C arbitrariamente, digamos que no es el objetivo,
+entonces agregaremos E, el siguiente a la frontera.
+Entonces digamos que elimino E de la frontera.
+Y ahora estoy mirando el estado E. ¿Es ese un estado objetivo?
+Es porque estoy tratando de encontrar un camino de A a E.
+Entonces devolvería el gol.
+Y esa, ahora, sería la solución, que estoy ahora
+Pude devolver la solución y encontré un camino de A a E.
+Esta es la idea general, el enfoque general de este algoritmo de búsqueda,
+seguir estos pasos eliminando constantemente nodos de la frontera
+hasta que seamos capaces de encontrar una solución.
+Entonces, la siguiente pregunta que podrías hacer razonablemente
+es, ¿qué podría salir mal aquí?
+¿Cuáles son los problemas potenciales con un enfoque como este?
+Y he aquí un ejemplo de un problema que podría surgir de este tipo de enfoque.
+Imagine este mismo gráfico, igual que antes, con un cambio.
+El cambio es, ahora, en lugar de solo una flecha de A a B,
+También tenemos una flecha de B a A, lo que significa que podemos ir en ambas direcciones.
+Y esto es cierto en algo como el rompecabezas de los 15.
+donde cuando deslizo un mosaico hacia la derecha,
+Luego podría deslizar un mosaico hacia la izquierda para volver a la posición original.
+Podría ir y venir entre A y B.
+Y eso es lo que simbolizan estas flechas dobles, la idea de que desde un estado
+Puedo llegar a otro y luego puedo regresar.
+Y eso es cierto en muchos problemas de búsqueda.
+¿Qué pasará si intento aplicar el mismo enfoque ahora?
+Bueno, empezaré con A, igual que antes.
+Y quitaré A de la frontera.
+Y luego consideraré adónde puedo llegar desde A. Y después de A, el único lugar
+Puedo elegir la opción B para que B entre en la frontera.
+Entonces diré, está bien.
+Echemos un vistazo a B. Eso es lo único que queda en la frontera.
+¿A dónde puedo llegar desde B?
+Antes eran solo C y D, pero ahora debido a esa flecha inversa,
+Puedo llegar a A, C o D. Entonces los tres A, C y D. Todos esos
+Ahora ve a la frontera.
+Son lugares a los que puedo llegar desde B. Y ahora quito uno de la frontera,
+y, ya sabes, tal vez tenga mala suerte y tal vez elija A.
+Y ahora estoy mirando a A de nuevo.
+Y considero a dónde puedo llegar desde A. Y desde A, bueno, puedo llegar a B.
+Y ahora empezamos a ver el problema, que si no tengo cuidado,
+Voy de A a B y luego vuelvo a A y luego a B nuevamente.
+Y podría estar entrando en este bucle infinito donde nunca
+hacer algún progreso porque estoy constantemente yendo y viniendo entre dos
+afirma que ya lo he visto.
+Entonces ¿cuál es la solución a esto?
+Necesitamos alguna forma de abordar este problema.
+Y la forma en que podemos abordar este problema.
+es hacer un seguimiento de alguna manera de lo que ya hemos explorado.
+Y la lógica será, bueno, si ya hemos explorado el estado,
+no hay razón para volver a ello.
+Una vez que hayamos explorado un estado, no regreses a él,
+no te molestes en agregarlo a la frontera.
+No es necesario.
+Así que aquí estará nuestro enfoque revisado,
+una mejor manera de abordar este tipo de problema de búsqueda.
+Y se verá muy similar sólo con un par de modificaciones.
+Comenzaremos con una frontera que contiene el estado inicial.
+Igual que antes.
+Pero ahora comenzaremos con otra estructura de datos,
+que sería simplemente un conjunto de nodos que ya hemos explorado.
+Entonces, ¿cuáles son los estados que hemos explorado?
+Al principio está vacío.
+Tenemos un conjunto explorado vacío.
+Y ahora repetimos.
+Si la frontera está vacía, no hay solución.
+Igual que antes.
+Eliminamos un nodo de la frontera, comprobamos
+para ver si es un estado objetivo, devuelva la solución.
+Nada de esto es diferente hasta ahora.
+Pero ahora, lo que vamos a hacer es ir
+para agregar el nodo al estado explorado.
+Entonces, si se da el caso de que eliminamos un nodo de la frontera
+y no es el objetivo, lo agregaremos al conjunto explorado
+para que sepamos que ya lo hemos explorado.
+No es necesario que volvamos a ello si surge más adelante.
+Y luego el paso final, expandimos el nodo.
+y sumamos los nodos resultantes a la frontera.
+Pero antes siempre añadíamos los nodos resultantes a la frontera,
+Esta vez vamos a ser un poco más inteligentes al respecto.
+Sólo vamos a agregar los nodos a la frontera.
+si no están ya en la frontera y si
+aún no están en el conjunto explorado.
+Así que comprobaremos tanto la frontera como el conjunto explorado,
+asegúrese de que el nodo no esté ya en uno de esos dos,
+y mientras no lo sea, seguiremos adelante y ampliaremos la frontera
+pero no de otra manera.
+Y por eso ese enfoque revisado es, en última instancia,
+¿Qué nos ayudará a garantizar que no lo hagamos?
+ir y venir entre dos nodos.
+Ahora, el único punto que he pasado por alto aquí
+Hasta ahora este paso está aquí, eliminar un nodo de la frontera.
+Antes simplemente elegía arbitrariamente, simplemente eliminamos un nodo y eso es todo.
+Pero resulta que en realidad es bastante importante.
+cómo decidimos estructurar nuestra frontera, cómo las sumamos,
+y cómo eliminamos nuestros nodos.
+La frontera es una estructura de datos.
+Y tenemos que elegir en qué orden
+¿Vamos a eliminar elementos?
+Y una de las estructuras de datos más simples para agregar y eliminar elementos.
+es algo llamado pila.
+Y una pila es una estructura de datos que es un tipo de datos de último en entrar, primero en salir.
+Lo que significa lo último que agrego a la frontera
+va a ser lo primero que saque de la frontera.
+Entonces, lo más reciente que se coloca en la pila, o en la frontera en este caso,
+va a ser el nodo que exploré.
+Entonces, veamos qué sucede si aplico este enfoque basado en pila.
+ a algo como este problema, encontrar un camino de A a E.
+¿Qué va a pasar?
+Bueno, nuevamente comenzaremos con A. Y diremos, está bien.
+Sigamos adelante y miremos primero a A.
+Y luego, observe que esta vez agregamos A al conjunto explorado.
+A es algo que ahora hemos explorado, tenemos esta estructura de datos
+eso es hacer un seguimiento.
+Luego decimos que desde A podemos llegar a B. Y está bien.
+Desde B ¿qué podemos hacer?
+Bueno, desde B, podemos explorar B y llegar tanto a C como a D.
+Entonces agregamos C y luego D. Ahora, cuando exploramos un nodo,
+Vamos a tratar la frontera como una pila, el último en entrar, el primero en salir.
+D fue el último en llegar, así que seguiremos adelante y exploraremos eso a continuación.
+Y decir, está bien, ¿a dónde podemos llegar desde D?
+Bueno, podemos llegar a F. Y así, está bien.
+Pondremos a F en la frontera.
+Y ahora porque la frontera es una pila, F
+es lo más reciente que ha ido a la pila.
+Entonces F es lo que exploraremos a continuación.
+Exploraremos F y diremos, está bien.
+¿Dónde podemos conseguirte desde F?
+Bueno, no podemos llegar a ninguna parte así que no se añade nada a la frontera.
+Entonces, ¿cuál fue la novedad más reciente agregada a la frontera?
+Bueno, no es C, lo único que queda en la frontera.
+Exploraremos aquello a partir de lo cual podemos decir, está bien, desde C podemos llegar a E.
+Entonces E entra en la frontera.
+Y luego decimos, está bien.
+Miremos E y E ahora es la solución.
+Y ahora hemos resuelto el problema.
+Entonces, cuando tratamos la frontera como una pila,
+una estructura de datos de último en entrar, primero en salir, ese es el resultado que obtenemos.
+Vamos de A a B, a D y a F, y luego retrocedimos y bajamos.
+a C y luego a E. Y es importante tener una idea visual de cómo
+este algoritmo está funcionando.
+Profundizamos mucho en este árbol de búsqueda, así que
+hablar, hasta el final, donde llegamos a un callejón sin salida.
+Y luego efectivamente retrocedimos y exploramos esta otra ruta.
+que no lo intentamos antes.
+Y esto va muy profundo en la idea del árbol de búsqueda,
+de esta manera el algoritmo termina funcionando cuando usamos una pila,
+que llamamos a esta versión del algoritmo de primera búsqueda en profundidad.
+La primera búsqueda en profundidad es el algoritmo de búsqueda.
+donde siempre exploramos el nodo más profundo de la frontera.
+Seguimos profundizando cada vez más en nuestro árbol de búsqueda.
+Y luego, si llegamos a un callejón sin salida, retrocedemos e intentamos otra cosa.
+Pero la búsqueda en profundidad es solo una de las posibles opciones de búsqueda.
+que podríamos utilizar.
+Resulta que hay otro algoritmo llamado
+Primera búsqueda en amplitud, que se comporta de manera muy similar a la búsqueda en profundidad.
+Primera búsqueda con una diferencia.
+En lugar de explorar siempre el nodo más profundo del árbol de búsqueda de la forma
+la primera búsqueda en profundidad lo hace, la primera búsqueda en amplitud
+Siempre va a explorar el nodo menos profundo de la frontera.
+¿Entonces que significa eso?
+Bueno, significa que en lugar de usar una pila, que
+Primera búsqueda en profundidad, o DFS, que se utiliza donde se agregó el elemento más reciente.
+a la frontera es el que exploraremos a continuación, en búsqueda en amplitud, o BFS,
+en su lugar, utilizará una cola donde la cola son los datos de primero en entrar, primero en salir
+tipo, donde lo primero que agregamos a la frontera es el primero
+exploraremos.
+Y efectivamente forman una fila o una cola,
+donde cuanto antes llegues a la frontera, antes te explorarán.
+Entonces, ¿qué significaría eso exactamente para el mismo problema de encontrar un camino desde A?
+a E?
+Bueno, empezamos con A, igual que antes.
+Luego seguiremos adelante y exploraremos A, y diremos, ¿adónde podemos llegar desde A?
+Bueno, desde A podemos llegar a B. Igual que antes.
+Desde B, igual que antes.
+Podemos llegar a C y D para que C y D se agreguen a la frontera.
+Esta vez, sin embargo, agregamos C a la frontera.
+antes de D, así que exploraremos C primero.
+Entonces se explora C.
+Y desde C ¿a dónde podemos llegar?
+Bueno, podemos llegar a E.
+Entonces E se agrega a la frontera.
+Pero debido a que D fue explorado antes que E, veremos D a continuación.
+Entonces exploraremos D y diremos, ¿adónde podemos llegar desde D?
+Podemos llegar a F. Y sólo entonces diremos, está bien.
+Ahora podemos llegar a E. Y entonces, ¿qué amplitud de primera búsqueda, o BFS,
+Lo que hicimos fue que comenzamos aquí, miramos tanto a C como a D,
+y luego miramos a E. Efectivamente estamos
+mirando las cosas alejadas del estado inicial,
+luego dos de distancia del estado inicial.
+Y sólo entonces, cosas que están a tres distancias del estado inicial.
+A diferencia de la primera búsqueda en profundidad, que fue lo más profunda posible
+en el árbol de búsqueda hasta que llegó a un callejón sin salida y luego,
+Al final, tuvo que retroceder.
+Entonces estos ahora son dos algoritmos de búsqueda diferentes.
+que podríamos aplicar para intentar resolver un problema.
+Y echemos un vistazo a cómo estos realmente
+Trabaje en la práctica con algo como resolver laberintos, por ejemplo.
+He aquí un ejemplo de laberinto.
+Estas celdas vacías representan lugares donde nuestro agente puede moverse.
+Estas celdas grises oscurecidas representan paredes.
+que el agente no puede atravesar.
+Y, en última instancia, nuestro agente, nuestra IA, va a
+para tratar de encontrar una manera de llegar desde la posición A
+para posicionar B a través de alguna secuencia de acciones, donde se dejan esas acciones,
+derecha, arriba y abajo.
+¿Qué hará la primera búsqueda en profundidad en este caso?
+La primera búsqueda en profundidad seguirá un solo camino.
+Si llega a una bifurcación en el camino donde tiene múltiples opciones diferentes,
+La primera búsqueda en profundidad es, en este caso, elegir uno.
+No hay una preferencia real.
+Pero seguirá siguiendo uno hasta llegar a un callejón sin salida.
+Y cuando llegue a un callejón sin salida, primero busque en profundidad
+efectivamente regresa al último punto de decisión
+y prueba el otro camino.
+Agotando por completo todo este camino y cuando
+se da cuenta de que, vale, el objetivo no está aquí,
+luego dirige su atención a este camino.
+Va lo más profundo posible.
+Cuando llega a un callejón sin salida, retrocede y luego intenta este otro camino,
+continúa avanzando lo más profundo posible por un camino en particular,
+y cuando se dé cuenta de que es un callejón sin salida, retrocederá.
+Y finalmente encontrar el camino hacia la meta.
+Y tal vez tuviste suerte y tal vez tomaste una decisión diferente antes,
+pero, en última instancia, así es como funcionará la primera búsqueda en profundidad.
+Seguirá siguiéndolo hasta llegar a un callejón sin salida.
+Y cuando llega a un callejón sin salida, retrocede y busca una solución diferente.
+Y entonces, una cosa que razonablemente podrías preguntar
+Es decir, ¿este algoritmo siempre funcionará?
+¿Encontrará siempre una manera de llegar desde el estado inicial a la meta?
+Y resulta que mientras nuestro laberinto
+es finito, siempre y cuando sean un número finito de espacios donde
+Podemos viajar, entonces sí.
+La primera búsqueda en profundidad encontrará una solución porque eventualmente
+Simplemente explorará todo.
+Si el laberinto resulta ser infinito y hay un espacio de estados infinito, que
+existe en ciertos tipos de problemas, entonces es una historia ligeramente diferente.
+Pero mientras nuestro laberinto tenga un número finito de cuadrados,
+vamos a encontrar una solución.
+Sin embargo, la siguiente pregunta que queremos hacer
+es, ¿será una buena solución?
+¿Es la solución óptima que podemos encontrar?
+Y la respuesta no es necesariamente.
+Y echemos un vistazo a un ejemplo de eso.
+En este laberinto, por ejemplo, volvemos a intentar encontrar el camino de A a B.
+Y notarás que aquí hay múltiples soluciones posibles.
+Podríamos ir por aquí o podríamos subir en orden.
+para llegar de A a B. Ahora, si tenemos suerte,
+La primera búsqueda en profundidad elegirá este camino y llegará a B. Pero no hay ninguna razón,
+necesariamente, ¿por qué elegiría la primera búsqueda en profundidad?
+entre subir o ir a la derecha.
+Es una especie de punto de decisión arbitrario porque ambos
+se van a agregar a la frontera.
+Y, en última instancia, si tenemos mala suerte, primero realizaremos una búsqueda en profundidad.
+Podría optar por explorar este camino primero porque es solo
+una elección aleatoria en este punto.
+Explorará, explorará, explorará y eventualmente
+encontrar la meta, este camino particular, cuando en realidad no hay
+Era un camino mejor.
+Había una solución más óptima que utilizaba menos pasos,
+suponiendo que estamos midiendo el costo de una solución en función del número de pasos
+que debemos tomar.
+Así que la primera búsqueda en profundidad, si no tenemos suerte, podría terminar
+no encontrar la mejor solución cuando hay una solución mejor disponible.
+Entonces, si eso es DFS, primero busque en profundidad.
+¿Cómo se compara BFS, o búsqueda primero en amplitud?
+¿Cómo funcionaría en esta situación particular?
+Bueno, el algoritmo se verá muy diferente visualmente.
+en términos de cómo explora BFS.
+Debido a que BFS mira primero los nodos menos profundos,
+la idea será que BFS primero observe todos los nodos que
+están a uno del estado inicial.
+Mira aquí y mira aquí, por ejemplo.
+Justo en los dos nodos que están inmediatamente al lado de este estado inicial.
+Luego explorará los nodos que están a dos distancias,
+mirando el estado y ese estado, por ejemplo.
+Luego explorará los nodos que están a tres distancias, este estado y aquel estado.
+Mientras que la primera búsqueda en profundidad simplemente eligió un camino y siguió siguiéndolo,
+La primera búsqueda en amplitud, por otro lado, es
+tomando la opción de explorar todos los caminos posibles
+más o menos al mismo tiempo, rebotando entre ellos,
+mirando más y más profundamente a cada uno, pero haciendo
+asegúrese de explorar los menos profundos o los que son
+más cerca del estado inicial antes.
+Así que seguiremos este patrón, mirando cosas que están a cuatro distancias,
+mirando cosas que están a cinco de distancia, mirando
+en cosas que están a seis de distancia, hasta que finalmente lleguemos a la meta.
+Y en este caso, es cierto que tuvimos que explorar algunos estados que
+Al final no nos llevó a ninguna parte.
+Pero el camino que encontramos hacia la meta fue el camino óptimo.
+Este es el camino más corto por el que podemos llegar a la meta.
+Entonces, ¿qué podría pasar entonces en un laberinto más grande?
+Bueno, echemos un vistazo a algo como esto.
+y cómo se comportará la primera búsqueda de amplitud.
+Bueno, la primera búsqueda en amplitud, nuevamente, simplemente
+Continúe siguiendo los estados hasta que reciba un punto de decisión.
+Podría ir hacia la izquierda o hacia la derecha.
+Y mientras DFS simplemente escogió uno y siguió siguiéndolo
+que hasta que llegue a un callejón sin salida, BFS, por otro lado, explorará ambos.
+Dirá, mira este nodo, luego este nodo,
+y miraré este nodo, luego aquel nodo, y así sucesivamente.
+Y cuando llegue un punto de decisión aquí, en lugar de elegir uno a la izquierda o dos a la derecha
+y explorar ese camino, volverá a explorar ambos alternando entre ellos,
+yendo más y más profundo.
+Exploraré aquí, y luego tal vez aquí y aquí, y luego continuaré.
+Explora aquí y lentamente avanza hacia nuestro camino, puedes visualmente
+ver cada vez más lejos.
+Una vez que lleguemos a este punto de decisión,
+explorar tanto hacia arriba como hacia abajo hasta que, finalmente,
+llegar a la meta.
+Y lo que notarás es, sí, búsqueda primero en amplitud.
+Encontramos nuestro camino de A a B siguiendo este camino en particular.
+Pero necesitaba explorar muchos estados para poder hacerlo.
+Y entonces vemos algo de comercio aquí entre DFS y BFS.
+Que en DFS puede haber algunos casos en los que se ahorra algo de memoria,
+en comparación con un enfoque primero en amplitud donde
+La primera búsqueda en amplitud, en este caso, tuvo que explorar muchos estados.
+Pero tal vez ese no sea siempre el caso.
+Así que ahora dirijamos nuestra atención a algún código.
+Y mira el código que realmente podríamos
+escribir para implementar algo como búsqueda en profundidad o amplitud
+para la búsqueda en el contexto de la resolución de un laberinto, por ejemplo.
+Así que seguiré adelante y entraré en mi terminal.
+Y lo que tengo aquí dentro de maze.pi es una implementación
+de esta misma idea de resolver laberintos.
+He definido una clase llamada nodo que en este caso
+es realizar un seguimiento del estado, el padre, en otras palabras
+el Estado ante el Estado, y la acción.
+En este caso, no realizamos un seguimiento del costo de la ruta.
+porque podemos calcular el costo del camino al final
+después de que encontramos el camino desde el estado inicial hasta la meta.
+Además de esto, definí una clase llamada frontera de pila.
+Y si no estoy familiarizado con una clase, una clase es una forma para mí.
+para definir una forma de generar objetos en Python.
+Se refiere a una idea de programación orientada a objetos donde la idea aquí
+es que me gustaría crear un objeto que sea
+capaz de almacenar todos mis datos de Frontier.
+Y me gustaría tener funciones, también conocidas.
+como métodos en ese objeto, que puedo usar para manipular el objeto.
+Y entonces, ¿qué está pasando aquí? Si no estás familiarizado con la sintaxis,
+¿Tengo una función que inicialmente crea una frontera?
+que voy a representar usando una lista.
+E inicialmente mi frontera está representada por la lista vacía.
+Para empezar, no hay nada en mi frontera.
+Tengo una función de adición que agrega algo a la frontera,
+como agregándolo al final de la lista.
+Tengo una función que comprueba si la frontera contiene un estado particular.
+Tengo una función vacía que comprueba si la frontera está vacía.
+Si la frontera está vacía, eso solo significa la longitud de la frontera.
+es cero.
+Y luego tengo una función para eliminar algo de la frontera.
+No puedo eliminar algo de la frontera si la frontera está vacía.
+Así que lo compruebo primero.
+Pero por lo demás, si la frontera no está vacía,
+Recuerde que estoy implementando esta frontera como una pila,
+una estructura de datos de último en entrar, primero en salir.
+Lo que significa que lo último que agrego a la frontera,
+en otras palabras, lo último en la lista,
+es el elemento que debo sacar de esta frontera.
+Entonces, lo que verás aquí es que eliminé el último elemento de una lista.
+Y si indexa en una lista de Python con uno negativo,
+eso te lleva al último elemento de la lista.
+Dado que cero es el primer elemento, uno negativo
+de alguna manera se envuelve y lo lleva al último elemento de la lista.
+Entonces le damos a eso el nodo.
+Llamamos a ese nodo, actualizamos la frontera aquí en la línea 28 para decir:
+Continúe y elimine ese nodo que acaba de eliminar de la frontera.
+Y luego devolvemos el nodo como resultado. Entonces esta clase aquí efectivamente
+Implementa la idea de una frontera.
+Me da una manera de agregar algo a una frontera y una manera
+sacar algo de la frontera como una pila.
+También, por si acaso, implementé una versión alternativa.
+de lo mismo llamado frontera Q.
+Lo cual, entre paréntesis verás aquí, hereda de una frontera de pila,
+lo que significa que hará las mismas cosas que hizo la frontera de pila,
+excepto la forma en que eliminamos un nodo de la frontera
+va a ser ligeramente diferente.
+En lugar de eliminar del final de la lista como lo haríamos en una pila,
+en lugar de eso, vamos a eliminarlo del principio de la lista.
+self.frontierzero me conseguirá el primer nodo en la frontera,
+el primero que se agregó.
+Y ese va a ser el que devolveremos en el caso de una Q.
+Aquí tengo una definición de una clase llamada laberinto.
+Esto se encargará del proceso de tomar una secuencia, un texto similar a un laberinto.
+archivo y descubrir cómo solucionarlo.
+Así que tomaremos como entrada un archivo de texto que parece algo
+como este, por ejemplo, donde vemos marcas de almohadilla que aquí representan
+paredes y tengo el carácter A que representa la posición inicial,
+y el carácter B que representa la posición final.
+Y puedes echar un vistazo al código para analizar este archivo de texto ahora mismo.
+Esa es la parte menos interesante.
+La parte más interesante es esta función de resolución aquí,
+dónde se va a encontrar la función de resolución
+cómo llegar realmente del punto A al punto B.
+Y aquí vemos una implementación de exactamente la misma idea.
+vimos desde hace un momento.
+Vamos a realizar un seguimiento de cuántos estados
+Hemos explorado solo para poder informar esos datos más adelante.
+Pero empiezo con un nodo que representa sólo el estado inicial.
+Y empiezo con una frontera que en este caso es una frontera de pila.
+Y dado que estoy tratando mi frontera como una pila,
+Podrías imaginar que el algoritmo que estoy usando aquí ahora es la búsqueda en profundidad.
+Porque la primera búsqueda en profundidad o DFS utiliza una pila como estructura de datos.
+E inicialmente, esta frontera solo contendrá el estado inicial.
+Inicializamos un conjunto explorado que inicialmente está vacío.
+No hay nada que hayamos explorado hasta ahora.
+Y ahora aquí está nuestro bucle, esa noción de repetir algo una y otra vez.
+Primero, verificamos si la frontera está vacía llamando a esa función vacía que
+Vi la implementación de hace un momento.
+Y si la frontera está realmente vacía,
+Continúe y genere una excepción, o un error de Python, para decir, lo siento.
+No hay solución para este problema.
+De lo contrario, seguiremos adelante y eliminaremos un nodo de la frontera.
+como llamando a frontier.remove y actualizando la cantidad de estados que hemos explorado.
+Porque ahora hemos explorado un estado adicional
+entonces decimos self.numexplored más es igual a uno, sumando uno al número de estados
+hemos explorado.
+Una vez que eliminamos un nodo de la frontera, recordemos
+que el siguiente paso es ver si es o no la meta, la prueba de la meta.
+Y en el caso del laberinto, el objetivo es bastante sencillo.
+Compruebo si el estado del nodo es igual al objetivo.
+Inicialmente, cuando instalé el laberinto, instalé
+este valor llamado objetivo que es propiedad del laberinto
+así puedo comprobar si el nodo es realmente el objetivo.
+Y si es el objetivo, entonces lo que quiero hacer
+es retroceder en mi camino para descubrir qué acciones
+Tomé para llegar a esta meta.
+¿Y cómo hago eso?
+Recordaremos que cada nodo almacena su padre:
+el nodo anterior que usamos para llegar a este nodo...
+y también la acción utilizada para llegar allí.
+Entonces puedo crear este bucle donde estoy constantemente
+simplemente mirando el padre de cada nodo y manteniendo
+rastrear, para todos los padres, qué acción tomé para obtener del padre
+a esto.
+Así que este ciclo seguirá repitiendo este proceso de revisar todos
+de los nodos padres hasta que volvamos al estado inicial, que
+no tiene padre, donde node.parent será igual a ninguno.
+Mientras lo hago, iré construyendo la lista de todos
+de las acciones que estoy siguiendo y la lista de todas las celdas
+que son parte de la solución.
+Pero los revertiré porque cuando lo construya
+desde la meta hasta el estado inicial,
+Estoy construyendo la secuencia de acciones desde la meta hasta el estado inicial,
+pero quiero revertirlos para obtener la secuencia de acciones
+desde el estado inicial hasta la meta.
+Y esa será, en última instancia, la solución.
+Entonces todo eso sucede si el estado actual es igual al objetivo.
+Y de lo contrario, si no es el objetivo, bueno,
+luego continuaré y agregaré este estado al conjunto explorado para decir:
+He explorado este estado ahora.
+No es necesario volver a él si lo encuentro en el futuro.
+Y luego, esta lógica aquí implementa la idea.
+de añadir vecinos a la frontera.
+Lo que digo es que miren a todos mis vecinos.
+E implementé una función llamada vecinos que puedes ver.
+Y para cada uno de esos vecinos, voy a comprobar,
+¿Está el estado ya en la frontera?
+¿El estado ya está en el conjunto explorado?
+Y si no está en ninguno de ellos, continuaré y agregaré este nuevo niño.
+nodo-- este nuevo nodo--
+a la frontera.
+Aquí hay bastante sintaxis, pero la clave aquí
+no es comprender todos los matices de la sintaxis,
+aunque no dudes en echar un vistazo más de cerca a este archivo por tu cuenta.
+para tener una idea de cómo está funcionando.
+Pero la clave es ver cómo se trata de una implementación del mismo pseudocódigo,
+la misma idea que estábamos describiendo hace un momento en la pantalla cuando estábamos
+mirando los pasos que podríamos seguir para
+para resolver este tipo de problema de búsqueda.
+Así que ahora veamos esto en acción.
+Seguiré adelante y ejecutaré maze.py en maze1.txt, por ejemplo.
+Y lo que veremos es que aquí tenemos una copia impresa de cómo fue inicialmente el laberinto.
+parecía.
+Y luego aquí, abajo, está después de que lo hayamos resuelto.
+Tuvimos que explorar 11 estados para poder hacerlo y encontramos un camino de A a B.
+Y en este programa, se me ocurrió generar una representación gráfica.
+de esto, también--
+para poder abrir maze.png, que es generado por este programa--
+eso te muestra dónde, en el color más oscuro aquí, está la pared.
+El rojo es el estado inicial, el verde es la meta,
+y el amarillo es el camino que se siguió.
+Encontramos un camino desde el estado inicial hasta la meta.
+Pero ahora echemos un vistazo a un laberinto más sofisticado.
+para ver qué podría pasar en su lugar.
+Miremos ahora a maze2.txt, donde ahora tenemos un laberinto mucho más grande.
+Nuevamente, estamos tratando de encontrar el camino desde el punto A al punto B,
+pero ahora imaginarás que la búsqueda en profundidad podría no ser tan afortunada.
+Puede que no consiga el gol en el primer intento.
+Puede que tenga que seguir un camino y luego retroceder.
+y explorar algo más un poco más tarde.
+Así que probemos esto.
+Ejecute pythonmaze.py de maze2.txt, esta vez probando este otro laberinto.
+Y ahora la búsqueda en profundidad puede encontrar una solución.
+Aquí, como lo indican las estrellas, hay una manera de llegar de A a B.
+Y podemos representar esto visualmente abriendo este laberinto.
+Así es como se ve ese laberinto.
+Y resaltado en amarillo, está el camino que se encontró desde el estado inicial.
+a la meta.
+Pero ¿cuántos estados tenemos que explorar antes de encontrar ese camino?
+Bueno, recuerden que, en mi programa, llevaba la cuenta del número de estados
+que hemos explorado hasta ahora.
+Y entonces puedo volver a la terminal y ver eso, está bien, en orden
+Para resolver este problema, tuvimos que explorar 399 estados diferentes.
+Y de hecho, si hago una pequeña modificación al programa
+y decirle al programa al final cuando generamos esta imagen,
+Agregué un argumento llamado "mostrar explorado".
+Y si configuro "mostrar explorado" igual a verdadero
+y vuelva a ejecutar este programa pythonmaze.py ejecutándolo en maze2,
+y luego abro el laberinto, lo que verás aquí, resaltado en rojo,
+son todos los estados que tuvieron que ser explorados para llegar desde el estado inicial
+a la meta.
+La búsqueda en profundidad primero, o DFS, no encontró el camino hacia la meta de inmediato.
+Decidió explorar primero esta dirección.
+Y cuando exploró esta dirección, había
+seguir todos los caminos imaginables, hasta el final
+hasta el final, incluso este largo y sinuoso,
+para darnos cuenta de eso, ¿sabes qué? Eso es un callejón sin salida.
+Y en cambio, el programa necesitaba dar marcha atrás.
+Después de ir en esta dirección, debe haber ido en esta dirección.
+Aquí tuvo suerte al no elegir este camino.
+Pero aquí tuve mala suerte, explorar esta dirección, explorar un montón de estados.
+que no era necesario y luego, de la misma manera,
+explorando toda esta parte superior del gráfico
+cuando probablemente tampoco era necesario hacerlo.
+Considerándolo todo, la búsqueda en profundidad aquí realmente
+no tiene un rendimiento óptimo o probablemente explora más estados de los necesarios.
+Encuentra una solución óptima, el mejor camino hacia la meta,
+pero el número de estados necesarios para explorar para hacerlo,
+El número de pasos que tuve que dar fue mucho mayor.
+Así que comparemos.
+¿Cómo funcionaría Breadth-First Search, o BFS, en este mismo laberinto?
+Y para lograrlo, es un cambio muy fácil.
+El algoritmo para DFS y BFS es idéntico con la excepción
+de qué estructura de datos utilizamos para representar la frontera.
+Que en DFS usé una frontera de pila--
+último en entrar primero en salir--
+mientras que en BFS, voy a usar una frontera de cola: primero en entrar,
+primero en salir, donde lo primero que agrego a la frontera
+es lo primero que elimino.
+Así que volveré a la terminal, volveré a ejecutar este programa en el mismo laberinto,
+y ahora verás que el número de estados que tuvimos que explorar fue solo 77,
+en comparación con casi 400 cuando utilizamos la búsqueda en profundidad.
+Y podemos ver exactamente por qué.
+Podemos ver lo que pasó si abrimos maze.png ahora y echamos un vistazo.
+Nuevamente, el resaltado amarillo es la solución que encontró la búsqueda inicial,
+que, dicho sea de paso, es la misma solución que encontró la búsqueda en profundidad.
+Ambos están encontrando la mejor solución, pero notan todo el blanco inexplorado.
+células.
+Había muchos menos estados que necesitaban ser explorados.
+para llegar a la meta porque la búsqueda en amplitud opera
+un poco más superficialmente.
+Está explorando cosas que están cerca del estado inicial.
+sin explorar cosas que están más lejos.
+Entonces, si el objetivo no está demasiado lejos, entonces la búsqueda en amplitud
+en realidad puede comportarse con bastante eficacia en un laberinto que
+se parece un poco a esto.
+Ahora, en este caso, tanto BFS como DFS terminaron encontrando la misma solución,
+pero ese no será siempre el caso.
+Y, de hecho, echemos un vistazo a un ejemplo más, por ejemplo, maze3.txt.
+En maze3.txt, observe que aquí hay varias formas
+que se puede llegar de A a B.
+Es un laberinto relativamente pequeño, pero veamos qué sucede.
+Si uso... y continuaré y desactivaré "mostrar explorados" para
+simplemente vemos la solución.
+Si uso BFS, búsqueda en amplitud, para resolver maze3.txt,
+Bueno, entonces encontramos una solución.
+Y si abro el laberinto, aquí está la solución que encontramos.
+Es el óptimo.
+Con sólo cuatro pasos, podemos llegar desde el estado inicial.
+a cuál resulta ser el objetivo.
+Pero, ¿qué sucede si intentamos utilizar la búsqueda en profundidad o DFS?
+Bueno, de nuevo, volveré a mi frontera de cola, donde frontera de cola significa
+que estamos utilizando la búsqueda en amplitud.
+Y lo cambiaré a una frontera de pila, lo que significa que ahora
+utilizará la búsqueda en profundidad.
+Volveré a ejecutar Pythonmaze.py.
+Y ahora verás que encontramos una solución,
+pero no es la solución óptima.
+Esto, en cambio, es lo que encuentra nuestro algoritmo.
+Y tal vez una búsqueda en profundidad habría encontrado esta solución.
+Es posible, pero no está garantizado, que si simplemente
+resulta que tenemos mala suerte, si elegimos este estado en lugar de aquel estado,
+entonces la búsqueda en profundidad podría encontrar una ruta más larga para llegar
+desde el estado inicial hasta la meta.
+Así que aquí vemos algunas compensaciones en las que la búsqueda en profundidad podría no ser suficiente.
+encontrar la solución óptima.
+Entonces, en ese momento, parece que la búsqueda en amplitud es bastante buena.
+¿Es eso lo mejor que podemos hacer, donde nos encontrará la solución óptima?
+y no tenemos que preocuparnos por situaciones en las que
+¿Podríamos terminar encontrando un camino hacia la solución más largo que el que realmente existe?
+Donde el objetivo está muy lejos del estado inicial.
+y es posible que tengamos que tomar muchos pasos para pasar del estado inicial
+a la meta--
+lo que terminó sucediendo es que este algoritmo, BFS, terminó
+explorando básicamente todo el gráfico, teniendo que recorrer todo el laberinto
+para encontrar el camino desde el estado inicial al estado meta.
+Lo que finalmente nos gustaría es que nuestro algoritmo
+ser un poquito más inteligente.
+¿Y ahora qué significaría para nuestro algoritmo?
+¿Para ser un poco más inteligente, en este caso?
+Bien, volvamos a analizar dónde la búsqueda en amplitud podría
+haber podido tomar una decisión diferente
+y considere también la intuición humana en este proceso.
+Por ejemplo, ¿qué podría hacer un humano al resolver este laberinto que es diferente de lo que
+¿BFS finalmente decidió hacer?
+Bueno, el primer punto de decisión que tomó BFS
+Estaba justo aquí, cuando dio cinco pasos y terminó
+en una posición en la que había una bifurcación.
+Podría ir hacia la izquierda o hacia la derecha.
+En estos dos pasos iniciales, no había otra opción.
+Sólo había una acción que se podía tomar desde cada uno de esos estados.
+Y entonces el algoritmo de búsqueda hizo lo único
+que cualquier algoritmo de búsqueda podría hacer, lo cual
+es seguir ese estado después del siguiente estado.
+Pero en este punto de decisión es donde las cosas se ponen un poco interesantes.
+Búsqueda en profundidad, ese primer algoritmo de búsqueda que analizamos,
+decidió decir, elijamos un camino y agotemos ese camino,
+a ver si algo de esa manera tiene el objetivo, y si no, entonces vamos
+prueba al revés.
+La búsqueda en amplitud adoptó el enfoque alternativo de decir:
+¿Sabes que?
+Exploremos primero las cosas que son superficiales, cercanas a nosotros, miremos a izquierda y derecha,
+luego hacia la izquierda y hacia la derecha, y así sucesivamente,
+alternando entre nuestras opciones con la esperanza de encontrar algo cercano.
+Pero, en última instancia, ¿qué podría hacer un humano si se enfrenta a una situación como esta?
+de ir a la izquierda o ir a la derecha?
+Bueno, un humano podría ver eso visualmente, está bien,
+Estoy tratando de llegar al estado B, que está muy arriba, y voy hacia la derecha justo
+Se siente como si estuviera más cerca de la meta.
+Parece que ir hacia la derecha debería ser
+mejor que ir a la izquierda porque estoy progresando
+para llegar a esa meta.
+Ahora bien, por supuesto, estoy haciendo un par de suposiciones aquí.
+Estoy asumiendo que podemos representar
+esta cuadrícula como, como, una cuadrícula bidimensional,
+donde sé las coordenadas de todo.
+Sé que A está en la coordenada 0,0 y B está en algún otro par de coordenadas.
+Y sé en qué coordenada estoy ahora, así que puedo calcular eso, sí, yendo
+De esta manera, eso está más cerca de la meta.
+Y esa podría ser una suposición razonable para algunos tipos de búsqueda.
+problemas pero tal vez no en otros.
+Pero por ahora, seguiremos adelante y asumiremos que...
+que sé cuál es mi par de coordenadas actual y sé la coordenada x,y
+de la meta a la que estoy tratando de llegar.
+Y en esta situación, me gustaría un algoritmo que
+es un poco más inteligente y de alguna manera sabe
+que debería estar avanzando hacia la meta,
+y esta es probablemente la manera de hacerlo porque, en un laberinto,
+moviéndose en la dirección coordinada de la meta.
+suele ser algo bueno, aunque no siempre.
+Y aquí hacemos una distinción entre dos tipos diferentes de búsqueda.
+algoritmos: búsqueda no informada y búsqueda informada.
+Los algoritmos de búsqueda desinformados son algoritmos como DFS y BFS,
+los dos algoritmos que acabamos de ver,
+que son estrategias de búsqueda que no utilizan ningún conocimiento específico del problema
+para poder solucionar el problema.
+A DFS y BFS realmente no les importaba la estructura
+del laberinto o cualquier cosa sobre la forma en que un laberinto está en orden
+para resolver el problema.
+Simplemente miran las acciones disponibles y eligen entre esas acciones,
+y no importa si es un laberinto o algún otro problema.
+La solución, o la forma en que se intenta solucionar el problema,
+realmente va a ser fundamentalmente el mismo.
+Lo que vamos a ver ahora es
+una mejora respecto de la búsqueda desinformada.
+Vamos a echar un vistazo a la búsqueda informada.
+La búsqueda informada serán estrategias de búsqueda que
+utilizar conocimientos específicos del problema para poder encontrar mejor una solución.
+Y en el caso de un laberinto, este conocimiento específico del problema
+es algo así como, si voy a cuadrar
+que esté geográficamente más cerca de la meta, que
+Es mejor que estar en una plaza geográficamente más alejada.
+Y esto es algo que sólo podemos saber pensando en este problema.
+y razonamiento sobre qué conocimiento podría ser útil para nuestro agente de IA
+para saber algo sobre.
+Hay varios tipos diferentes de búsqueda informada.
+ Específicamente, primero veremos un tipo particular
+del algoritmo de búsqueda llamado búsqueda codiciosa del mejor primero.
+Búsqueda codiciosa de lo mejor primero, a menudo abreviada como GBFS,
+es un algoritmo de búsqueda que, en lugar de expandir el nodo más profundo,
+como DFS, o el nodo menos profundo, como BFS,
+este algoritmo siempre va a expandir el nodo
+que cree que está más cerca de la meta.
+Ahora, el algoritmo de búsqueda no sabrá con certeza si es el más cercano.
+cosa a la meta, porque si supiéramos lo que estaba más cerca de la meta
+todo el tiempo, entonces ya tendríamos una solución.
+Como el conocimiento de lo que está cerca de la meta,
+Podríamos seguir esos pasos para llegar desde la posición inicial.
+a la solución.
+Pero si no conocemos la solución, es decir, no sabemos exactamente
+¿Qué está más cerca de la meta?
+en su lugar, podemos usar una estimación de lo que es
+más cercano al objetivo, también conocido como heurística:
+sólo una forma de estimar si estamos o no cerca de la meta.
+Y lo haremos usando una función heurística, convencionalmente llamada h(n),
+que toma un estado de entrada y devuelve nuestra estimación de qué tan cerca estamos
+están a la meta.
+Entonces, ¿cuál podría ser realmente esta función heurística?
+¿Cómo se ve en el caso de un algoritmo de resolución de laberintos?
+Cuando intentamos resolver un laberinto, ¿cómo es una heurística?
+Bueno, la heurística necesita responder una pregunta, como entre estas dos
+Células C y D, ¿cuál es mejor?
+¿En cuál preferiría estar si estoy tratando de encontrar el camino hacia la meta?
+Bueno, cualquier humano probablemente podría ver esto y decirte, ¿sabes qué?
+D parece que es mejor.
+Incluso si el laberinto es complicado y no has pensado en todas las paredes,
+Probablemente D sea mejor.
+¿Y por qué D es mejor?
+Bueno, porque si ignoras la pared... simplemente pretendamos que las paredes
+No existas ni por un momento y relajas el problema, por así decirlo.
+D, sólo en términos de pares de coordenadas, está más cerca de este objetivo.
+Son menos pasos los que necesitaría dar para llegar a la meta,
+en comparación con C, incluso si ignoras las paredes.
+Si conoces la coordenada x,y de C y la coordenada x,y del objetivo,
+y de la misma manera, conoces la coordenada x,y de D,
+puedes calcular que D, solo geográficamente, ignorando las paredes,
+parece que es mejor.
+Y esta es la función heurística que vamos a utilizar,
+y es algo llamado distancia de Manhattan, un tipo específico
+de heurística, dónde está la heurística, cuántos cuadrados verticalmente
+y horizontalmente y luego de izquierda a derecha, así que no
+permitiéndome ir en diagonal, ya sea hacia arriba, hacia la derecha, hacia la izquierda o hacia abajo.
+¿Cuántos pasos debo dar para llegar desde cada una de estas celdas hasta la meta?
+Bueno, resulta que D está mucho más cerca.
+Hay menos pasos.
+Sólo es necesario dar seis pasos para llegar a ese objetivo.
+De nuevo aquí ignorando las paredes.
+Hemos relajado un poco el problema.
+Sólo nos preocupa, si haces los cálculos,
+restar los valores de x entre sí y la y
+valores unos de otros, ¿cuál es nuestra estimación de qué tan lejos estamos?
+Podemos estimar que D está más cerca de la meta que C.
+Y ahora tenemos un enfoque.
+Tenemos una forma de elegir qué nodo eliminar de la frontera.
+Y en cada etapa de nuestro algoritmo, estamos
+va a eliminar un nodo de la frontera.
+Vamos a explorar el nodo, si tiene el más pequeño.
+valor para esta función heurística, si tiene el menor
+Distancia de Manhattan a la meta.
+¿Y cómo sería esto realmente?
+Bueno, primero déjame etiquetar este gráfico, etiquetar este laberinto,
+con un número que representa el valor de esta heurística
+función, el valor de la distancia de Manhattan desde cualquiera de estas celdas.
+Así, desde esta celda, por ejemplo, estábamos a uno de la portería.
+De esta celda, quedaron dos lejos de la portería.
+Tres de distancia, cuatro de distancia.
+Aquí estamos a cinco de distancia, porque tenemos que ir uno hacia la derecha y luego cuatro hacia arriba.
+Desde algún lugar como aquí, la distancia a Manhattan es 2.
+Estamos a sólo dos casillas de la meta,
+geográficamente, aunque en la práctica estamos
+Tendremos que tomar un camino más largo, pero aún no lo sabemos.
+La heurística es sólo una manera fácil de estimar
+qué tan lejos estamos de la meta.
+Y tal vez nuestra heurística sea demasiado optimista.
+Piensa que sí, estamos a sólo dos pasos de distancia.
+cuando en la práctica, si se consideran las paredes, podrían ser más pasos.
+Entonces lo importante aquí es que la heurística no es una garantía.
+de cuántos pasos va a dar.
+Es estimar.
+Es un intento de intentar aproximarnos.
+Y en general parece ser el caso que los cuadrados que miran más de cerca
+al objetivo tienen valores más pequeños para la función heurística
+que los cuadrados que están más lejos.
+Así que ahora, usando la búsqueda codiciosa de "mejor primero", ¿qué podría hacer realmente este algoritmo?
+Bueno, nuevamente, para estos primeros cinco pasos, no hay muchas opciones.
+Comenzamos este estado inicial, A. Y decimos, está bien.
+Tenemos que explorar estos cinco estados.
+Pero ahora tenemos un punto de decisión.
+Ahora tenemos la opción de ir a la izquierda o a la derecha.
+Y antes, cuando DFS y BFS simplemente elegían arbitrariamente porque simplemente
+Depende del orden en que arrojes estos dos nodos a la frontera.
+y no especificamos en qué orden los pusiste en la frontera, solo el orden
+los sacas.
+Aquí podemos mirar el 13 y el 11 y decir que, está bien,
+este cuadrado está a una distancia de 11 de la portería,
+según nuestra heurística, según nuestra estimación.
+Y éste estimamos que estará a 13 de la portería.
+Entonces, entre esas dos opciones, entre estas dos opciones,
+Prefiero el 11.
+Prefiero estar a 11 pasos de la meta, así que iré hacia la derecha.
+Podemos tomar una decisión informada porque sabemos algo más.
+sobre este problema.
+Entonces seguimos siguiendo 10, 9, 8...
+entre los dos sietes.
+Realmente no tenemos mucha manera de saber entre ellos.
+Entonces sólo tenemos que hacer una elección arbitraria.
+¿Y sabes qué?
+Quizás elegimos mal.
+Pero está bien porque ahora todavía podemos decir, está bien, probemos con este siete.
+Decimos siete, seis.
+Tenemos que tomar esta decisión aunque aumente
+el valor de la función heurística.
+Pero ahora tenemos otro punto de decisión entre el seis y el ocho.
+Y entre esos dos...
+y realmente, también estamos considerando el 13, pero es mucho más alto.
+Entre seis, ocho y 13, bueno, los seis
+es el valor más pequeño, por lo que preferimos tomar el seis.
+Podemos tomar una decisión informada de que ir por este camino hacia la derecha
+Probablemente sea mejor que ir por ese camino.
+Entonces giramos hacia este lado.
+Vamos a las cinco.
+Y ahora encontramos un punto de decisión en el que realmente
+tomar una decisión que tal vez no querríamos tomar,
+pero desafortunadamente no hay mucha manera de evitar esto.
+Vemos cuatro y seis.
+Cuatro parece más cerca de la meta, ¿verdad?
+Está subiendo y la meta está más arriba.
+Así que terminamos tomando ese camino, que finalmente nos lleva a un callejón sin salida.
+Pero está bien porque todavía podemos decir, está bien, ahora probemos con los seis,
+y ahora sigue esta ruta que finalmente nos llevará a la meta.
+Y así es como la codiciosa búsqueda del mejor primero podría
+Trate de abordar este problema, diciendo siempre que
+tenemos una decisión entre múltiples nodos que podríamos explorar,
+exploremos el nodo que tiene el valor más pequeño de h(n),
+esta función heurística que estima hasta dónde tengo que llegar.
+Y sucede que, en este caso,
+terminamos haciéndolo mejor, en términos de la cantidad de estados que necesitábamos explorar,
+de lo que BFS necesitaba.
+BFS exploró toda esta sección y toda aquella sección.
+Pero pudimos eliminar eso aprovechando
+de esta heurística, este conocimiento sobre cuán cerca estamos
+son hacia el objetivo o alguna estimación de esa idea.
+Entonces esto parece mucho mejor.
+¿No preferiríamos siempre un algoritmo?
+¿Te gusta esto con un algoritmo como la búsqueda en amplitud?
+Bien quizás.
+Una cosa a tener en cuenta es que nosotros
+Necesito encontrar una buena heurística.
+La calidad de la heurística afectará la calidad de este algoritmo.
+Y encontrar una buena heurística a menudo puede resultar un desafío.
+Pero la otra cosa a considerar es preguntar
+la pregunta, tal como lo hicimos con los dos algoritmos anteriores,
+¿Es este algoritmo óptimo?
+¿Encontrará siempre el camino más corto desde el estado inicial hasta la meta?
+Y para responder a esa pregunta, echemos un vistazo a este ejemplo por un momento.
+Echale un vistazo a éste ejemplo.
+Nuevamente estamos tratando de ir de A a B, y nuevamente, he
+etiquetó cada una de las celdas con su distancia de Manhattan
+desde la portería, el número de casillas hacia arriba y hacia la derecha
+necesitarías viajar para llegar desde esa casilla a la meta.
+Y pensemos, ¿los codiciosos buscarían primero lo mejor?
+que siempre escoge el número más pequeño termina encontrando la solución óptima?
+¿Cuál es la solución más corta? ¿La encontraría este algoritmo?
+Y lo importante es darse cuenta de que aquí está el punto de decisión.
+Se estima que estamos a 12 de la meta.
+Y tenemos dos opciones.
+Podemos ir hacia la izquierda, que estimamos que está a 13 de la portería,
+o podemos subir, donde estimamos que estará a 11 de la meta.
+Y entre esos dos, la codiciosa búsqueda de lo mejor primero dirá:
+El 11 luce mejor que el 13.
+Y al hacerlo, la codiciosa búsqueda de lo mejor primero
+acabará encontrando este camino hacia la meta.
+Pero resulta que este camino no es óptimo.
+Hay una manera de llegar a la meta usando menos pasos.
+Y en realidad es de esta manera que finalmente implicó menos pasos,
+aunque eso significara en este momento elegir lo peor
+opción entre las dos, o lo que estimamos como la peor opción, según
+sobre los herejes.
+Y esto es lo que queremos decir con esto es un algoritmo codicioso.
+Es tomar la mejor decisión, a nivel local.
+En este punto de decisión, parece que es mejor.
+ir aquí que ir al 13.
+Pero en general, no es necesariamente óptimo,
+que podría encontrar una solución cuando en realidad no
+Había una mejor solución disponible.
+Entonces nos gustaría alguna forma de resolver este problema.
+Nos gusta la idea de esta heurística, de ser
+capaz de estimar el camino, la distancia entre nosotros y la meta,
+y eso nos ayuda a poder tomar mejores decisiones
+y para eliminar la necesidad de buscar en partes enteras del estado
+espacio.
+Pero nos gustaría modificar el algoritmo para que podamos lograr
+Optimidad, para que pueda ser óptima.
+¿Y cuál es la manera de hacer esto?
+¿Cuál es la intuición aquí?
+Bueno, echemos un vistazo a este problema.
+En este problema inicial, la búsqueda codiciosa de lo mejor primero
+Encontré aquí esta solución, este largo camino.
+Y la razón por la que no fue genial es porque, sí, los números heurísticos
+Cayeron bastante bajo, pero más tarde comenzaron a recuperarse.
+Reconstruyeron 8, 9, 10, 11... hasta llegar a 12, en este caso.
+Entonces, ¿cómo podríamos intentar mejorar este algoritmo?
+Bueno, una cosa de la que podríamos darnos cuenta es que, si
+recorrer todo el camino a través de este algoritmo, a través de este camino,
+y terminamos yendo al 12, y hemos tenido que tomar muchos pasos... como,
+quién sabe cuántos pasos son... sólo para llegar a estos 12,
+También podríamos haber dado, como alternativa, muchos menos pasos, sólo seis pasos,
+y terminé en este 13 aquí.
+Y sí, 13 es más que 12, así que parece que no es tan bueno.
+pero requirió muchos menos pasos.
+¿Bien?
+Sólo se necesitaron seis pasos para llegar a estos 13, en comparación con muchos más pasos.
+para llegar a este 12.
+Y mientras la codiciosa búsqueda del mejor primero dice, oh, bueno, 12 es mejor que 13
+así que elige los 12, podríamos decir más inteligentemente:
+Preferiría estar en algún lugar tan heurísticamente
+Parece que me llevará un poco más de tiempo si puedo llegar mucho más rápido.
+Y vamos a codificar esa idea, esta idea general,
+en un algoritmo más formal conocido como búsqueda de estrellas.
+Una búsqueda de estrellas resolverá este problema al,
+en lugar de simplemente considerar la heurística,
+considerando también cuánto tiempo nos llevó llegar a un estado en particular.
+Entonces la distinción es búsqueda codiciosa de lo mejor primero, si estoy en un estado
+Ahora mismo lo único que me importa es
+¿Cuál es la distancia estimada, el valor heurístico, entre mí?
+y la meta.
+Mientras que una búsqueda de estrellas tendrá en cuenta
+dos datos.
+Tomará en consideración qué tan lejos calculo que estoy de la meta,
+pero también ¿qué distancia tuve que viajar para llegar aquí?
+Porque eso también es relevante.
+Entonces buscaremos algoritmos expandiendo el nodo con el menor
+valor de g(n) más h(n).
+h(n) es la misma heurística de la que hablábamos hace un momento que va
+variar según el problema, pero g(n) será el costo para alcanzar
+el nodo--
+cuántos pasos tuve que dar, en este caso, para llegar a mi posición actual.
+Entonces, ¿cómo se ve ese algoritmo de búsqueda en la práctica?
+Bueno, echemos un vistazo.
+Nuevamente tenemos el mismo laberinto.
+Y nuevamente, los he etiquetado según su distancia a Manhattan.
+Este valor es el valor h(n), la estimación heurística
+de qué tan lejos está cada uno de estos cuadrados de la meta.
+Pero ahora, cuando empezamos a explorar los estados,
+preocuparse no sólo por este valor heurístico sino también
+sobre g(n), el número de pasos que tuve que dar para llegar allí.
+Y me importa sumar esos dos números.
+Entonces, ¿cómo se ve eso?
+En este primer paso, he dado un paso.
+Y ahora se estima que estoy a 16 pasos de la meta.
+Entonces el valor total aquí es 17.
+Luego doy un paso más.
+Ahora he dado dos pasos.
+Y calculo que estoy a 15 de la meta...
+nuevamente, un valor total de 17.
+Ahora he dado tres pasos.
+Y se estima que estoy a 14 de la meta, y así sucesivamente.
+Cuatro pasos, una estimación de 13.
+Cinco pasos, estimación de 12.
+Y ahora, aquí hay un punto de decisión.
+Podría estar a seis pasos de la meta con una heurística de 13
+para un total de 19, o podría estar a seis pasos de distancia
+desde la portería con una heurística de 11 con una estimación de 17 para el total.
+Entonces, entre 19 y 17, prefiero tomar el 17...
+el 6 más el 11.
+Hasta ahora, no es diferente de lo que vimos antes.
+Todavía estamos tomando esta opción porque parece ser mejor.
+Y sigo eligiendo esta opción porque parece ser mejor.
+Pero es justo aquí cuando las cosas se vuelven un poco diferentes.
+Ahora podría estar a 15 pasos de la meta con una distancia estimada de 6.
+Entonces 15 más 6, el valor total es 21.
+Alternativamente, podría estar a seis pasos de la meta...
+porque esto estaba a cinco pasos de distancia, entonces esto está a seis pasos de distancia...
+con un valor total de 13 como mi estimación.
+Entonces 6 más 13--
+eso es 19.
+Entonces aquí evaluaríamos que g(n) más h(n) es 19--
+6 más 13, mientras que aquí seríamos 15 más 6, o 21.
+Entonces la intuición es 19 menos que 21, elige aquí.
+Pero la idea es, en última instancia, que preferiría haber dado menos pasos para llegar a 13.
+que haber dado 15 pasos y estar a seis
+porque significa que he tenido que dar más pasos para llegar allí.
+Quizás haya un camino mejor de esta manera.
+Entonces, en lugar de eso, exploraremos esta ruta.
+Ahora, si damos uno más... son siete pasos más 14,
+tiene 21 años, así que entre esos dos es una especie de volatilidad.
+Podríamos terminar explorando ese de todos modos.
+Pero después de eso, a medida que estos números comienzan a aumentar en los valores heurísticos
+y estos valores heurísticos comienzan a reducirse,
+Descubrirá que seguiremos explorando este camino.
+Y puedes hacer los cálculos para ver que en cada punto de decisión,
+Una búsqueda de estrellas hará una elección basada en la suma de cuántos pasos
+Me tomó llegar a mi posición actual y luego
+qué tan lejos estimo que estoy de la meta.
+Entonces, si bien tuvimos que explorar algunos de estos estados,
+la solución final que encontramos fue, de hecho, una solución óptima.
+Nos encontró la forma más rápida posible de llegar desde el estado inicial.
+a la meta.
+Y resulta que A* es un algoritmo de búsqueda óptimo bajo ciertas
+condiciones.
+Entonces las condiciones son h de n, mi heurística debe ser admisible.
+¿Qué significa que una heurística sea admisible?
+Bueno, una heurística es admisible si nunca sobreestima el costo real.
+Cada evento siempre necesita hacerlo exactamente bien
+en términos de qué tan lejos estoy, o es necesario subestimarlo.
+Entonces vimos un ejemplo anterior donde el valor heurístico era mucho menor.
+que el costo real que costaría.
+Eso está totalmente bien.
+Pero el valor heurístico nunca debe sobreestimarse.
+Nunca debería pensar que estoy más lejos de la meta de lo que realmente estoy.
+Y mientras tanto, para hacer una declaración más contundente, h de n
+También es necesario ser coherente.
+¿Y qué significa que sea consistente?
+Matemáticamente, significa que para cada nodo, que
+llamaremos n, y sucesor, el nodo después de mí, al que llamaré n principal,
+donde se necesita un costo de c para dar ese paso, el valor heurístico de n
+debe ser menor o igual que la heurística
+valor de n primo más el costo.
+Son muchas matemáticas, pero en palabras, lo que en última instancia
+Lo que significa es que si estoy aquí en este estado ahora mismo,
+el valor heurístico desde mí hasta el objetivo no debería ser mayor que el valor heurístico
+valor de mi sucesor, el próximo lugar al que podría ir, más todo lo que
+Me costaría simplemente dar ese paso, de un paso al siguiente.
+Y esto es sólo para asegurarme de que mi heurística sea consistente entre todos
+de estos pasos que podría tomar.
+Mientras esto sea cierto, la búsqueda A* me encontrará una solución óptima.
+solución.
+Y aquí es donde gran parte del desafío de resolver estos problemas de búsqueda puede
+A veces entramos, que la búsqueda A* es un algoritmo que se conoce,
+y podrías escribir el código con bastante facilidad.
+Pero elegir la heurística puede ser un desafío interesante.
+Cuanto mejor sea la heurística, mejor
+Seré capaz de resolver el problema y menos estados tendré que explorar.
+Y necesito asegurarme de que la heurística satisfaga
+estas limitaciones particulares.
+En definitiva, estos son algunos de los ejemplos de algoritmos de búsqueda.
+aquello podría funcionar.
+Y ciertamente, hay muchos más que esto.
+A*, por ejemplo, tiene tendencia a utilizar bastante memoria,
+por lo que existen enfoques alternativos para A* que, en última instancia, utilizan menos memoria que
+esta versión de A* se utiliza.
+Y existen otros algoritmos de búsqueda que están optimizados para otros casos.
+también.
+Pero ahora, hasta ahora, sólo hemos estado analizando algoritmos de búsqueda.
+donde hay un agente.
+Estoy tratando de encontrar una solución a un problema.
+Estoy tratando de abrirme camino a través de un laberinto.
+Estoy tratando de resolver un rompecabezas de 15.
+Estoy tratando de encontrar indicaciones para llegar desde el punto A al punto B.
+A veces, sin embargo, en situaciones de búsqueda,
+entrar en una situación adversa en la que estoy
+un agente que intenta tomar decisiones inteligentes,
+y hay alguien más que está peleando contra mí, por así decirlo,
+que tiene un objetivo opuesto, alguien en quien estoy intentando triunfar,
+Alguien más que quiere que fracase.
+Y esto es más popular en algo como un juego, un juego como tres en raya,
+donde tenemos esta cuadrícula de 3 por 3, y X y O
+túrnense para escribir una X o una O en cualquiera de estos cuadrados.
+Y el objetivo es conseguir tres X seguidas, si eres el jugador X,
+o tres O seguidas, si eres el jugador O.
+Y las computadoras se han vuelto bastante buenas jugando juegos, tres en raya con mucha facilidad,
+pero juegos aún más complejos.
+Y como puedes imaginar, ¿cómo se ve una decisión inteligente en un juego?
+¿como?
+Entonces tal vez X haga un movimiento inicial en el medio y O juegue aquí arriba.
+¿En qué se convierte ahora una jugada inteligente para X?
+¿A dónde deberías moverte si fueras X?
+Y resulta que hay un par de posibilidades.
+Pero si una IA juega este juego de manera óptima,
+entonces la IA podría jugar en algún lugar como la esquina superior derecha, donde
+en esta situación, O tiene el objetivo opuesto a X.
+X está tratando de ganar el juego, para conseguir tres en fila en diagonal aquí,
+y O está tratando de detener ese objetivo, opuesto al objetivo.
+Y entonces O se va a colocar aquí, para intentar bloquear.
+Pero ahora X tiene una jugada bastante inteligente.
+X puede hacer un movimiento, como este donde ahora X tiene dos formas posibles de hacerlo.
+puede ganar el juego.
+X podría ganar el juego si consigue tres seguidos por aquí,
+o X podría ganar el juego si consigue tres en fila vertical de esta manera.
+Así que no importa dónde haga O su próximo movimiento.
+O podría jugar aquí, por ejemplo, bloqueando los tres en fila horizontalmente,
+pero entonces X ganará el juego si consigue un tres en fila vertical.
+Y entonces hay bastante razonamiento
+eso está sucediendo aquí para que la computadora pueda resolver un problema.
+Y es similar en espíritu a los problemas que hemos analizado hasta ahora.
+Hay acciones, hay una especie de estado del tablero,
+y alguna transición de una acción a la siguiente,
+pero es diferente en el sentido de que ya no se trata sólo de una búsqueda clásica
+problema, sino un problema de búsqueda adversario, que soy el jugador X,
+tratando de encontrar los mejores movimientos para hacer, pero
+Sé que hay algún adversario que está tratando de detenerme.
+Entonces necesitamos algún tipo de algoritmo para lidiar con estos tipos de adversarios.
+de situaciones de búsqueda.
+Y el algoritmo que vamos a ver
+es un algoritmo llamado Minimax, que funciona
+muy bien para estos juegos deterministas, donde hay dos jugadores.
+También puede funcionar para otros tipos de juegos, pero ahora veremos los juegos
+donde hago un movimiento, que mi oponente hace un movimiento y estoy tratando de ganar,
+y mi oponente también está tratando de ganar.
+O en otras palabras, mi oponente está intentando hacerme perder.
+Entonces, ¿qué necesitamos para que este algoritmo funcione?
+Bueno, cada vez que intentamos traducir este concepto humano de jugar un juego,
+Ganando y perdiendo ante una computadora, queremos
+traducirlo en términos que la computadora pueda entender.
+Y, en última instancia, la computadora realmente sólo entiende los números.
+Y entonces queremos alguna forma de traducir un juego de X y O.
+en una cuadrícula a algo numérico, algo que la computadora pueda entender.
+La computadora normalmente no entiende las nociones de ganar o perder,
+pero sí entiende el concepto de más grande y más pequeño.
+Y entonces, lo que todavía podríamos hacer es tomar cada una de las formas posibles.
+que un juego de tres en raya puede desarrollarse y asignar un valor, o una utilidad,
+a cada uno de esos caminos posibles.
+Y en un juego de tres en raya, y en muchos tipos de juegos,
+hay tres resultados posibles.
+Los resultados son: O gana, X gana o nadie gana.
+Entonces el jugador uno gana, el jugador dos gana o nadie gana.
+Y por ahora, sigamos adelante y asignemos cada uno de estos posibles resultados.
+un valor diferente.
+Diremos O ganando--
+eso tendrá un valor negativo 1.
+Nadie ganará... eso tendrá un valor de 0.
+Y X ganando... eso tendrá un valor de 1.
+Así que acabamos de asignar números a cada uno de estos tres resultados posibles.
+Y ahora tenemos dos jugadores.
+Tenemos el jugador X y el jugador O.
+Y vamos a seguir adelante y llamar al jugador X el jugador máximo.
+Y al jugador O lo llamaremos jugador mínimo.
+Y la razón es porque en el algoritmo Minimax,
+el jugador máximo, que en este caso es X, tiene como objetivo maximizar la puntuación.
+Estas son las posibles opciones para la puntuación, 1 negativo, 0 y 1.
+X quiere maximizar la puntuación, es decir, si es posible,
+A X le gustaría esta situación en la que X gane el juego.
+Y le damos una puntuación de 1.
+Pero si esto no es posible, si X necesita elegir entre estos dos
+opciones, 1 negativo significa O ganando, o 0 significa que nadie gana,
+X preferiría que nadie gane, puntuación de 0, que una puntuación negativa de 1,
+Oh, ganar.
+Entonces esta noción de ganar y perder en el tiempo
+se ha reducido matemáticamente a esta idea de intentar y maximizar
+el marcador.
+El jugador X siempre quiere que la puntuación sea mayor.
+Y por otro lado, el jugador mínimo, en este caso, O,
+tiene como objetivo minimizar la puntuación.
+El jugador O quiere que la puntuación sea lo más pequeña posible.
+Así que ahora hemos tomado este juego de X y O y ganar y perder.
+y lo convertí en algo matemático, algo
+donde X intenta maximizar la puntuación, O intenta minimizar la puntuación.
+Veamos ahora todas las partes del juego.
+que necesitamos para codificarlo en una IA
+para que una IA pueda jugar un juego como el tres en raya.
+Entonces el juego necesitará un par de cosas.
+Necesitaremos algún tipo de estado inicial, que en este caso
+llama a S0, que es como comienza el juego, como un tablero de tres en raya vacío,
+Por ejemplo.
+También necesitaremos una función llamada jugador,
+donde la función player va a tomar como entrada un estado, aquí representado
+por S. Y la salida de la función del reproductor será,
+¿A qué jugador le toca?
+Necesitamos poder darle un tablero de tres en raya a la computadora,
+ejecutarlo a través de una función, y esa función nos dice de quién es el turno.
+Necesitaremos alguna noción de las acciones que podemos tomar.
+Veremos ejemplos de eso en un momento.
+Necesitamos alguna noción de un modelo de transición, igual que antes.
+Si tengo un estado y tomo una acción,
+Necesitamos saber qué resulta como consecuencia de ello.
+Necesito alguna forma de saber cuando termina el juego.
+Entonces esto es equivalente a una especie de prueba de objetivos,
+pero necesito alguna prueba de terminal, alguna forma de verificar
+para ver si un estado es un estado terminal, donde un estado terminal significa
+el juego ha terminado.
+En el clásico juego de tres en raya, un estado terminal significa que alguien tiene
+consiguió tres en fila, o todos los cuadrados del tablero de tres en raya están
+completado.
+Cualquiera de esas condiciones lo convierte en un estado terminal.
+En una partida de ajedrez, podría ser algo así como:
+cuando hay jaque mate, o si el jaque mate ya no es posible,
+que se convierte en un estado terminal.
+Y finalmente necesitaremos una función de utilidad, una función que tome un estado
+y nos da un valor numérico para ese estado terminal, alguna forma de decir,
+Si X gana el juego, eso tiene un valor de 1.
+Si O ha ganado el juego, eso tiene el valor de menos 1.
+Si nadie ha ganado el juego, tiene un valor de 0.
+Así que echemos un vistazo a cada uno de estos.
+El estado inicial lo podemos representar simplemente en tres en raya como el tablero de juego vacío.
+Aquí es donde comenzamos.
+Es el lugar desde donde iniciamos esta búsqueda.
+Y nuevamente, representaré estas cosas visualmente.
+Pero puedes imaginar que esto realmente sea simplemente
+una matriz, o una matriz bidimensional, de todos estos cuadrados posibles.
+Entonces necesitamos la función del reproductor que, nuevamente, toma un estado
+y nos dice a quién le toca.
+Suponiendo que X hace el primer movimiento, si tengo un tablero de juego vacío,
+entonces mi función de reproductor devolverá X
+Y si tengo un tablero de juego donde X ha hecho un movimiento, mi función de jugador es
+va a devolver O. La función de jugador toma un tablero de juego de tres en raya
+y nos dice a quién le toca.
+A continuación, consideraremos la función de acciones.
+La función de acciones, al igual que en la búsqueda clásica, toma un estado
+y nos da el conjunto de todas las acciones posibles
+podemos tomar en ese estado.
+Entonces imaginemos que es el turno de O de moverse en un tablero de juego que se ve así.
+¿Qué sucede cuando lo pasamos a la función de acciones?
+Entonces la función de acciones toma este estado del juego como entrada,
+y el resultado es un conjunto de acciones posibles, es un conjunto de...
+Podría moverme en la parte superior izquierda o podría moverme en la parte inferior central.
+Esas son las dos posibles opciones de acción que tengo.
+cuando comienzo en este estado particular.
+Ahora, como antes, cuando agregamos estados y acciones,
+Necesitamos algún tipo de modelo de transición que nos diga,
+Cuando realizamos esta acción en el estado, ¿cuál es el nuevo estado que obtenemos?
+Y aquí, definimos eso usando la función de resultado que toma
+un estado como entrada, así como una acción.
+Y cuando aplicamos la función de resultado a este estado,
+diciendo que dejemos que O se mueva en esta esquina superior izquierda, el nuevo estado que obtenemos
+es este estado resultante, donde O está en la esquina superior izquierda.
+Y ahora, esto parece obvio para alguien que sabe jugar al tres en raya.
+Por supuesto, juegas en la esquina superior izquierda.
+ese es el tablero que obtienes.
+Pero toda esta información debe codificarse en la IA.
+La IA no sabe jugar al tres en raya
+hasta que le digas a la IA cómo funcionan las reglas del tres en raya.
+Y esta función, definiendo la función aquí,
+nos permite decirle a la IA cómo funciona realmente este juego
+y cómo las acciones realmente afectan el resultado del juego.
+Entonces la IA necesita saber cómo funciona el juego.
+La IA también necesita saber cuándo termina el juego.
+Eso es definiendo una función llamada terminal que toma como entrada
+un estado S, tal que si tomamos un juego que aún no ha terminado,
+páselo a la función terminal, la salida es falsa.
+El juego no ha terminado.
+Pero si tomamos un juego que ya se acabó, porque X ha metido tres
+en una fila a lo largo de esa diagonal, páselo a la función terminal,
+entonces el resultado será verdadero, porque el juego, de hecho, ha terminado.
+Y finalmente, le hemos dicho a la IA cómo funciona el juego.
+en términos de qué movimientos se pueden hacer y qué sucede cuando se hacen esos movimientos.
+Le hemos avisado a la IA cuando termina el juego.
+Ahora necesitamos decirle a la IA cuál es el valor de cada uno de esos estados.
+Y lo hacemos definiendo esta función de utilidad, que toma un estado, S,
+y nos dice la puntuación o la utilidad de ese estado.
+Nuevamente dijimos que si X gana el juego, esa utilidad tiene un valor de 1,
+mientras que si O gana el juego, entonces la utilidad de eso es menos 1.
+Y la IA necesita saber, para cada uno de estos estados terminales.
+Cuando termina el juego, ¿cuál es la utilidad de ese estado?
+Entonces puedo darles un tablero de juego como este, donde el juego, de hecho, ha terminado,
+y le pido a la IA que me diga cuál es el valor de ese estado, podría hacerlo.
+El valor del estado es 1.
+Sin embargo, las cosas se ponen interesantes cuando el juego aún no ha terminado.
+Imaginemos un tablero de juego como este.
+Estamos en medio del juego.
+Es el turno de O de hacer un movimiento.
+Entonces, ¿cómo sabemos que es el turno de O de hacer un movimiento?
+Podemos calcular eso usando la función del reproductor.
+Podemos decir, jugador de S, pasa en el estado.
+O es la respuesta, entonces sabemos que es el turno de O de moverse.
+Y ahora, ¿cuál es el valor de este tablero y qué acción debería tomar O?
+Bueno eso va a depender.
+Tenemos que hacer algunos cálculos aquí.
+Y aquí es donde realmente entra en juego el algoritmo Minimax.
+Recuerde que X está tratando de maximizar la puntuación, lo que significa
+que O está tratando de minimizar la puntuación.
+O quisiera minimizar el valor total que obtenemos al final del juego.
+Y debido a que este juego aún no ha terminado, realmente no
+Todavía no sabemos cuál es el valor de este tablero de juego.
+Tenemos que hacer algunos cálculos para resolverlo.
+Entonces, ¿cómo hacemos ese tipo de cálculo?
+Bueno, para hacerlo, vamos a considerar,
+tal como lo haríamos en una situación de búsqueda clásica,
+ ¿Qué acciones podrían ocurrir a continuación y a qué estados nos llevará eso?
+Y resulta que en esta posición, no
+Hay sólo dos cuadrados abiertos, lo que significa que sólo hay dos lugares abiertos donde
+O puede hacer un movimiento.
+O podría hacer un movimiento en la esquina superior izquierda,
+u O puede hacer un movimiento en el medio inferior.
+Y Minimax no sabe de inmediato cuál de esos movimientos
+va a ser mejor, por lo que considerará ambos.
+Pero ahora nos encontramos con la misma situación.
+Ahora tengo dos tableros de juego más, ninguno de los cuales ha terminado.
+¿Qué pasa después?
+Y ahora es en este sentido que Minimax es
+lo que llamaremos un algoritmo recursivo.
+Ahora repetirá exactamente el mismo proceso, aunque ahora
+considerándolo desde la perspectiva opuesta.
+Es como si ahora me fuera a poner... si soy el jugador O,
+Voy a ponerme en el lugar de mi oponente, mi oponente como jugador X,
+y considere, ¿qué haría mi oponente si estuviera en esta posición?
+¿Qué haría mi oponente, el jugador X, si estuviera en esa posición?
+¿Y qué pasaría entonces?
+Bueno, el otro jugador, mi oponente, el jugador X,
+está tratando de maximizar la puntuación, mientras que yo estoy tratando
+para minimizar la puntuación como jugador O.
+Entonces X está tratando de encontrar el valor máximo posible que pueden obtener.
+¿Y entonces qué va a pasar?
+Bueno, desde esta posición en el tablero, X sólo tiene una opción.
+X va a jugar aquí y van a conseguir tres seguidos.
+Y sabemos que ese tablero, X ganando...
+que tiene un valor de 1.
+Si X gana el juego, el valor de ese tablero de juego es 1.
+Y así, desde esta posición, si este estado sólo puede conducir a este estado,
+es la única opción posible y este estado tiene un valor de 1,
+entonces el valor máximo posible que el jugador X puede obtener de este tablero de juego
+también es 1 de aquí.
+El único lugar al que podemos llegar es a un juego con valor 1,
+entonces este tablero de juego también tiene un valor de 1.
+Ahora consideramos este de aquí.
+¿Qué va a pasar ahora?
+Bueno, X necesita hacer un movimiento.
+El único movimiento que X puede hacer es en la esquina superior izquierda, por lo que X irá allí.
+Y en este juego nadie gana.
+Nadie tiene tres seguidos.
+Entonces el valor de ese tablero de juego es 0.
+Nadie ha ganado.
+Y así nuevamente, por la misma lógica, si desde esta posición en el tablero, el único lugar
+podemos llegar a un tablero donde el valor es 0,
+entonces este estado también debe tener un valor de 0.
+Y ahora viene la parte de elección, la idea de intentar minimizar.
+Yo, como jugador O, ahora sé que si tomo esta decisión,
+moviéndose en la parte superior izquierda, eso resultará en un juego con un valor de 1,
+suponiendo que todos jueguen de manera óptima.
+Y si en lugar de eso juego en el medio-bajo,
+Elige esta bifurcación en el camino, que resultará en un tablero de juego.
+con un valor de 0.
+Tengo dos opciones.
+Tengo un 1 y un 0 para elegir y necesito elegir.
+Y como jugador mínimo, prefiero elegir la opción
+con el valor mínimo.
+Entonces, cada vez que un jugador tiene múltiples opciones,
+el jugador mínimo elegirá la opción con el valor más pequeño.
+El jugador máximo elegirá la opción con el valor mayor.
+Entre el 1 en el 0, el 0 es más pequeño,
+lo que significa que prefiero empatar el juego que perderlo.
+Y entonces este tablero de juego, digamos, también tiene un valor de 0,
+porque si estoy jugando de manera óptima, elegiré esta bifurcación en el camino.
+Colocaré mi O aquí para bloquear las tres X seguidas.
+X se moverá en la parte superior izquierda y el juego habrá terminado.
+y nadie habrá ganado el juego.
+Esta es ahora la lógica de Minimax: considerar todas las opciones posibles.
+que puedo tomar, todas las acciones que puedo tomar,
+y luego ponerme en el lugar de mi oponente.
+Decido qué movimiento voy a hacer ahora considerando qué movimiento
+mi oponente hará en el siguiente turno.
+Y para hacer eso, considero qué movimiento haría en el turn siguiente,
+y así sucesivamente, hasta llegar al final del juego,
+a uno de estos llamados estados terminales.
+De hecho, este mismo punto de decisión, donde
+Estoy tratando de decidir como jugador O sobre qué tomar una decisión,
+Podría haber sido simplemente parte de la lógica de que el jugador X, mi oponente,
+Estaba usando el movimiento antes que yo.
+Esto podría ser parte de algún árbol más grande donde
+X está intentando hacer un movimiento en esta situación.
+y necesita elegir entre tres opciones diferentes
+para tomar una decisión sobre lo que sucederá.
+Y cuanto más nos alejamos del final del juego,
+cuanto más profundo tiene que llegar este árbol, porque cada nivel en este árbol
+va a corresponder a un movimiento, un movimiento o acción que realizo,
+un movimiento o acción que realiza mi oponente para decidir qué sucede.
+Y de hecho, resulta que si soy el jugador X en esta posición,
+y recursivamente hago la lógica y veo que tengo una opción...
+tres opciones, de hecho, una de las cuales lleva a un valor de 0, si juego aquí,
+y si todos juegan de manera óptima, el juego será un empate.
+Si juego aquí, entonces O ganará y yo perderé, jugando de manera óptima.
+O aquí, donde yo, el jugador X, puedo ganar...
+bueno, entre una puntuación de 0 y 1 y 1 negativos,
+Prefiero elegir el tablero con un valor de 1,
+porque ese es el valor máximo que puedo obtener.
+Y entonces este tablero también tendría un valor máximo de 1.
+Y entonces este árbol puede llegar a ser muy, muy profundo,
+especialmente cuando el juego comienza a tener más y más movimientos.
+Y esta lógica no sólo funciona para el tres en raya,
+pero en cualquiera de estos tipos de juegos donde yo hago un movimiento, mi oponente hace un movimiento,
+y, en última instancia, tenemos estos objetivos contradictorios.
+Y podemos simplificar el diagrama en un diagrama como este.
+Esta es una versión más abstracta del árbol Minimax,
+donde estos son cada estado, pero ya no los represento exactamente
+como tableros de tres en raya.
+Esto sólo representa un juego genérico que podría ser tres en raya,
+Podría ser otro juego completamente diferente.
+Cualquiera de estas flechas verdes que apuntan hacia arriba...
+que representa un estado maximizador.
+Me gustaría que la puntuación fuera lo más grande posible.
+Y cualquiera de estas flechas rojas apuntando hacia abajo...
+esos son estados minimizadores, donde el jugador es el jugador mínimo,
+y están tratando de hacer que la puntuación sea lo más pequeña posible.
+Entonces, si te imaginas en esta situación, yo soy el jugador que maximiza, este jugador
+aquí, y tengo tres opciones...
+una opción me da una puntuación de 5, una opción me da una puntuación de 3,
+y una opción me da una puntuación de 9.
+Bueno, entonces entre esas tres opciones, mi mejor opción.
+es elegir este 9 de aquí, el puntaje que maximiza mis opciones
+de las tres opciones.
+Y entonces puedo darle a este estado un valor de 9,
+porque entre mis tres opciones esa es la mejor
+opción que tengo disponible para mí.
+Entonces esa es mi decisión ahora.
+Te imaginas que está como a un paso del final del juego.
+Pero entonces también podrías hacer una pregunta razonable.
+¿Qué podría hacer mi oponente a dos movimientos del final del juego?
+Mi oponente es el jugador que minimiza.
+Están intentando que la puntuación sea lo más pequeña posible.
+Imagínese lo que habría pasado si tuvieran que elegir qué elegir.
+Una elección nos lleva a este estado, donde yo, el jugador maximizador,
+Voy a optar por 9, la puntuación más alta que puedo conseguir.
+Y uno conduce a este estado, donde yo, el jugador maximizador,
+Elegiría 8, que es entonces la puntuación más alta que puedo obtener.
+Ahora, el jugador minimizador, obligado a elegir entre un 9 o un 8,
+Va a elegir la puntuación más pequeña posible, que en este caso es un 8.
+Y así es como se desarrollaría este proceso.
+Pero el jugador minimizador, en este caso, considera
+ambas opciones, y luego todas las opciones
+eso sucedería como resultado de eso.
+Esta es ahora una imagen general de cómo se ve el algoritmo Minimax.
+Intentemos ahora formalizarlo usando un poco de pseudocódigo.
+Entonces, ¿qué está sucediendo exactamente en el algoritmo Minimax?
+Bueno, dado un estado, S, debemos decidir qué sucederá.
+El jugador máximo... si es el turno del jugador máximo, entonces
+max va a elegir una acción, A, en acciones de S. Recuerde
+que acciones es una función que toma un estado
+y me devuelve todas las acciones posibles que puedo realizar.
+Me dice todos los movimientos que son posibles.
+El jugador máximo elegirá específicamente
+una acción, A, en el conjunto de acciones que me da
+el valor más alto del valor mínimo del resultado de S y A. Entonces, ¿qué significa eso?
+Bueno quiere decir que quiero hacer la opción que me da
+la puntuación más alta de todas las acciones, A.
+¿Pero qué puntuación va a tener eso?
+Para calcular eso, necesito saber cuál es mi oponente, el jugador mínimo,
+lo que van a hacer si intentan minimizar el valor del estado resultante.
+Entonces decimos, ¿qué estado resulta después de realizar esta acción?
+¿Y qué pasa cuando el jugador mínimo lo intenta?
+¿Para minimizar el valor de ese estado?
+Lo considero para todas mis opciones posibles.
+Y después de haber considerado eso para todas mis opciones posibles,
+Elijo la acción, A, que tiene el valor más alto.
+Asimismo, el jugador mínimo va a hacer lo mismo, pero al revés.
+También van a considerar cuáles son todas las acciones posibles que
+pueden tomar si es su turno?
+Y van a elegir la acción, A, que tiene la menor
+valor posible de todas las opciones.
+Y la forma en que saben cuál es el valor más pequeño posible de todas las opciones,
+es considerando lo que va a hacer el jugador máximo,
+diciendo, ¿cuál es el resultado de aplicar esta acción al estado actual?
+y luego, ¿qué intentaría hacer el jugador máximo?
+¿Qué valor calcularía el jugador máximo para ese estado en particular?
+Entonces todos toman su decisión basándose en intentar estimar
+lo que haría la otra persona.
+Y ahora debemos centrar nuestra atención en estos dos.
+funciones, maxValue y minValue.
+¿Cómo se calcula realmente el valor de un estado?
+si estás tratando de maximizar su valor, y ¿cómo lo haces?
+¿Calcular el valor de un estado si estás intentando minimizar el valor?
+Si puedes hacer eso, entonces tenemos una implementación completa.
+de este algoritmo Minimax.
+Así que intentémoslo.
+Intentemos implementar esta función maxValue
+que toma un estado y devuelve como salida el valor de ese estado
+si estoy tratando de maximizar el valor del estado.
+Bueno, lo primero que puedo comprobar es si el juego ha terminado.
+porque si el juego termina--
+en otras palabras, si el estado es un estado terminal...
+entonces esto es fácil.
+Ya tengo esta función de utilidad que me dice
+cual es el valor del tablero.
+Si el juego termina, simplemente compruebo, ¿ganó X?
+¿O ganó?
+¿Eso es un empate?
+Y la función de utilidad simplemente sabe cuál es el valor del estado.
+Lo que es más complicado es que si el juego no termina,
+porque entonces necesito hacer este razonamiento recursivo sobre el pensamiento,
+¿Qué va a hacer mi oponente en el siguiente movimiento?
+Entonces quiero calcular el valor de este estado,
+y quiero que el valor del Estado sea lo más alto posible.
+Y haré un seguimiento de ese valor en una variable llamada v.
+Y si quiero que el valor sea lo más alto posible,
+Necesito darle a v un valor inicial.
+E inicialmente, seguiré adelante y lo configuraré lo más bajo posible,
+porque todavía no sé qué opciones tengo disponibles.
+Así que inicialmente estableceré v igual a infinito negativo, lo cual
+Parece un poco extraño, pero la idea aquí
+es decir, quiero que el valor inicialmente sea lo más bajo posible,
+porque al considerar mis acciones, siempre estoy
+Voy a intentar hacerlo mejor que v. Y si configuro v en infinito negativo,
+Sé que siempre puedo hacerlo mejor que eso.
+Entonces ahora considero mis acciones.
+Y esto va a ser una especie de bucle,
+donde por cada acción en acciones de estado--
+Recuerdo, las acciones son una función que toma mi estado.
+y me da todas las acciones posibles que puedo utilizar en ese estado.
+Entonces, para cada una de esas acciones, quiero compararla con v y decir:
+Muy bien, v va a ser igual al máximo de v y esta expresión.
+¿Cuál es entonces esta expresión?
+Bueno, primero es obtener el resultado de realizar la acción y el estado,
+y luego obtener el valor mínimo de eso.
+En otras palabras, digamos que quiero saber
+desde ese estado qué es lo mejor que puede hacer el min player,
+porque van a intentar minimizar el marcador.
+Entonces, cualquiera que sea la puntuación resultante del valor mínimo de ese estado,
+compárelo con mi mejor valor actual y simplemente elija el máximo de esos dos,
+porque estoy tratando de maximizar el valor.
+En resumen, ¿qué hacen estas tres líneas de código?
+Estoy repasando todas mis acciones posibles y haciendo la pregunta,
+¿Cómo maximizo la puntuación, teniendo en cuenta lo que mi oponente va a intentar hacer?
+Después de todo este ciclo, puedo devolver v,
+y ese es ahora el valor de ese estado en particular.
+Y para el jugador mínimo, es exactamente lo contrario de esto, la misma lógica,
+solo al revés.
+Para calcular el valor mínimo de un estado,
+Primero comprobamos si es un estado terminal.
+Si es así, le devolvemos su utilidad.
+De lo contrario, ahora vamos a intentar minimizar el valor del estado,
+dadas todas mis acciones posibles.
+Entonces necesito un valor inicial para v, el valor del estado.
+E inicialmente, lo configuraré en infinito, porque sé que siempre puede
+obtener algo menor que el infinito.
+Entonces, al comenzar con v es igual a infinito, me aseguro de que la primera acción
+Encuentro--
+eso será menor que este valor de v.
+Y luego hago lo mismo...
+recorrer todas mis acciones posibles, y para cada una
+de los resultados que podríamos obtener cuando el jugador máximo tome su decisión,
+tomemos el mínimo de eso y el valor actual de v.
+Entonces, después de todo lo dicho y hecho, obtengo el valor más pequeño posible de v,
+que luego devuelvo al usuario.
+De modo que, en efecto, ese es el pseudocódigo de Minimax.
+Así es como tomamos un juego y descubrimos cuál es el mejor movimiento a realizar.
+es usando recursivamente estas funciones maxValue y minValue, donde
+maxValue llama a minValue, minValue llama a maxValue, atrás
+y adelante, hasta llegar a un estado terminal, en cuyo punto
+nuestro algoritmo puede simplemente devolver la utilidad de ese estado en particular.
+Lo que puedes imaginar es que esto va
+comenzar a ser un proceso largo, especialmente cuando comienzan los juegos
+volverse más complejo, a medida que comenzamos a agregar más movimientos y más opciones posibles
+y juegos que podrían durar bastante más.
+Entonces, la siguiente pregunta es: ¿qué tipo de optimizaciones podemos hacer aquí?
+¿Cómo podemos hacerlo mejor para utilizar menos espacio?
+¿O tomar menos tiempo para poder solucionar este tipo de problemas?
+Y veremos un par de posibles optimizaciones.
+Pero, por un lado, veremos este ejemplo.
+Nuevamente, recurriremos a estas flechas hacia arriba y hacia abajo.
+Imaginemos que ahora soy el jugador máximo, esta flecha verde.
+Estoy intentando que la puntuación sea lo más alta posible.
+Y este es un juego fácil, donde sólo hay dos movimientos.
+Hago un movimiento, una de estas tres opciones,
+y luego mi oponente hace un movimiento, una de estas tres opciones,
+basado en el movimiento que hago.
+Y como resultado, obtenemos algo de valor.
+Veamos el orden en el que hago estos cálculos.
+y averiguar si hay alguna optimización que pueda hacer
+a este proceso de cálculo.
+Tendré que mirar estos estados uno a la vez.
+Entonces digamos que empiezo aquí por la izquierda y digo, está bien, ahora
+Voy a considerar, ¿qué intentará hacer aquí el jugador mínimo, mi oponente?
+Bueno, el jugador mínimo verá las tres posibles acciones.
+y mira su valor, porque estos son estados terminales.
+Son el final del juego.
+Y entonces verán, muy bien, este nodo tiene un valor de 4, un valor de 8,
+valor de 5.
+Y el jugador mínimo va a decir, bueno, está bien.
+Entre estas tres opciones, 4, 8 y 5,
+Me quedo con el más pequeño, me quedo con los 4.
+Entonces este estado ahora tiene un valor de 4.
+Entonces yo, como jugador máximo, digo, está bien, si tomo esta acción,
+tendrá un valor de 4.
+Eso es lo mejor que puedo hacer, porque min player
+Voy a intentar minimizar mi puntuación.
+Ahora bien, ¿qué pasa si elijo esta opción?
+Exploraremos esto a continuación.
+Y ahora exploro qué haría el jugador mínimo si elijo esta acción.
+Y el jugador mínimo va a decir, muy bien, ¿cuáles son las tres opciones?
+El jugador mínimo tiene opciones entre 9, 3 y 7, por lo que 3
+es el más pequeño entre 9, 3 y 7.
+Entonces continuaremos y diremos que este estado tiene un valor de 3.
+Así que ahora yo, como jugador máximo...
+Ahora he explorado dos de mis tres opciones.
+Sé que una de mis opciones me garantizará una puntuación de 4, como mínimo,
+y una de mis opciones me garantizará una puntuación de 3.
+Y ahora considero mi tercera opción y digo, está bien, ¿qué pasa aquí?
+Exactamente la misma lógica: el jugador mínimo va
+para mirar estos tres estados, 2, 4 y 6,
+digamos que la opción mínima posible es 2, por lo que el jugador mínimo quiere las dos.
+Ahora yo, como jugador máximo, he calculado toda la información.
+mirando dos capas de profundidad, mirando todos estos nodos.
+Y ya puedo decir, entre el 4, el 3 y el 2, ¿sabes qué?
+Prefiero tomar el 4, porque si elijo
+esta opción, si mi oponente juega de manera óptima,
+Intentarán llevarme al 4, pero eso es lo mejor que puedo hacer.
+No puedo garantizar una puntuación más alta, porque si
+Si elijo cualquiera de estas dos opciones, podría obtener un 3 o un 2.
+Y es cierto que aquí abajo hay un 9, y eso es
+la puntuación más alta de cualquiera de las puntuaciones.
+Así que podría sentirme tentado a decir: ¿sabes qué?
+Tal vez debería elegir esta opción, porque podría obtener el 9.
+Pero si el jugador mínimo juega inteligentemente,
+si están haciendo los mejores movimientos en cada opción posible
+tienen cuando tienen que elegir, me quedaré con un 3,
+Considerando que podría mejorar, jugando de forma óptima,
+Me han garantizado que obtendría el 4.
+Entonces eso no afecta la lógica que yo haría.
+Úselo como jugador Minimax tratando de maximizar mi puntaje desde ese nodo allí.
+Pero resulta que eso requirió bastante cálculo.
+para que yo me dé cuenta de eso.
+Tuve que razonar todos estos nodos para llegar a esta conclusión.
+Y esto es para un juego bastante simple, donde tengo tres opciones,
+Mi oponente tiene tres opciones y luego se acaba el juego.
+Entonces, lo que me gustaría hacer es encontrar alguna forma de optimizar esto.
+Quizás no necesito hacer todos estos cálculos para alcanzar
+la conclusión es que, ¿sabes qué?
+Esta acción a la izquierda ...
+eso es lo mejor que pude hacer.
+Sigamos adelante e intentemos de nuevo y tratemos de ser un poco más inteligentes.
+sobre cómo hago esto.
+Primero, empiezo exactamente de la misma manera.
+No sé qué hacer inicialmente, así que simplemente
+Tengo que considerar una de las opciones y considerar lo que podría hacer el jugador mínimo.
+Min tiene tres opciones, 4, 8 y 5.
+Y entre esas tres opciones, dice min, 4 es lo mejor que pueden hacer,
+porque quieren intentar minimizar el marcador.
+Ahora, yo, el jugador máximo, consideraré mi segunda opción,
+hacer este movimiento aquí y considerar lo que mi oponente haría en respuesta.
+¿Qué hará el jugador mínimo?
+Bueno, el jugador mínimo, desde ese estado, verá sus opciones.
+Y yo diría, está bien.
+9 es una opción, 3 es una opción.
+Y si estoy haciendo los cálculos desde este estado inicial,
+Haciendo todo este cálculo, cuando veo un 3,
+Eso debería ser inmediatamente una señal de alerta para mí,
+porque cuando veo un 3 aquí abajo en este estado,
+Sé que el valor de este estado será como máximo 3.
+Serán 3 o algo menos de 3,
+aunque todavía no he visto esta última acción o incluso otras acciones
+si hubiera más acciones que pudieran tomarse aquí.
+¿Cómo sé eso?
+Bueno, sé que el jugador mínimo intentará minimizar mi puntuación.
+Y si ven un 3, la única manera de que esto pueda ser algo más que un 3.
+es si lo restante que aún no he mirado es menos de 3,
+lo que significa que no hay forma de que este valor sea superior a 3,
+porque el jugador mínimo ya puede garantizar un 3,
+y están tratando de minimizar mi puntuación.
+Entonces, ¿qué me dice eso?
+Bueno, me dice que si elijo esta acción,
+mi puntuación será 3, o tal vez incluso menos de 3, si no tengo suerte.
+Pero ya sé que esta acción me garantizará un 4.
+Y así, dado que sé que esta acción me garantiza una puntuación de 4,
+y esta acción significa que no puedo hacerlo mejor que 3,
+Si estoy tratando de maximizar mis opciones, hay
+No es necesario que considere este triángulo aquí.
+No hay ningún valor, ningún número que pueda ir aquí,
+Eso haría cambiar de opinión entre estas dos opciones.
+Siempre voy a optar por este camino que me da un 4,
+a diferencia de este camino, donde lo mejor que puedo hacer es un 3,
+si mi oponente juega de manera óptima.
+Y esto también será cierto para todos los estados futuros que analice.
+Pero si miro aquí, qué podría hacer el reproductor mínimo aquí,
+si veo que este estado es un 2, sé que este estado es como máximo un 2,
+porque la única forma en que este valor podría ser distinto de 2
+es si uno de estos estados restantes es menor que 2,
+y entonces el jugador mínimo optaría por eso.
+Entonces, incluso sin mirar estos estados restantes,
+Yo, como jugador maximizador, puedo saber que elegir este camino hacia la izquierda
+Va a ser mejor que elegir cualquiera de esos dos caminos a la derecha,
+porque este no puede ser mejor que 3, este no puede ser mejor que 2,
+y entonces 4 en este caso es lo mejor que puedo hacer.
+Y puedo decir ahora que este estado tiene un valor de 4.
+Entonces, para hacer este tipo de cálculo,
+Estaba haciendo un poco más de contabilidad, haciendo un seguimiento de las cosas,
+haciendo un seguimiento todo el tiempo de qué es lo mejor que puedo hacer,
+qué es lo peor que puedo hacer, y para cada uno de estos estados, decir,
+Está bien, bueno, si ya sé que puedo sacar un 4,
+entonces si lo mejor que puedo hacer en este estado es un 3,
+No hay motivo para que lo considere.
+Puedo podar eficazmente esta hoja y cualquier cosa que esté debajo del árbol.
+Y es por eso que este enfoque, esta optimización para Minimax,
+se llama poda alfa-beta.
+Alfa y beta representan estos dos valores
+que tendrás que seguir, lo mejor que puedes hacer hasta ahora
+y lo peor que puedes hacer hasta ahora.
+Y podar es la idea de, si tengo un árbol de búsqueda grande, largo y profundo,
+Quizás pueda buscarlo de manera más eficiente si no lo hago
+Necesito buscar en todo, si puedo eliminar algunos de los nodos
+para intentar optimizar la forma en que miro a través de todo este espacio de búsqueda.
+Entonces, la poda alfa-beta definitivamente puede ahorrarnos mucho tiempo.
+a medida que avanzamos en el proceso de búsqueda haciendo que nuestras búsquedas sean más eficientes.
+Pero incluso entonces, todavía no es genial a medida que los juegos se vuelven más complejos.
+El tres en raya, afortunadamente, es un juego relativamente sencillo,
+y podríamos razonablemente hacer una pregunta como,
+¿Cuántos juegos de tres en raya posibles hay en total?
+Puedes pensar en ello.
+Puedes intentar estimar cuántos movimientos hay en un punto dado.
+¿Cuántos movimientos puede durar el juego?
+Resulta que hay alrededor de 255.000 posibles juegos de tres en raya que
+se puede jugar.
+Pero compara eso con un juego más complejo, algo
+como una partida de ajedrez, por ejemplo...
+muchas más piezas, muchos más movimientos, juegos que duran mucho más.
+¿Cuántas partidas de ajedrez posibles en total podría haber?
+Resulta que después de sólo cuatro movimientos cada uno,
+cuatro movimientos del jugador blanco, cuatro movimientos del jugador negro,
+que hay 288 mil millones de ajedrez posibles
+juegos que pueden resultar de esa situación, después de sólo cuatro movimientos cada uno.
+Y yendo aún más lejos.
+Si miras partidas enteras de ajedrez y cuántas partidas de ajedrez posibles hay
+podría ser como resultado allí, hay más de 10
+a las 29.000 partidas de ajedrez posibles, muchas más partidas de ajedrez
+de lo que jamás podría considerarse.
+Y este es un problema bastante grande para el algoritmo Minimax, porque el Minimax
+El algoritmo comienza con un estado inicial, considera todas las acciones posibles.
+y todas las acciones posibles después de eso, hasta el final
+hasta llegar al final del juego.
+Y eso va a ser un problema si la computadora está
+Necesitaremos revisar tantos estados, lo que
+es mucho más de lo que cualquier computadora podría hacer en un período de tiempo razonable.
+Entonces, ¿qué hacemos para resolver este problema?
+En lugar de examinar todos estos estados, que
+es totalmente intratable para una computadora, necesitamos un enfoque mejor.
+Y resulta que un mejor enfoque generalmente toma la forma de algo
+llamado Minimax de profundidad limitada.
+Donde normalmente Minimax tiene profundidad ilimitada...
+Seguimos adelante, capa tras capa, movimiento tras movimiento.
+hasta que lleguemos al final del juego--
+Minimax de profundidad limitada va a decir, ¿sabes qué?
+Después de una cierta cantidad de movimientos, tal vez lo haga.
+Mire 10 movimientos hacia adelante, tal vez mire 12 movimientos hacia adelante, pero después de ese punto,
+Voy a detenerme y no considerar movimientos adicionales que
+podría venir después de eso, sólo porque sería
+Ser computacionalmente intratable considerar todas esas opciones posibles.
+Pero, ¿qué hacemos después de realizar 10 o 12 movimientos de profundidad?
+¿Y llegamos a una situación en la que el juego no ha terminado?
+Minimax todavía necesita una forma de asignar una puntuación a ese tablero de juego o estado del juego.
+para averiguar cuál es su valor actual, cuál
+Es fácil de hacer si el juego ha terminado, pero no tanto.
+fácil de hacer si el juego aún no ha terminado.
+Entonces, para hacer eso, necesitamos agregar una característica adicional.
+al Minimax de profundidad limitada llamado función de evaluación,
+que es sólo una función que va
+estimar la utilidad esperada de un juego en un estado determinado.
+Entonces, en un juego como el ajedrez, si imaginas que un valor de juego de 1
+significa que las blancas ganan, 1 negativo significa que las negras ganan, 0 significa que es un empate,
+entonces podrías imaginar que una puntuación de 0,8 significa que las blancas tienen muchas probabilidades de ganar,
+aunque ciertamente no está garantizado.
+Y tendrías una función de evaluación que estima
+qué tan bueno es el estado del juego.
+Y dependiendo de qué tan buena sea esa función de evaluación,
+Eso es, en última instancia, lo que limitará la calidad de la IA.
+Cuanto mejor sea la IA para estimar qué tan bueno
+o qué tan malo es un estado particular del juego, mejor será la IA
+va a poder jugar ese juego.
+Si la función de evaluación es peor y no tan buena
+como estimar cuál es la utilidad esperada,
+entonces será mucho más difícil.
+Y puedes imaginarte tratando de idear estas funciones de evaluación.
+En ajedrez, por ejemplo, podrías escribir una función de evaluación
+basado en cuántas piezas tienes, en comparación
+a cuántas piezas tiene tu oponente, porque cada una
+tiene un valor en su función de evaluación.
+Probablemente necesite ser un poco más
+complicado que eso para considerar otras posibles situaciones que
+podría surgir también.
+Y hay muchas otras variantes de Minimax.
+que agregan características adicionales para ayudarlo a funcionar mejor
+bajo estos mayores y más intratables computacionalmente
+situaciones en las que no podríamos explorar todos los movimientos posibles,
+entonces necesitamos descubrir cómo usar la evaluación
+funciones y otras técnicas para poder jugar a estos juegos, en definitiva,
+mejor.
+Pero esto ahora fue una mirada a este tipo de búsqueda contradictoria, estas búsquedas
+problemas donde tenemos situaciones donde estoy intentando
+jugar contra algún tipo de oponente.
+Y estos problemas de búsqueda aparecen por todas partes.
+en toda la inteligencia artificial.
+Hemos estado hablando mucho hoy sobre problemas de búsqueda más clásicos,
+como tratar de encontrar direcciones de un lugar a otro.
+Pero cada vez que una IA se enfrenta a la necesidad de tomar una decisión como,
+¿Qué hago ahora para hacer algo que sea racional?
+o hacer algo que sea inteligente, o intentar jugar un juego,
+como descubrir qué movimiento hacer, este tipo de algoritmos
+realmente puede resultar útil.
+Resulta que para el tres en raya la solución es bastante sencilla,
+porque es un juego pequeño.
+XKCD ha creado un famoso webcomic
+donde te dirá exactamente qué movimiento hacer como el movimiento óptimo
+hacer, sin importar lo que haga tu oponente.
+Este tipo de cosas no es tan posible
+para un juego mucho más grande como las damas o el ajedrez,
+por ejemplo, donde el ajedrez es totalmente computacional
+intratable para la mayoría de las computadoras para poder explorar
+todos los estados posibles.
+Así que realmente necesitamos que nuestra IA sea mucho más inteligente en cuanto a cómo
+Ellos tratan de lidiar con estos problemas.
+y cómo abordan este entorno
+en el que se encuentran y en última instancia
+buscando una de estas soluciones.
+Entonces esto fue una mirada a la búsqueda y la inteligencia artificial.
+La próxima vez veremos el conocimiento,
+pensando en cómo es que nuestras IA son capaces de conocer información, razonar
+sobre esa información y sacar conclusiones, todo en nuestra mirada a la IA
+y los principios detrás de esto.
+Nos vemos la próxima vez.
