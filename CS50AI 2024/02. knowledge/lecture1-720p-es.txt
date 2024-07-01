@@ -1,0 +1,2168 @@
+<img src="https://prod-edx-ai-translations-assets.s3.amazonaws.com/google-translate.png" alt="Traducido por el logotipo de Google"><br><br>[GENERADO AUTOMÁTICAMENTE ]<br>[REPRODUCCIÓN DE MÚSICA]
+BRIAN YU: Muy bien.
+Bienvenidos todos de nuevo a una introducción a la inteligencia artificial.
+con Python.
+La última vez analizamos los problemas de búsqueda.
+en particular, donde tenemos agentes de IA que
+están tratando de resolver algún tipo de problema tomando acciones
+en algún tipo de entorno, ya sea ese entorno
+está tratando de realizar acciones realizando movimientos en un juego,
+o si esas acciones son algo así como tratar de descubrir dónde hacer
+gira para obtener direcciones de conducción desde el punto A al punto B.
+Esta vez vamos a centrar nuestra atención de forma más general
+a esta idea de conocimiento.
+La idea de que gran parte de la inteligencia se basa en el conocimiento, especialmente
+si pensamos en la inteligencia humana.
+La gente conoce la información.
+Conocemos hechos sobre el mundo.
+Y usando esa información que conocemos, estamos
+capaz de sacar conclusiones-- razonar sobre la información
+que sabemos para descubrir cómo hacer algo o descubrir
+algún otro dato que concluimos en base a la información que tenemos
+ya tenemos a nuestra disposición.
+En lo que nos gustaría centrarnos ahora es en la capacidad de tomar esta idea de conocimiento
+y ser capaz de razonar basándose en el conocimiento,
+y aplicar esas ideas a la inteligencia artificial.
+En particular, vamos a construir lo que
+Se les conoce como agentes basados ​​en el conocimiento.
+Agentes que son capaces de razonar y actuar representando el conocimiento internamente.
+De alguna manera, dentro de nuestra IA, tienen cierta comprensión.
+de lo que significa saber algo.
+E idealmente, tienen algunos algoritmos o algunas técnicas.
+pueden utilizar basándose en ese conocimiento que conocen para
+encontrar la solución a un problema o descubrir
+algún dato adicional que pueda ser útil en algún sentido.
+Entonces, ¿qué entendemos por razonamiento basado en el conocimiento?
+para poder sacar conclusiones?
+Bueno, veamos un ejemplo sencillo extraído del mundo de Harry Potter.
+Tomamos una frase que sabemos que es cierta.
+Si no llovió, entonces Harry visitó a Hagrid hoy.
+Entonces, un hecho que podríamos saber sobre el mundo.
+Y luego tomamos otro hecho.
+Harry visitó a Hagrid o Dumbledore hoy, pero no a ambos.
+Entonces nos dice algo sobre el mundo.
+Que Harry visitó a Hagrid pero no a Dumbledore,
+o Harry visitó a Dumbledore pero no a Hagrid.
+Y ahora tenemos un tercer dato sobre el mundo.
+que Harry visitó a Dumbledore hoy.
+Entonces ahora tenemos tres datos.
+Tres hechos dentro de una base de conocimiento, por así decirlo: información que conocemos.
+Y ahora nosotros, como humanos, podemos intentar razonar sobre esto,
+y averiguar en base a esta información, qué
+información adicional ¿podemos empezar a concluir?
+Y bueno, mirando estas dos últimas declaraciones,
+Harry visitó a Hagrid o a Dumbledore, pero no a ambos.
+y sabemos que Harry visitó a Dumbledore hoy.
+Bueno, entonces es bastante razonable que
+podría sacar la conclusión de que, ¿sabes qué?, Harry no debe
+He visitado a Hagrid hoy.
+Porque basándose en una combinación de estas dos declaraciones,
+podemos sacar esta inferencia, por así decirlo.
+Una conclusión de que Harry no visitó a Hagrid hoy.
+Pero resulta que incluso podemos hacerlo un poco mejor que eso: obtener más
+información-- echando un vistazo a esta primera declaración
+y razonar sobre eso.
+Esta primera declaración dice que, si no llovió, entonces Harry visitó a Hagrid hoy.
+¿Entonces que significa eso?
+En todos los casos en los que no llovió, sabemos que Harry visitó a Hagrid.
+Pero si también sabemos ahora que Harry no visitó a Hagrid,
+entonces nos dice algo sobre nuestra premisa inicial
+que estábamos pensando.
+En particular, nos dice que hoy sí llovió.
+Porque podemos razonar que si no hubiera llovido, Harry habría visitado a Hagrid.
+Pero sabemos con certeza que Harry no visitó a Hagrid hoy.
+Entonces es este tipo de razonamiento, el tipo de razonamiento lógico
+donde utilizamos la lógica basada en la información
+que conocemos para tomar información y sacar conclusiones.
+Ese será el foco de lo que vamos a hablar hoy.
+¿Cómo podemos hacer que nuestra inteligencia artificial sea tan lógica?
+que pueden realizar los mismos tipos de deducción, los mismos tipos de razonamiento
+que hemos estado haciendo hasta ahora.
+Por supuesto, los humanos razonan sobre la lógica generalmente en términos del lenguaje humano.
+Que justo ahora estaba hablando en inglés, hablando en inglés,
+sobre estas oraciones y tratando de razonar cómo
+es que se relacionan entre sí.
+Tendremos que ser un poco más formales cuando
+dirigimos nuestra atención a las computadoras y a ser
+capaz de codificar esta noción de lógica, y de verdad y falsedad dentro
+de una máquina.
+Entonces vamos a necesitar introducir algunos términos más y algunos símbolos que
+Nos ayudará a razonar a través de esta idea de lógica.
+dentro de una inteligencia artificial.
+Y comenzaremos con la idea de una oración.
+Ahora, una oración en un lenguaje natural como el inglés.
+Es sólo algo que estoy diciendo, como lo que estoy diciendo ahora mismo.
+Sin embargo, en el contexto de la IA, una oración es solo una afirmación sobre el mundo.
+en lo que llamaremos un lenguaje de representación del conocimiento,
+alguna forma de representar el conocimiento dentro de nuestras computadoras.
+Y la forma en que vamos a pasar la mayor parte de hoy,
+razonamiento sobre el conocimiento, es a través de un tipo
+de lógica conocida como lógica proposicional.
+Hay varios tipos diferentes de lógica, algunos de los cuales tocaremos.
+Pero la lógica proposicional se basa en una lógica de proposiciones, o simplemente
+declaraciones sobre el mundo.
+Y así comenzamos en la lógica proposicional con la noción
+de símbolos proposicionales.
+Tendremos ciertos símbolos que muchas veces son solo letras,
+algo como P o Q o R, donde cada uno de esos símbolos
+va a representar algún hecho o frase sobre el mundo.
+Entonces P, por ejemplo, podría representar el hecho de que está lloviendo.
+Entonces P será un símbolo que representa esa idea.
+Y Q, por ejemplo, podría representar que Harry visitó a Hagrid hoy.
+Cada uno de estos símbolos proposicionales representa alguna oración.
+o algún hecho sobre el mundo.
+Pero además de tener datos individuales sobre el mundo,
+queremos alguna forma de conectar estos símbolos proposicionales entre sí
+para razonar de manera más compleja sobre otros hechos que podrían existir dentro
+del mundo en el que razonamos.
+Entonces, para hacer eso, necesitaremos introducir algunos símbolos adicionales que
+se conocen como conectivos lógicos.
+Ahora bien, hay varios de estos conectivos lógicos,
+pero cinco de los más importantes, y en los que nos centraremos hoy,
+Son estos cinco aquí arriba, cada uno representado por un símbolo lógico.
+No está representado aquí por este símbolo.
+Y se representa como una especie de V invertida. O
+está representado por una forma de V.
+Implicación... y hablaremos de lo que eso significa en un momento...
+está representado por una flecha.
+Y bicondicional... nuevamente, hablaremos de lo que eso significa en un momento...
+está representado por estas flechas dobles.
+Pero estos cinco conectivos lógicos son los principales.
+vamos a centrarnos en términos de pensar en cómo
+es que una computadora puede razonar sobre hechos
+y sacar conclusiones basadas en los hechos que conoce.
+Pero para llegar allí tenemos que echar un vistazo.
+en cada uno de estos conectivos lógicos y desarrollar una comprensión de lo que
+es lo que realmente quieren decir.
+Así que sigamos adelante y comencemos con el símbolo no.
+Entonces este no es un símbolo aquí.
+Y lo que vamos a mostrar para cada uno de estos conectivos lógicos.
+es lo que vamos a llamar tabla de verdad.
+Una tabla que demuestra lo que esta palabra no
+significa cuando lo adjuntamos a un símbolo proposicional o cualquier oración
+dentro de nuestro lenguaje lógico.
+Y aquí se muestra la tabla de verdad para no.
+Si P-- algún símbolo proposicional o alguna otra oración, incluso--
+es falso, entonces no P es verdadero.
+Y si P es verdadera, entonces P no es falsa.
+Así que puedes imaginarte colocando este símbolo de no
+frente a alguna oración de lógica proposicional.
+Simplemente dice lo contrario de eso.
+Entonces, si, por ejemplo, P representara que está lloviendo,
+entonces no P representaría la idea de que no está lloviendo.
+Y como es de esperar, si P es falsa, es decir, si la oración está lloviendo
+es falsa, entonces la oración no P debe ser verdadera.
+La frase de que no llueve es, por tanto, cierta.
+Así que no, como puedes imaginar, simplemente toma lo que está en P y lo invierte.
+Convierte lo falso en verdadero y lo verdadero en falso.
+De manera muy análoga a lo que significa la palabra inglesa not.
+Simplemente tomando lo que viene después e invirtiéndolo para que signifique lo contrario.
+La siguiente, y también muy inglesa, es esta idea.
+de y, representado por esta forma de V invertida, o esta forma de punto.
+Y en lugar de simplemente tomar un solo argumento de la manera que no lo hace...
+tenemos P y no tenemos P--
+y va a combinar dos oraciones diferentes
+y lógica proposicional juntos.
+Entonces podría tener una oración P y otra oración Q,
+y quiero combinarlos para decir P y Q.
+Y la lógica general de lo que significan P y Q es que
+significa que ambos operandos son verdaderos.
+P es verdadera y también Q es verdadera.
+Y así es como se ve esa tabla de verdad.
+Esta vez tenemos dos variables, P y Q.
+Y cuando tenemos dos variables, cada una de las cuales puede estar en dos estados posibles,
+verdadero o falso, eso lleva a dos al cuadrado,
+o cuatro, posibles combinaciones de verdad y falsedad.
+Entonces tenemos que P es falso y Q es falso.
+Tenemos que P es falso y Q es verdadero.
+P es verdadera y Q es falsa.
+Y entonces P y Q son verdaderas.
+Y esas son las únicas cuatro posibilidades.
+por lo que P y Q podrían significar.
+Y en cada una de esas situaciones, esta tercera columna aquí, P y Q,
+nos dice un poco sobre lo que realmente significa que P y Q sean verdaderos.
+Y vemos que el único caso donde P y Q son verdaderos es en esta cuarta fila.
+aquí, donde P resulta ser verdadera, Q también resulta ser verdadera.
+Y en todas las demás situaciones, P y Q se evaluarán como falsos.
+Así que esto, nuevamente, está muy en línea con lo que nuestra intuición y lo que podría significar.
+Si digo P y Q, probablemente quiero decir que espero que tanto P como Q sean verdaderos.
+A continuación, también potencialmente coherente con lo que queremos decir,
+es esta palabra o, representada por esta forma de V, ordenar
+de un símbolo y al revés.
+Y o, como sugiere el nombre, es verdadera si cualquiera de sus argumentos
+son verdaderas.
+Mientras P sea verdadera o Q sea verdadera, entonces P o Q serán verdaderas.
+Lo que significa que la única vez que P o Q es falso es si ambos operandos
+son falsos.
+Si P es falso y Q es falso, entonces P o Q serán falsos.
+Pero en todos los demás casos, si al menos uno de los operandos es verdadero...
+tal vez ambas sean ciertas
+en cuyo caso P o Q se evaluarán como verdaderos.
+Ahora bien, esto es más consistente con la forma en que la mayoría de la gente podría usar la palabra
+o, en el sentido de hablar la palabra o en inglés normal.
+Aunque a veces hay momentos en los que podríamos decir o dónde
+nos referimos a P o Q, pero no a ambos.
+O queremos decir que solo puede ser uno u otro.
+Es importante tener en cuenta que este símbolo aquí, this or, significa P o Q o ambos.
+Que esos están totalmente bien.
+Siempre que uno o ambos sean verdaderos, entonces el o
+va a evaluar para ser cierto también.
+Es sólo en el caso en que todos los operandos
+son falsos que P o Q en última instancia también se evalúan como falsos.
+En lógica existe otro símbolo conocido como exclusivo o, que
+codifica esta idea de exclusividad de uno u otro, pero no de ambos.
+Pero hoy no nos centraremos en eso.
+Siempre que hablamos de o, siempre hablamos de uno o ambos,
+en este caso, como lo representa esta tabla de verdad aquí.
+De modo que ahora no es, ni an, ni o.
+Y el siguiente paso es lo que podríamos llamar implicación, como se denota
+por este símbolo de flecha.
+Entonces tenemos P y Q. Y esta oración aquí
+generalmente se leerá como P implica Q. ¿Y qué
+P implica que Q significa que si P es verdadero, entonces Q también es verdadero.
+Entonces podría decir algo como, si está lloviendo, estaré adentro.
+Lo que significa que está lloviendo implica que estaré adentro.
+es la frase lógica que estoy diciendo ahí.
+Y la tabla de verdad para esto a veces puede resultar un poco complicada.
+Entonces, obviamente, si P es verdadera y Q es verdadera, entonces P implica Q, eso es cierto.
+Eso definitivamente tiene sentido.
+Y también debería ser lógico que cuando P es verdadera y Q es falsa,
+entonces P implica que Q es falso.
+Porque si te digo, si llueve, entonces estaré dentro,
+y está lloviendo, pero no estoy dentro, pues entonces
+Parecería ser que mi afirmación original no era cierta.
+P implica que Q significa que si P es verdadera, entonces Q también debe ser verdadera.
+Y si no es así, entonces la afirmación es falsa.
+Sin embargo, también vale la pena señalar lo que sucede cuando P es falso.
+Cuando P es falsa, la implicación no hace ninguna afirmación.
+Si digo algo como, si está lloviendo, entonces estaré adentro,
+y resulta que no está lloviendo, entonces en ese caso,
+No estoy haciendo ninguna declaración sobre si
+o no estaré adentro o no.
+P implica Q simplemente significa que si P es verdadero, Q debe ser verdadero.
+Pero si P no es cierta, entonces no podemos afirmar nada sobre
+si Q es cierto o no.
+Entonces, en cualquier caso, si P es falso, no importa
+qué es Q, ya sea falso o verdadero.
+No hacemos ningún reclamo sobre Q en absoluto.
+Todavía podemos evaluar la implicación como verdadera.
+La única manera de que la implicación sea falsa.
+es si nuestra premisa, P, es verdadera, pero la conclusión que estamos sacando,
+P, resulta ser falsa.
+Entonces, en ese caso, diríamos que P no implica Q en ese caso.
+Finalmente, el último conectivo que discutiremos es este bicondicional.
+Puedes pensar en un bicondicional como una condición que va en ambas direcciones.
+Originalmente, cuando dije algo como, si está lloviendo,
+entonces estaré adentro.
+No dije qué pasaría si no estuviera lloviendo.
+Tal vez estaré adentro, tal vez estaré afuera.
+Este bicondicional se puede leer como si y sólo si.
+Entonces puedo decir que estaré adentro si y solo si está lloviendo.
+Es decir, si está lloviendo, estaré adentro.
+Y si estoy en el interior, es razonable concluir que también está lloviendo.
+Entonces este bicondicional sólo es cierto cuando P y Q son iguales.
+Entonces, si P es verdadero y Q es verdadero, entonces este bicondicional también es verdadero:
+P implica Q. Pero también es cierto lo contrario.
+Q también implica P. Entonces, si P y Q resultan ser ambos falsos,
+todavía diríamos que es verdad.
+Pero en cualquiera de estas otras dos situaciones, esta P si y sólo
+si Q finalmente se evaluará como falso.
+Hay muchas verdades y mentiras allí,
+pero estos cinco conectivos lógicos básicos son
+va a formar el núcleo del lenguaje de la lógica proposicional,
+el lenguaje que vamos a utilizar para describir ideas,
+y el lenguaje que vamos a utilizar para razonar sobre esas ideas
+para poder sacar conclusiones.
+Así que ahora echemos un vistazo a algunos de los términos adicionales.
+que necesitaremos saber para poder ir
+sobre tratar de formar este lenguaje de lógica proposicional,
+y escribir IA que sea realmente capaz de entender este tipo de lógica.
+Lo siguiente que vamos a necesitar es la noción
+de lo que es realmente cierto sobre el mundo.
+Tenemos un montón de símbolos proposicionales...
+P y Q y R y tal vez otros.
+Pero necesitamos alguna forma de saber qué es realmente cierto en el mundo.
+¿P es verdadera o falsa, Q es verdadera o falsa, y así sucesivamente?
+Y para ello, introduciremos la noción de modelo.
+Un modelo simplemente asigna un valor de verdad donde un valor de verdad es verdadero o falso.
+a cada símbolo proposicional.
+En otras palabras, está creando lo que podríamos llamar un mundo posible.
+Así que déjame darte un ejemplo.
+Si, por ejemplo, tengo dos símbolos proposicionales,
+P es que está lloviendo y Q es que es martes,
+un modelo simplemente toma cada uno de estos dos símbolos
+y les asigna un valor de verdad, ya sea verdadero o falso.
+Así que aquí hay un modelo de muestra.
+En este modelo, es decir, en este mundo posible,
+es posible que P sea verdadera, lo que significa que está lloviendo, y Q sea falsa,
+lo que significa que no es martes.
+Pero hay también otros mundos posibles u otros modelos.
+Existe algún modelo en el que ambas variables son verdaderas.
+Algún modelo en el que ambas variables sean falsas.
+De hecho, si hay N variables que son símbolos proposicionales como este,
+que son verdaderas o falsas, entonces el número de modelos posibles
+es dos elevado a N, porque cada uno de estos modelos posibles...
+posibles variables dentro de mi modelo podrían ser
+establecido en verdadero o falso, si no conozco ninguna información al respecto.
+Ahora que tengo los símbolos...
+Los símbolos y los conectivos que voy.
+necesitar para construir estas partes del conocimiento,
+Necesitamos alguna forma de representar ese conocimiento.
+Y para hacerlo, permitiremos el acceso de nuestra IA.
+a lo que llamaremos una base de conocimiento.
+Y una base de conocimientos es en realidad solo un conjunto de oraciones.
+que nuestra IA sabe que es verdad.
+Algún conjunto de oraciones en lógica proposicional.
+Esas son cosas que nuestra IA sabe sobre el mundo.
+Y entonces podríamos darle a nuestra IA cierta información, información
+sobre una situación en la que se encuentra,
+o situación sobre un problema que se intenta resolver.
+Y le daríamos esa información a la IA,
+que la IA almacenaría dentro de su base de conocimientos.
+Y lo que sucede después es que a la IA le gustaría
+utilizar esa información en la base de conocimientos
+poder sacar conclusiones sobre el resto del mundo.
+¿Y cómo son esas conclusiones?
+Bueno, para entender esas conclusiones,
+Necesito introducir una idea más, un símbolo más, y eso
+es la noción de vinculación.
+Entonces esta frase aquí, con este doble torniquete y estas letras griegas...
+esta es la letra griega alfa y la letra griega beta--
+y leemos esto como que alfa implica beta.
+Y aquí alfa y beta son sólo oraciones en lógica proposicional.
+Y lo que esto significa es que alfa implica beta significa que en cada modelo,
+en otras palabras, en todos los mundos posibles en los que la oración a es verdadera:
+o la oración alfa es verdadera, entonces la oración beta también es verdadera.
+Entonces, si algo implica otra cosa, si alfa implica beta,
+significa que si sé que alfa es verdad,
+entonces beta, por lo tanto, también debe ser verdadera.
+Entonces, si mi alfa es algo así como, sé que es un martes de enero,
+entonces una beta razonable podría ser algo
+Como, sé que es enero.
+Porque en todos los mundos, donde en enero es martes,
+Estoy seguro de que debe ser enero, simplemente por definición.
+Esta primera afirmación, o frase sobre el mundo,
+Implica la segunda afirmación.
+Y podemos usar razonablemente la deducción, basándonos en esa primera oración,
+para descubrir que la segunda oración, de hecho, también es cierta.
+Y, en última instancia, es esta idea de vinculación
+que vamos a intentar codificar en nuestra computadora.
+Queremos que nuestro agente de IA pueda descubrir
+cuáles son las posibles implicaciones.
+Queremos que nuestra IA pueda tomar estas tres oraciones, oraciones como,
+si no llovía, Harry visitaba a Hagrid.
+Que Harry visitó a Hagrid o Dumbledore pero no a ambos.
+Y que Harry visitó a Dumbledore.
+Y simplemente usando esa información, nos gustaría que nuestra IA
+para poder inferir, o descubrir, que usar estas tres oraciones dentro
+de una base de conocimientos, podemos sacar algunas conclusiones.
+En particular, podemos sacar las conclusiones aquí.
+Ese, Harry no visitó a Hagrid hoy.
+Y podemos sacar la implicación dos: que, de hecho, llovió hoy.
+Y este proceso se conoce como inferencia.
+Y eso es en lo que nos vamos a centrar.
+En la actualidad, este proceso de derivar nuevas oraciones a partir de otras antiguas.
+Que te doy estas tres frases, las pones en la base de conocimiento
+en, digamos, la IA, y la IA es capaz de utilizar algún tipo de algoritmo de inferencia
+para descubrir que estas dos oraciones también deben ser ciertas.
+Y así es como definimos la inferencia.
+Así que echemos un vistazo a un ejemplo de inferencia.
+para ver cómo podríamos realmente inferir cosas en un sentido humano,
+antes de adoptar un enfoque más algorítmico para ver cómo podríamos
+codificar esta idea de inferencia en IA.
+Y veremos que hay varias maneras en que podemos lograrlo.
+De nuevo, nos ocuparemos de un par de símbolos proposicionales.
+Nos ocuparemos de P, Q y R. P si es martes.
+Q es que esta lloviendo.
+Y R es Harry irá a correr.
+Tres símbolos proposicionales que acabamos de definir para significar esto.
+Aún no diremos nada sobre si son verdaderas o falsas.
+Simplemente estamos definiendo cuáles son.
+Ahora nos daremos a nosotros mismos, o a una IA, acceso a una base de conocimientos,
+abreviado como KB, al conocimiento que conocemos sobre el mundo.
+Conocemos esta afirmación.
+Muy bien, intentemos analizarlo.
+Los paréntesis aquí solo se usan como precedente,
+para que podamos ver qué se asocia con qué.
+Pero leerías esto como P y no como Q implica R.
+Muy bien, ¿qué significa eso?
+Pongámoslo pieza por pieza.
+P es que es martes.
+Q es que esta lloviendo.
+Entonces no es q no esté lloviendo.
+E implica que R es que Harry saldrá a correr.
+Entonces, la forma de leer esta oración completa al menos en lenguaje natural humano,
+Es que si es martes y no llueve, entonces Harry saldrá a correr.
+Entonces, si es martes y no llueve, entonces Harry saldrá a correr.
+Y eso ahora está dentro de nuestra base de conocimientos.
+Y imaginemos ahora que nuestra base de conocimientos tiene otras dos piezas
+de información también.
+Tiene información de que P es verdadera, que es martes.
+Y también tenemos la información no Q, de que no está lloviendo.
+Que esta frase Q, está lloviendo, resulta ser falsa.
+Y esas son las tres frases a las que tenemos acceso.
+P y no Q implica R, P y no Q.
+Usando esa información, deberíamos poder hacer algunas inferencias.
+P y no Q sólo es cierto si tanto P como no Q son verdaderos.
+Bueno, está bien, sabemos que P es verdadera.
+Y sabemos que no Q es cierto.
+Entonces sabemos que toda esta expresión es cierta.
+Y la definición de implicación es que si todo esto de la izquierda es cierto,
+entonces esto de la derecha también debe ser cierto.
+Entonces, si sabemos que P y no Q es verdadero, entonces R también debe ser verdadero.
+Entonces, la inferencia que deberíamos poder sacar de todo esto
+es que R es verdadera y sabemos que Harry saldrá a correr,
+tomando este conocimiento dentro de nuestra base de conocimiento y siendo capaz de razonar
+basado en esa idea.
+Y esto, en última instancia, es el comienzo de lo que podríamos considerar
+ser una especie de algoritmo de inferencia.
+Algún proceso que podemos utilizar para intentar determinar si
+podemos sacar alguna conclusión.
+Y, en última instancia, qué van a responder estos algoritmos de inferencia.
+es la pregunta central sobre la vinculación.
+Ante alguna pregunta sobre el mundo, algo
+Nos preguntamos sobre el mundo y llamaremos a esa consulta alfa.
+la pregunta que queremos hacer, usando estos algoritmos de inferencia,
+¿KB, nuestra base de conocimientos, implica alfa?
+En otras palabras, utilizar sólo la información.
+Sabemos dentro de nuestra base de conocimientos, el conocimiento al que tenemos acceso.
+¿Podemos concluir que esta oración alfa es verdadera?
+Y eso es, en última instancia, lo que nos gustaría hacer.
+Entonces, ¿cómo podemos hacer eso?
+¿Cómo podemos escribir un algoritmo que pueda analizar esta base de conocimientos?
+y averiguar si esta consulta alfa es realmente cierta o no.
+Bueno, resulta que hay un par de algoritmos diferentes para hacerlo.
+Y uno de los más simples, quizás, sea el conocido como verificación de modelos.
+Ahora recuerda que un modelo es sólo una tarea.
+de todos los símbolos proposicionales dentro de nuestro lenguaje a una verdad
+valor, verdadero o falso.
+Y puedes pensar en un modelo como un mundo posible.
+Que hay muchos mundos posibles donde diferentes cosas
+puede ser verdadero o falso.
+Y podemos enumerarlos todos.
+Y el algoritmo de verificación del modelo hace exactamente eso.
+Entonces, ¿qué hace nuestro algoritmo de seguimiento de modelos?
+Bueno, si quisiéramos determinar si nuestro conocimiento
+base implica alguna consulta alfa, entonces estamos
+Vamos a enumerar todos los modelos posibles.
+En otras palabras, considere todos los valores posibles de verdadero y falso.
+para nuestras variables.
+Todos los estados posibles en los que puede estar nuestro mundo.
+Y si en cada modelo donde nuestra base de conocimientos es verdadera,
+alfa también es cierto, entonces sabemos que la base de conocimiento implica alfa.
+Así que echemos un vistazo más de cerca a esa frase.
+e intenta descubrir qué significa realmente.
+Si sabemos que en cada modelo, en otras palabras, en cada mundo posible,
+no importa qué asignación de verdadero y falso a las variables le dé,
+si sabemos que siempre que nuestro conocimiento sea verdadero...
+lo que sabemos que es verdad es verdad
+que esta consulta alfa también es cierta.
+Bueno, entonces es lógico que mientras nuestra base de conocimientos sea verdadera,
+entonces alfa también debe ser verdadera.
+Y esto formará la base de nuestra verificación de modelos.
+algoritmo.
+Vamos a enumerar todos los mundos posibles,
+y preguntarnos, siempre que la base de conocimiento sea verdadera, ¿es alfa verdadero?
+Y si ese es el caso, entonces sabemos que alfa es cierto.
+Y en caso contrario no hay vinculación.
+Nuestra base de conocimientos no implica alfa.
+Muy bien, esto es un poco abstracto.
+Pero echemos un vistazo a un ejemplo para intentar poner símbolos proposicionales reales.
+a esta idea.
+De nuevo, trabajaremos con el mismo ejemplo.
+P es que es martes.
+Q es que esta lloviendo.
+R es Harry irá a correr.
+Nuestra base de conocimientos contiene estos datos.
+P y no Q implica R. También conocemos P, es martes.
+Y no Q, no está lloviendo.
+Y nuestra consulta, nuestro alfa en este caso, lo que queremos preguntar.
+es R. Queremos saber, ¿está garantizado?
+¿Se supone que Harry saldrá a correr?
+Entonces el primer paso es enumerar todos los modelos posibles.
+Aquí tenemos tres símbolos proposicionales, P, Q,
+y R, lo que significa que tenemos 2 elevado a la tercera potencia, u 8 modelos posibles.
+Todo falso.
+Falso, falso, verdadero.
+Falso, verdadero, falso.
+Falso, verdadero, verdadero.
+Etcétera.
+Ocho formas posibles de asignar verdadero y falso a todos estos modelos.
+Y podríamos preguntarnos en cada uno de ellos, ¿es cierta la base de conocimiento?
+Aquí está el conjunto de cosas que sabemos.
+¿En cuál de estos mundos podría aplicarse esta base de conocimientos?
+¿En qué mundo es cierta esta base de conocimientos?
+Bueno, en la base de conocimientos, por ejemplo, nosotros
+Conozco a P. Sabemos que es martes.
+Lo que significa que sabemos que estas cuatro... primeras cuatro filas... donde P es falsa,
+Ninguno de esos va a ser cierto, va a funcionar.
+para esta base de conocimientos en particular.
+Nuestra base de conocimientos no es cierta en esos mundos.
+Asimismo, tampoco sabemos que Q. Sabemos que no está lloviendo.
+Entonces cualquiera de estos modelos donde Q es verdadera, como estos dos y estos dos
+aquí tampoco van a funcionar porque sabemos que Q no es cierto.
+Y finalmente, también sabemos que P y no Q
+implica R. Lo que significa que cuando P es verdadera...
+donde P es verdadera aquí--
+y Q es falso--
+Q es falsa en estos dos...
+entonces R debe ser verdadera.
+Y si alguna vez P es verdadera, Q es falsa, pero R también es falsa,
+bueno, eso no satisface esta implicación aquí.
+Esa implicación no es cierta en esas situaciones.
+Entonces podríamos decir que para nuestra base de conocimientos,
+Podemos concluir bajo cuál de estos mundos posibles se encuentra nuestra base de conocimientos.
+verdadero, y bajo cuál de los mundos posibles nuestra base de conocimiento es falsa.
+Y resulta que sólo hay un mundo posible donde
+nuestra base de conocimientos es realmente cierta.
+En algunos casos, puede haber múltiples mundos posibles.
+donde la base de conocimientos es verdadera.
+Pero en este caso resulta que sólo hay uno.
+Un mundo posible donde podamos definitivamente
+decir algo sobre nuestra base de conocimientos.
+Y en este caso, miraríamos la consulta.
+La consulta de R. ¿Es R verdadero?
+R es verdad.
+Y como resultado, podemos sacar esa conclusión.
+Y esta es la idea de la verificación de modelos.
+Enumere todos los modelos posibles y busque en esos modelos posibles.
+para ver si nuestra base de conocimientos es cierta o no,
+¿La consulta en cuestión también es cierta?
+Así que ahora echemos un vistazo a cómo podríamos realmente
+Escribe esto en un lenguaje de programación como Python.
+Eche un vistazo a un código real que
+codificar esta noción de símbolos proposicionales,
+y lógica, y estos conectivos, como y, y o, y no una implicación,
+y así sucesivamente, y vea cómo se vería realmente ese código.
+Así que escribí de antemano una biblioteca lógica.
+Es más detallado de lo que necesitamos preocuparnos por completo hoy.
+Pero lo importante es que tenemos una clase.
+para cada tipo de símbolo lógico, o conectivo, que podamos tener.
+Entonces solo tenemos una clase para símbolos lógicos,
+por ejemplo, donde cada símbolo va a representar y almacenar
+algún nombre para ese símbolo en particular.
+Y también tenemos una clase para no, que requiere un operando.
+Entonces podríamos decir ni un solo símbolo para decir que algo no es cierto,
+o alguna otra frase no es cierta.
+Tenemos uno para y, uno para o, y así sucesivamente.
+Y simplemente demostraré cómo funciona esto.
+Y puedes echar un vistazo al logic.py real más adelante.
+Pero sigue adelante y llama a este archivo, Harry.py.
+Vamos a almacenar información sobre este mundo de Harry Potter,
+Por ejemplo.
+Así que seguiré adelante e importaré desde mi módulo lógico.
+Importaré todo.
+Y en esta biblioteca, para crear un símbolo, se utiliza el símbolo S mayúscula.
+Y crearé un símbolo de lluvia para que signifique que está lloviendo, por ejemplo.
+Y crearé un símbolo para que Hagrid signifique
+Harry visitó a Hagrid, eso es lo que significará el símbolo.
+Entonces este símbolo significa que está lloviendo.
+Este símbolo significa que Harry visitó a Hagrid.
+Y agregaré otro símbolo llamado Dumbledore.
+porque Harry visitó a Dumbledore.
+Ahora me gustaría guardar estos símbolos para poder usarlos más tarde.
+mientras hago un análisis lógico.
+Así que seguiré adelante y guardaré cada uno de ellos dentro de una variable.
+Entonces, como lluvia, Hagrid y Dumbledore, que tú
+Podría llamar a las variables cualquier cosa.
+Y ahora que tengo estos símbolos lógicos,
+Puedo usar conectivos lógicos para combinarlos.
+Entonces, por ejemplo, si tengo una oración como, y lluvia y Hagrid,
+Por ejemplo--
+lo cual no es necesariamente cierto, pero es solo una demostración.
+Ahora puedo intentar imprimir la fórmula frase.
+que es una función que escribí que requiere una oración y lógica proposicional
+y simplemente lo imprime para que nosotros, los programadores,
+Ahora podemos ver esto para comprender cómo funciona realmente.
+obras.
+Entonces, si ejecuto Python Harry.py, lo que veremos
+Es esta oración y lógica proposicional, lluvia y Hagrid.
+Esta es la representación lógica de lo que
+tenemos aquí en nuestro programa Python de decir
+y, cuyos argumentos son lluvia y Hagrid.
+ Entonces decimos lluvia y Hagrid al codificar esa idea.
+Y esto es bastante común en la programación orientada a objetos de Python.
+donde tienes varias clases diferentes,
+y les pasas argumentos para crear un nuevo
+y objeto, por ejemplo, para representar esta idea.
+Pero ahora lo que me gustaría hacer es codificar de alguna manera el conocimiento.
+que tengo sobre el mundo, para poder resolver
+ese problema desde el inicio de la clase,
+donde hablamos sobre tratar de descubrir a quién visitó Harry,
+y tratando de averiguar si está lloviendo o no.
+¿Y entonces qué conocimientos tengo?
+Seguiré adelante y crearé una nueva variable llamada conocimiento.
+¿Y yo qué sé?
+Bueno, conozco la primera frase que
+Lo que se habló fue la idea de que si no está lloviendo, entonces
+Harry visitará a Hagrid.
+Está bien.
+¿Cómo codifico la idea de que no está lloviendo?
+Bueno, puedo usar not y luego el símbolo de la lluvia.
+Así que aquí estoy yo diciendo que no está lloviendo.
+Y ahora la implicación es que si no está lloviendo, entonces Harry visitó a Hagrid.
+Así que envolveré esto dentro de una implicación.
+decir, si no está lloviendo, este primer argumento a la implicación,
+Bueno, entonces Harry visitó a Hagrid.
+Entonces digo implicación, la premisa es que no está lloviendo.
+Y si no llueve, entonces Harry visitó a Hagrid.
+Y puedo imprimir Knowledge.Formula para ver la fórmula lógica.
+equivalente a esa misma idea.
+Entonces ejecuto Python de Harry.py, y esta es la fórmula lógica.
+que vemos como resultado, que es una versión basada en texto de lo que
+estábamos mirando antes.
+Que si no está lloviendo, entonces eso implica que Harry visitó a Hagrid.
+Pero también había información adicional a la que teníamos acceso.
+En este caso, tuvimos acceso al hecho de que Harry
+Visitó a Hagrid o Dumbledore.
+Entonces, ¿cómo codifico eso?
+Bueno, esto significa que, hasta donde yo sé, he
+Realmente tengo múltiples conocimientos.
+Sé una cosa, y otra cosa, y otra cosa.
+Así que seguiré adelante y envolveré todo mi conocimiento dentro de un y.
+Y moveré las cosas en una nueva línea solo por si acaso.
+Pero sé varias cosas.
+Entonces digo que el conocimiento es un y de múltiples oraciones diferentes.
+Sé que varias oraciones diferentes son verdaderas.
+Una de esas frases que sé que es cierta es esta implicación
+que si no está lloviendo, entonces Harry visitó a Hagrid.
+Otra frase que sé que es cierta es Hagrid Dumbledore.
+En otras palabras, entonces Hagrid o Dumbledore son ciertos,
+porque sé que Harry visitó a Hagrid o Dumbledore.
+Pero en realidad sé más que eso.
+Esa frase inicial de antes decía que Harry visitó
+Hagrid o Dumbledore, pero no ambos.
+Así que ahora quiero una oración que codifique la idea de que Harry no
+Visita a Hagrid y Dumbledore.
+Bueno, la idea de que Harry visite a Hagrid y Dumbledore
+estaría representado así.
+Y de Hagrid y Dumbledore.
+Y si eso no es cierto, quiero decir que no es eso, entonces simplemente
+Envuelve todo esto dentro de un no.
+Entonces ahora estas tres líneas, la línea 8 dice que si no está lloviendo, entonces
+Harry visitó a Hagrid.
+La línea 9 dice que Harry visitó a Hagrid o Dumbledore.
+Y la línea 10 dice que Harry no visitó ni a Hagrid ni a Dumbledore.
+Que no es cierto que tanto el símbolo de Hagrid como el de Dumbledore
+son verdaderas.
+Sólo una de ellas puede ser cierta.
+Y finalmente, el último dato que sabía.
+fue el hecho de que Harry visitó a Dumbledore.
+Estos son ahora los conocimientos que conozco.
+Una frase, y otra frase, y otra, y otra.
+Y puedo imprimir lo que sé, sólo para verlo un poco más visualmente.
+Y aquí ahora hay una representación lógica de la información.
+que mi computadora ahora está representando internamente
+usando estos diferentes objetos de Python.
+Y nuevamente, eche un vistazo a logic.py si desea ver cómo exactamente
+está implementando esto.
+Pero no hay necesidad de preocuparse demasiado por todos los detalles allí.
+Estamos aquí diciendo que si no está lloviendo, entonces Harry visitó a Hagrid.
+Estamos diciendo que Hagrid o Dumbledore es verdad.
+Y estamos diciendo que no es cierto que Hagrid y Dumbledore sean ciertos.
+Que no ambas son ciertas.
+Y también sabemos que Dumbledore es verdad.
+Entonces esta frase larga y lógica representa nuestra base de conocimientos.
+Es lo que sabemos.
+Y ahora lo que nos gusta hacer es utilizar la verificación de modelos para realizar una consulta.
+Para hacer una pregunta como, basándose en esta información,
+¿Sé si está lloviendo o no?
+Y nosotros, como humanos, somos capaces de superarlo con lógica.
+y descubrir que, muy bien, basándonos en estas oraciones podemos concluir esto
+y que para darme cuenta que sí, debió estar lloviendo.
+Pero ahora nos gustaría que la computadora también hiciera eso.
+Así que echemos un vistazo al algoritmo de verificación del modelo que
+va a seguir el mismo patrón que dibujamos
+en pseudocódigo hace un momento.
+Así que he definido una función aquí en logic.py
+que puedes echarle un vistazo a lo que se llama verificación de modelo.
+La verificación del modelo requiere dos argumentos, el conocimiento que ya sé.
+y la consulta.
+Y la idea es, para realizar la verificación del modelo,
+Necesito enumerar todos los modelos posibles.
+Y para cada uno de los modelos posibles, necesito preguntarme:
+¿Es verdadera la base de conocimientos y la consulta?
+Así que lo primero que tengo que hacer es de alguna manera
+enumera todos los modelos posibles.
+Significado de todos los símbolos posibles que existen,
+Necesito asignar verdadero y falso a cada uno de ellos.
+y ver si sigue siendo cierto o no.
+Y esta es la forma en que lo haremos.
+Vamos a empezar--
+así que he definido otra función auxiliar internamente
+a eso llegaremos en un momento.
+Pero esta función comienza obteniendo todos los símbolos,
+tanto en el conocimiento como en la consulta, averiguando
+¿Con qué símbolos estoy tratando?
+En este caso, los símbolos con los que estoy tratando
+son la lluvia, Hagrid y Dumbledore.
+Pero puede haber otros símbolos, según el problema.
+Y pronto veremos algunos ejemplos de situaciones.
+donde, en última instancia, necesitaremos algunos símbolos adicionales para
+para representar el problema.
+Y luego vamos a ejecutar esta función verificar todo, que
+es una función auxiliar que básicamente se llamará a sí misma de forma recursiva,
+comprobando todas las configuraciones posibles de símbolos proposicionales.
+Entonces, comenzamos observando esta función de verificar todo, ¿y qué hacemos?
+Entonces, si no son símbolos, significa que terminamos de asignar todos los símbolos.
+Hemos asignado cada símbolo de valor.
+Hasta ahora no lo hemos hecho, pero si alguna vez lo hacemos, lo comprobaremos.
+En este modelo, ¿es verdadero el conocimiento?
+Eso es lo que dice esta línea.
+Si evaluamos el conocimiento, fórmula lógica proposicional,
+Utilizando los modelos de asignación de valores de verdad, ¿es verdadero el conocimiento?
+Si el conocimiento es verdadero, entonces deberíamos devolver verdadero, solo si la consulta es verdadera.
+Porque si el conocimiento es verdadero, queremos que la consulta también lo sea,
+para que haya vinculación.
+De lo contrario, no sabemos que hay... de lo contrario, hay
+no será una vinculación.
+Si alguna vez hay una situación en la que lo que sabemos es cierto,
+pero la consulta, lo que estamos preguntando, resulta ser falsa.
+Entonces esta línea aquí verifica la misma idea.
+Que en todos los mundos donde el conocimiento es verdadero, la consulta también debe ser verdadera.
+De lo contrario, podemos simplemente devolver verdadero, porque si el conocimiento no es verdadero,
+entonces no nos importa.
+Esto es equivalente a cuando estábamos enumerando
+esta tabla de hace un momento.
+En todas las situaciones en las que la base de conocimientos no era cierta...
+todas estas siete filas aquí--
+No nos importaba si nuestra consulta era cierta o no.
+Sólo nos importa comprobar si la consulta es verdadera.
+cuando la base de conocimientos es realmente cierta,
+que era solo esta fila resaltada en verde allí mismo.
+Entonces esa lógica se codifica usando esa declaración allí.
+Y en caso contrario, si aún no hemos asignado símbolos,
+que aún no hemos visto nada, entonces lo primero que hacemos
+es pop uno de los símbolos.
+Primero hago una copia de los símbolos, sólo para guardar una copia existente.
+Pero saco un símbolo de los símbolos restantes,
+de modo que solo elijo un símbolo al azar.
+Y creo una copia del modelo donde ese símbolo es verdadero,
+y creo una segunda copia del modelo donde ese símbolo es falso.
+Ahora tengo dos copias del modelo.
+Uno donde el símbolo es verdadero y otro donde el símbolo es falso.
+Y necesito asegurarme de que esta vinculación se cumpla.
+en ambos modelos.
+Entonces reviso recursivamente todo en el modelo donde la afirmación es verdadera,
+y verifique todo en el modelo donde la afirmación es falsa.
+De nuevo, puedes echar un vistazo a esa función.
+para intentar tener una idea de cómo funciona exactamente esta lógica.
+Pero en efecto, lo que está haciendo es llamar recursivamente a esta verificación.
+todos funcionan una y otra vez.
+Y en cada nivel de la recursividad estamos diciendo,
+Escojamos un nuevo símbolo que aún no hayamos asignado.
+Asígnalo a verdadero.
+Y asígnelo a falso.
+Y luego verifique para asegurarse de que la vinculación se cumpla en ambos casos.
+Porque, en última instancia, necesito comprobar todos los mundos posibles.
+Necesito tomar cada combinación de símbolos.
+Y prueba todas las combinaciones de verdadero y falso.
+para determinar si la relación de vinculación realmente se cumple.
+Entonces esa función la hemos escrito para ti.
+Pero para poder usar esa función dentro de Harry.py, lo que escribiré
+es algo como esto.
+Me gustaría modelar la verificación, basada en el conocimiento,
+y luego proporciono, como segundo argumento, cuál es la consulta.
+¿Qué es lo que quiero preguntar?
+Y lo que quiero preguntar en este caso es ¿está lloviendo?
+Así que la verificación del modelo, nuevamente, requiere dos argumentos.
+El primer argumento es la información que conozco.
+Este conocimiento.
+Que en este caso, es esta información que me dieron al principio.
+Y el segundo argumento, lluvia, codifica la idea de la consulta.
+¿Qué estoy preguntando?
+Me gustaría preguntar, basándose en este conocimiento,
+¿Estoy seguro de que está lloviendo?
+Y puedo intentar imprimir el resultado de eso.
+Y cuando ejecuto este programa, veo que la respuesta es verdadera.
+Que con base en esta información puedo decir de manera concluyente que está lloviendo.
+Porque al usar este algoritmo de verificación de modelo,
+pudimos comprobar que en todos los mundos donde este conocimiento es verdadero,
+esta lloviendo.
+En otras palabras, no existe ningún mundo donde este conocimiento sea verdadero.
+y no llueve.
+Entonces puedes concluir que, de hecho, está lloviendo.
+Y este tipo de lógica se puede aplicar a un número.
+de diferentes tipos de problemas.
+Eso si nos enfrentamos a un problema en el que algún tipo de deducción lógica
+se puede utilizar para intentar resolverlo, usted
+Podría intentar pensar en qué símbolos proposicionales
+que pueda necesitar para representar esa información.
+¿Y qué enunciados y lógica proposicional
+podría utilizar para codificar la información que conoce.
+Y este proceso de tratar de resolver un problema
+y descubrir qué símbolos proposicionales usar para
+codificar esa idea, o cómo representarla lógicamente
+Se conoce como ingeniería del conocimiento.
+Que los ingenieros de software y los ingenieros de inteligencia artificial se hagan cargo del problema
+e intentar descubrir cómo destilarlo en conocimiento
+que es representable por una computadora.
+Y si podemos tomar cualquier problema de propósito general, algún problema que
+encontrar en el mundo humano y convertirlo en un problema
+esa computadora sabe cómo resolver, ya que usando
+cualquier cantidad de variables diferentes, bueno, entonces,
+se puede tomar una computadora que sea capaz de hacer algo
+como la verificación de modelos o algún otro algoritmo de inferencia,
+y realmente descubrir cómo resolver ese problema.
+Ahora veremos dos o tres ejemplos de ingeniería del conocimiento.
+y practica.
+De tomar algún problema y descubrir cómo podemos aplicar símbolos lógicos.
+y utilizar fórmulas lógicas para poder codificar esa idea.
+Y comenzaremos con un juego de mesa muy popular en EE. UU. y el Reino Unido.
+conocido como Pista.
+Ahora bien, en el juego de Clue hay varios factores diferentes.
+que están pasando.
+Pero la premisa básica del juego, si nunca lo has jugado antes,
+es que hay varias personas diferentes...
+por ahora solo usaremos tres, el coronel Mustard, el profesor Plum,
+y la señorita escarlata.
+Hay varias salas diferentes, como un salón de baile, una cocina,
+y una biblioteca.
+Y hay varias armas diferentes: un cuchillo, un revólver,
+y una llave inglesa.
+Y tres de ellos... una persona, una habitación y un arma...
+es la solución al misterio--
+el asesino y en qué habitación se encontraba, y qué arma utilizó.
+Y lo que sucede al comienzo del juego es que todas estas cartas son
+Se mezclaron aleatoriamente y tres de ellos (una persona, una habitación,
+y un arma--
+se colocan en un sobre cerrado que no conocemos.
+Y nos gustaría descubrir, usando algún tipo de proceso lógico, qué es
+dentro del sobre.
+Qué persona, qué habitación y qué arma.
+Y lo hacemos analizando algunas, pero no todas, de estas tarjetas aquí.
+Mirando estas tarjetas para intentar descubrir qué podría estar pasando.
+Y este es un juego muy popular, pero ahora
+intentar formalizarlo y ver si podemos entrenar una computadora
+poder jugar este juego razonando lógicamente.
+Entonces, para hacer esto, comenzaremos pensando
+sobre qué símbolos proposicionales vamos a necesitar en última instancia.
+Recuerde nuevamente que los símbolos proposicionales son solo
+algún símbolo, alguna variable, que puede ser verdadera o falsa en el mundo.
+Y así, en este caso, los símbolos proposicionales
+realmente van a corresponder a cada una de las cosas posibles que
+podría estar dentro del sobre.
+La mostaza es un símbolo proposicional, que en este caso
+Será cierto, si el Coronel Mustard está dentro del sobre,
+si es el asesino.
+Y falso en caso contrario.
+Y de la misma manera, Plum para el profesor Plum y Scarlet para la señorita Scarlet,
+y lo mismo para cada una de las habitaciones, y para cada una de las armas.
+Tenemos un símbolo proposicional para cada una de estas ideas.
+Luego, usando esos símbolos proposicionales
+Puede comenzar a crear oraciones lógicas, crear conocimiento.
+que sabemos sobre el mundo.
+Así, por ejemplo, sabemos que alguien es el asesino.
+Que una de las tres personas es, en realidad, el asesino.
+¿Y cómo codificaríamos eso?
+Bueno, no sabemos con certeza quién es el asesino.
+pero sabemos que es una persona, o la segunda persona, o la tercera persona.
+Entonces podría decir algo como esto: Mostaza, Ciruela o Escarlata.
+Y este conocimiento codifica que una de estas tres personas
+es el asesino.
+No sabemos cuál, pero una de estas tres cosas debe ser cierta.
+¿Qué otra información conocemos?
+Bueno, sabemos que, por ejemplo, una de las habitaciones
+Debe haber sido la habitación en el sobre.
+Que el crimen se cometió en el salón de baile o en la cocina,
+o la biblioteca.
+De nuevo, ahora mismo no sabemos cuál, pero esto
+Es el conocimiento que conocemos desde el principio: el conocimiento de que uno de estos tres
+debe estar dentro del sobre.
+Y lo mismo podemos decir del arma.
+Que era el cuchillo, el revólver o la llave inglesa.
+Esa de esas armas debe haber sido el arma elegida,
+y por tanto, el arma en el sobre.
+Y luego, a medida que avanza el juego, el juego
+Las obras de personas obtienen varias tarjetas diferentes.
+Y usando esas tarjetas, puedes deducir información.
+Que si alguien te da una tarjeta, por ejemplo,
+Tengo la tarjeta del Profesor Plum en mi mano,
+Entonces sé que la tarjeta del profesor Plum no puede estar dentro del sobre.
+Sé que el profesor Plum no es el criminal.
+Entonces conozco un dato, como no Plum, por ejemplo.
+Sé que el profesor Plum tiene que ser falso.
+Este símbolo proposicional no es cierto.
+Y a veces puede que no esté seguro de si una tarjeta en particular no es
+en el centro.
+Pero a veces alguien adivinará.
+y sabré que una de tres posibilidades no es cierta.
+Como si alguien adivinara al Coronel Mustard en la biblioteca con el revólver,
+O algo por el estilo.
+Y en ese caso, podría revelarse una tarjeta que no veo.
+Pero si es una tarjeta y es el coronel Mustard o el revólver,
+o la biblioteca, entonces sé que al menos uno de ellos
+no puede estar en el medio.
+Entonces sé algo como: o no es Mustard o no es la biblioteca,
+o no es el revólver.
+Quizás varias de estas no sean ciertas, pero sé que al menos una
+de Mostaza, biblioteca y revólver debe, en efecto, ser falso.
+Y esta es ahora una representación lógica proposicional de este juego de Clue.
+Una forma de codificar el conocimiento que conocemos dentro de este juego usando
+lógica proposicional que un algoritmo informático, algo
+como el modelo de comprobación que vimos hace un momento,
+realmente puedo mirar y comprender.
+Así que ahora echemos un vistazo a algún código para ver cómo este algoritmo podría realmente
+trabajar en la práctica.
+Está bien.
+Así que ahora voy a abrir un archivo llamado indicio.py,
+que ya comencé.
+Y lo que veremos aquí es que he definido un par de cosas.
+Inicialmente definí algunos símbolos.
+Observe que tengo un símbolo para el coronel Mustard, un símbolo para el profesor Plum,
+un símbolo para Miss Scarlet, todo lo cual puse dentro
+de esta lista de personajes.
+Tengo un símbolo para el salón de baile y la cocina.
+y biblioteca dentro de una lista de habitaciones.
+Y luego tengo símbolos para cuchillo, revólver y llave inglesa.
+Estas son mis armas.
+Y así todos estos personajes, habitaciones y armas en conjunto,
+esos son mis símbolos.
+Y ahora también tengo esta función de verificación de conocimientos.
+Y lo que hace la función de verificación de conocimiento es tomar mi conocimiento,
+y va a intentar sacar conclusiones sobre lo que sé.
+Así, por ejemplo, recorreremos todos los símbolos posibles y los comprobaremos.
+¿Sé que ese símbolo es verdadero?
+Y un símbolo será algo así como el Profesor Plum, o el cuchillo,
+o la biblioteca.
+Y si sé que es verdad, en otras palabras,
+Sé que debe ser la tarjeta en el sobre,
+luego voy a imprimir, usando una función llamada
+C print, que imprime cosas en color.
+Voy a imprimir la palabra sí, y la voy a imprimir en verde,
+sólo para que quede muy claro para nosotros.
+Y si no estamos seguros de que el símbolo sea verdadero,
+tal vez pueda comprobar si estoy seguro de que el símbolo no es verdadero.
+Como si estuviera seguro de que no es el profesor Plum, por ejemplo.
+Y lo hago ejecutando la verificación del modelo nuevamente.
+Esta vez comprobando si mi conocimiento no es el símbolo.
+Si estoy seguro de que el símbolo no es verdadero.
+Y si no estoy seguro de que el símbolo no es verdadero,
+porque digo elif no model check, lo que significa que no estoy seguro
+que el símbolo es falso, bueno, entonces lo haré
+Continúe e imprima tal vez junto al símbolo.
+Porque tal vez el símbolo sea cierto.
+Quizás no lo sea.
+En realidad no lo sé.
+Entonces, ¿qué conocimientos tengo realmente?
+Bueno, intentemos representar mis conocimientos ahora.
+Entonces, mi conocimiento es que sé un par de cosas, así que las pondré en un y.
+Y sé que una de las tres personas debe ser el criminal.
+Así lo sé o Mostaza, Ciruela, Escarlata.
+Esta es mi forma de codificar que es el coronel Mustard o el profesor.
+Plum o Miss Scarlet.
+Sé que debió suceder en alguna de las habitaciones.
+Así lo sé o el salón de baile, la cocina, la biblioteca, por ejemplo.
+Y sé que una de las armas también debe haber sido utilizada.
+Entonces sé o cuchillo, revólver, llave inglesa.
+Entonces ese podría ser mi conocimiento inicial.
+Que sé que debe haber sido una de las personas.
+Sé que debe haber sido en una de las habitaciones.
+Y sé que debe haber sido una de las armas.
+Y puedo ver cómo se ve ese conocimiento como una fórmula,
+imprimiendo la fórmula del conocimiento.
+Entonces ejecutaré Python Clue.py.
+Y aquí está ahora la información que conozco en formato lógico.
+Sé que es el coronel Mustard, el profesor Plum o la señorita Scarlet.
+Y sé que es el salón de baile, la cocina o la biblioteca.
+Y sé que es el cuchillo, el revólver o la llave inglesa.
+Pero no sé mucho más que eso.
+Realmente no puedo sacar ninguna conclusión firme.
+Y de hecho, podemos ver que si lo intento y lo hago...
+déjame seguir adelante y ejecutar mi función de verificación de conocimientos según mis conocimientos.
+Ahora veamos si esta función es la que yo...
+o comprobar el conocimiento más bien.
+¿Es esta función que acabo de escribir que revisa todos los símbolos?
+e intenta ver qué conclusiones puedo sacar realmente sobre cualquiera de los símbolos.
+Así que seguiré adelante y ejecutaré Clue.py y veré qué es lo que sé.
+Y parece que realmente no sé nada con seguridad.
+Tengo a las tres personas tal vez.
+Las tres habitaciones son quizás.
+Las tres armas son quizás.
+Realmente no sé nada con certeza todavía.
+Pero ahora déjame intentar agregar información adicional.
+y ver si hay información adicional, conocimiento adicional,
+puede ayudarnos a razonar lógicamente nuestro camino a través de este proceso.
+Y simplemente vamos a proporcionar la información.
+Nuestra IA se encargará de hacer la inferencia y descubrir
+qué conclusiones es capaz de sacar.
+Entonces empiezo con algunas tarjetas y esas tarjetas me dicen algo.
+Entonces, si tengo la tarjeta del Coronel Mustard, por ejemplo,
+Sé que el símbolo Mostaza debe ser falso.
+En otras palabras, Mustard no es el que está en el sobre.
+No es el criminal.
+Entonces puedo decir que el conocimiento respalda algo llamado...
+todos y en esta biblioteca admiten .add, que es una forma de agregar conocimiento,
+o agregar una oración lógica adicional a una cláusula y.
+Entonces puedo decir conocimiento.agregar, no mostaza.
+Resulta que lo sé, porque tengo la tarjeta Mostaza,
+que el coronel Mustard no es el sospechoso.
+Y tal vez también tenga un par de cartas más.
+Quizás también tenga una tarjeta para la cocina,
+entonces sé que no es la cocina.
+Y tal vez tengo otra tarjeta que dice que no es el revólver.
+Entonces tengo tres cartas...
+El coronel Mustard, la cocina y el revólver.
+Y lo codifico en mi IA de esta manera, diciendo que no es el Coronel Mustard,
+No es la cocina ni el revólver, y sé que eso es cierto.
+Ahora, cuando vuelva a ejecutar Clue.py, veremos que he estado
+capaz de eliminar algunas posibilidades.
+Antes no estaba seguro de si era el cuchillo, el revólver o la llave inglesa.
+Tal vez fuese un cuchillo, tal vez fuera un revólver, tal vez fuera una llave inglesa.
+Ahora sólo me queda el cuchillo y la llave inglesa.
+Entre esos dos, no sé cuál es... ambos son tal vez...
+pero he podido eliminar el revólver, que es uno
+eso sé que es falso porque tengo la tarjeta revólver.
+Y entonces se podría adquirir información adicional en el transcurso de este juego,
+y lo representaríamos simplemente agregando conocimiento
+a nuestro conjunto de conocimientos o base de conocimientos que hemos estado construyendo aquí.
+Entonces, si, por ejemplo, obtuviéramos además la información
+que alguien hizo una suposición.
+Alguien adivinó, como, la señorita Scarlet en la biblioteca con la llave inglesa.
+Y sabemos que esa carta fue revelada, lo que significa que una de esas tres
+cartas... ya sea Miss Scarlet, o la biblioteca, o la llave inglesa...
+uno de ellos como mínimo, no debe estar dentro del sobre.
+Entonces podría agregar algunos conocimientos.
+Di conocimiento.agregar, y voy a agregar una cláusula o, porque
+No sé con seguridad cuál no es.
+Pero sé que uno de ellos no está en el sobre.
+Entonces, o no es Scarlet o no es la biblioteca.
+Y/o apoya múltiples argumentos.
+Puedo decir que también es o no la llave inglesa.
+Entonces al menos uno de esos...
+Escarlata, biblioteca y llave inglesa: al menos uno de ellos debe ser falso.
+Aunque no sé cuál.
+Tal vez sean múltiples, tal vez sea solo uno, pero al menos uno lo sé.
+necesita aguantar.
+Y ahora, si vuelvo a ejecutar Clue.py, en realidad no
+Todavía no tengo información adicional.
+Nada que pueda decir de manera concluyente.
+Todavía sé que tal vez sea la profesora Plum, tal vez sea la señorita Scarlet.
+No he eliminado ninguna opción.
+Pero imaginemos que obtengo más información.
+Que alguien me muestre la tarjeta del Profesor Plum, por ejemplo.
+Entonces digo, está bien.
+Volvamos aquí.
+Knowledge.add, no Plum.
+Entonces tengo la tarjeta del Profesor Plum.
+Sé que el profesor Plum no está en el medio.
+Vuelvo a ejecutar Clue.py y ahora mismo puedo sacar algunas conclusiones.
+Ahora he podido eliminar al Profesor Plum.
+Y la única persona que podría quedar es Miss Scarlet.
+Entonces lo sé, sí, señorita Scarlet, esta variable debe ser cierta.
+Y he podido inferir eso basándome en la información que ya tenía.
+Ahora, entre el salón de baile y la biblioteca, y el cuchillo y la llave inglesa,
+Para esos dos, todavía no estoy seguro.
+Así que agreguemos un dato más.
+Digamos que sé que no es el salón de baile.
+Alguien me mostró la tarjeta del salón de baile, así que sé que no es el salón de baile.
+Lo que significa que en este punto debería poder concluir que es la biblioteca.
+Vamos a ver.
+Diré conocimiento.agregar, no el salón de baile.
+Y seguiremos adelante y ejecutaremos eso.
+Y resulta que después de todo esto, no sólo
+Concluyo que sé que es la biblioteca.
+Pero también sé que el arma era el cuchillo.
+Y esa podría haber sido una inferencia un poco más complicada.
+Algo de lo que no me habría dado cuenta inmediatamente.
+Pero la IA, a través de este algoritmo de verificación de modelos,
+es capaz de sacar esa conclusión.
+Que sabemos con certeza que debe ser la señorita
+Scarlet en la biblioteca con el cuchillo.
+¿Y cómo sabemos eso?
+Bueno, lo sabemos por esta cláusula de aquí arriba.
+Que sabemos que o no es Scarlet o no es la biblioteca,
+o no es la llave inglesa.
+Y dado que sabemos que es la señorita Scarlet,
+y sabemos que es la biblioteca, entonces lo único que queda
+opción para el arma es que no es la llave, que
+Significa que debe ser el cuchillo.
+Entonces nosotros, como humanos, ahora podemos retroceder y razonar sobre eso,
+aunque puede que no haya quedado claro de inmediato.
+Y esa es una de las ventajas de usar una IA o algún tipo de algoritmo.
+para poder hacer esto, es que el ordenador
+podemos agotar todas estas posibilidades e intentar descubrir
+cuál debería ser realmente la solución.
+Y por esa razón, a menudo es útil estar
+capaz de representar el conocimiento de esta manera.
+Ingeniería del conocimiento, alguna situación, donde
+Podemos usar una computadora para poder representar el conocimiento y dibujar.
+conclusiones basadas en ese conocimiento.
+Y en cualquier momento podemos traducir algo a lógica proposicional.
+Símbolos como este, tipo de enfoque pueden ser útiles.
+Quizás estés familiarizado con los acertijos de lógica, donde
+tienes que abrirte camino tratando de descubrir algo.
+Así es como podría verse un acertijo de lógica clásico.
+Algo así como Gildaroy, Minerva, Pomona y Horace cada uno
+pertenecen a una diferente de las cuatro casas--
+Gryffindor, Hufflepuff, Ravenclaw y Slytherin.
+Y luego tenemos alguna información, que Gildaroy
+Pertenece a Gryffindor o Ravenclaw.
+Pomona no pertenece a Slytherin.
+Y Minerva pertenece a Gryffindor.
+Tenemos un par de datos.
+Y usando esa información, necesitamos ser
+capaz de sacar algunas conclusiones sobre qué persona
+debe asignarse a qué casa.
+Y nuevamente, podemos usar exactamente la misma idea para intentar implementar esta noción.
+Entonces necesitamos algunos símbolos proposicionales.
+Y en este caso, los símbolos proposicionales
+vamos a volvernos un poco más complejos, aunque vamos a
+Vea formas de hacer esto un poco más limpio más adelante.
+Pero necesitaremos 16 símbolos proposicionales.
+Uno para cada persona y casa.
+Entonces necesitamos decir... recuerden, cada símbolo proposicional
+es verdadero o falso.
+Entonces Gildaroy Gryffindor es verdadero o falso.
+O está en Gryffindor o no.
+Asimismo, Gildaroy Hufflepuff también es verdadero o falso.
+O es verdad o es falso.
+Y eso es cierto para cualquier combinación de persona y casa.
+que se nos ocurra.
+Tenemos algún tipo de símbolo proposicional para cada uno de ellos.
+Usando este tipo de conocimiento, podemos entonces
+Empezar a pensar en qué tipos de oraciones lógicas
+podemos decir sobre el rompecabezas.
+Que si sabemos--
+Antes incluso de pensar en la información que nos dieron,
+Podemos pensar en la premisa del problema.
+Que a cada persona se le asigna una casa diferente.
+Entonces, ¿qué nos dice eso?
+Pues nos dice frases como esta.
+Nos dice que Pomona Slytherin no implica Pomona Hufflepuff.
+Algo así como si Pomona estuviera en Slytherin,
+entonces sabemos que Pomona no está en Hufflepuff.
+Y lo sabemos para las cuatro personas y para todas las combinaciones de casas.
+Que no importa qué persona elijas, si están en la misma casa,
+entonces no están en otra casa.
+Así que probablemente tendré un montón de declaraciones de conocimientos
+que son de estos cuatro.
+Que si sabemos que Pomona está en Slytherin, entonces
+Sabemos que Pomona no está en Hufflepuff.
+También nos dieron la información de que cada persona está en una casa diferente.
+Entonces también tengo conocimientos que se parecen a esto.
+Minerva Ravenclaw no implica Gildaroy Ravenclaw.
+Si están todos en casas diferentes, entonces si Minerva está en Ravenclaw,
+entonces sabemos que Gildaroy tampoco está en Ravenclaw.
+Y tengo un montón de frases similares.
+como este que están expresando esa idea para otras personas y otras casas
+también.
+Y así, además de oraciones de esta forma,
+También tengo el conocimiento que me fue dado.
+Información como, Gildaroy estuvo en Gryffindor o en Ravenclaw
+eso estaría representado así.
+Gildaroy Gryffindor o Gildaroy Ravenclaw.
+Y luego, usando este tipo de oraciones,
+Podemos empezar a sacar algunas conclusiones sobre el mundo.
+Así que veamos un ejemplo de esto.
+Seguiremos adelante e intentaremos implementar este acertijo lógico.
+para ver si podemos descubrir cuál es la respuesta.
+Seguiré adelante y abriré puzzle.py donde ya he
+Comencé a implementar este tipo de idea.
+He definido una lista de personas y una lista de casas.
+Y hasta ahora he creado un símbolo para cada persona y para cada casa.
+Eso es lo que hace este bucle doble for: recorrer todas las personas,
+recorriendo todas las casas, creando un nuevo símbolo para cada una de ellas.
+Y luego agregué algo de información.
+Sé que cada persona pertenece a una casa,
+así que agregué la información para cada persona--
+esa persona Gryffindor, o la persona Hufflepuff,
+o persona Ravenclaw, o persona Slytherin.
+Esa una de esas cuatro cosas debe ser cierta.
+Cada persona pertenece a una casa.
+¿Qué otra información conozco?
+También sé que sólo una casa por persona.
+Entonces ninguna persona pertenece a varias casas.
+Entonces, ¿cómo funciona esto?
+Bueno, esto será cierto para todas las personas.
+Así que recorreré a cada persona.
+Y luego necesito recorrer todos los diferentes pares de casas.
+La idea es codificar la idea de que si Minerva está en Gryffindor,
+Entonces Minerva no puede estar en Ravenclaw.
+Así que recorreré todas las casas, h1.
+Y volveré a recorrer todas las casas, h2.
+ Y mientras sean diferentes, h1 no es igual a H2,
+luego agregaré esta información a mi base de conocimientos.
+Esa implicación, en otras palabras, un si/entonces, si la persona está en h1,
+entonces sé que no están en la casa h2.
+Entonces estas líneas aquí codifican la noción
+que para cada persona, si pertenece a la casa uno, entonces
+no están en la casa dos.
+Y la otra pieza de lógica que necesitamos codificar.
+Es la idea de que en cada casa sólo puede haber una persona.
+En otras palabras, si Pomona es Hufflepuff, entonces nadie más
+Tampoco se le permite estar en Hufflepuff.
+Y esa es la misma lógica pero más o menos al revés.
+Recorro todas las casas y recorro todos los diferentes pares de personas.
+Así que paso por encima de las personas una vez y vuelvo a pasar por encima de las personas.
+Y solo haga esto cuando las personas sean diferentes, p1 no sea igual a p2.
+Y agrego el conocimiento de que si, como lo da la implicación,
+si la persona uno pertenece a la casa, entonces
+No se da el caso de que dos personas pertenezcan a la misma casa.
+Así que aquí sólo estoy codificando el conocimiento que
+representa las restricciones del problema.
+Sé que todos están en una casa diferente.
+Sé que cualquier persona sólo puede pertenecer a una casa.
+Y ahora puedo tomar mis conocimientos e intentar imprimir la información.
+que por casualidad lo sé.
+Así que seguiré adelante e imprimiré la fórmula conocimiento.
+sólo para ver esto en acción.
+Y seguiré adelante y me saltaré esto por ahora, pero
+Vuelve a esto en un segundo.
+Imprimamos el conocimiento que conozco ejecutando Python puzzle.py.
+Es mucha información, mucha la que tengo.
+para desplazarse, porque hay 16 variables diferentes en juego.
+Pero la idea básica si nos desplazamos hasta la parte superior
+es que veo mi información inicial.
+Gildaroy está en Gryffindor, o Gildaroy está en Hufflepuff,
+o Gildaroy está en Ravenclaw, o Gildaroy está en Slytherin.
+Y luego mucha más información también.
+Entonces esto es bastante complicado.
+Más de lo que realmente queremos ver.
+Y pronto también veremos formas de representar esto un poco más.
+muy bien usando la lógica.
+Pero por ahora, podemos decir simplemente que estas son las variables con las que estamos tratando.
+Y ahora nos gustaría agregar algo de información.
+Entonces la información que vamos a agregar es que Gildaroy está en Gryffindor.
+o está en Ravenclaw.
+Entonces ese conocimiento nos fue dado.
+Así que seguiré adelante y diré conocimiento.agregar, y
+Lo sé, ya sea Gildaroy Gryffindor o Gildaroy Ravenclaw.
+Una de esas dos cosas debe ser cierta.
+También sé que Pomona no estaba en Slytherin.
+Entonces puedo decir conocimiento.agregar, no este símbolo.
+No el símbolo de Pomona Slytherin.
+Y luego puedo agregar el conocimiento de que Minerva está en Gryffindor agregando
+el símbolo Minerva Gryffindor.
+Entonces esos son los conocimientos que conozco.
+Y este bucle aquí en la parte inferior simplemente recorre todos mis símbolos,
+comprueba si el conocimiento implica ese símbolo llamando a este modelo de verificación
+funcionar nuevamente.
+Y si es así, si sabemos que el símbolo es verdadero, lo imprimimos.
+Ahora puedo ejecutar Python puzzle.py y Python
+va a resolver este rompecabezas por mí.
+Podemos concluir que Gildaroy pertenece a Ravenclaw,
+Pomona pertenece a Hufflepuff, Minerva a Gryffindor,
+y Horace a Slytherin simplemente codificando este conocimiento dentro de la computadora...
+aunque, fue bastante tedioso de hacer en este caso--
+Y como resultado, también pudimos sacar la conclusión de eso.
+Y puedes imaginar que esto se aplica a muchos tipos diferentes de métodos deductivos.
+situaciones.
+Así que no sólo estas situaciones en las que intentamos
+para lidiar con los personajes de Harry Potter en este rompecabezas.
+Pero si alguna vez has jugado juegos como Mastermind
+donde intentas descubrir en qué orden van los diferentes colores
+y tratando de hacer predicciones al respecto, te podría decir, por ejemplo.
+Juguemos a una versión simplificada de Mastermind donde hay cuatro
+Colores: rojo, azul, verde y amarillo.
+y están en algún orden, pero no les diré en qué orden.
+Sólo tienes que adivinar y te lo diré.
+de rojo, azul, verde y amarillo, ¿cuántos de los cuatro
+Estás en la posición correcta.
+Entonces una versión simplificada de este juego.
+Podrías adivinar, como rojo, azul, verde, amarillo.
+Y te diría algo así como, dos de esos cuatro
+están en la posición correcta, pero los otros dos no.
+Entonces podrías razonablemente hacer una suposición y decir, está bien, intentemos esto.
+Azul, rojo, verde, amarillo.
+Intente cambiar dos de ellos.
+Y esta vez tal vez te diga, ¿sabes qué?, ninguna de esas
+están en la posición correcta.
+Y la pregunta entonces es, muy bien, ¿qué es?
+¿El orden correcto de estos cuatro colores?
+Y nosotros, como humanos, podríamos empezar a razonar esto.
+Muy bien, bueno, si ninguna de estas fuera correcta, pero dos de ellas fueran correctas,
+Bueno, debe haber sido porque cambié el rojo y el azul.
+Lo que significa que el rojo y el azul aquí deben ser correctos.
+Lo que significa que el verde y el amarillo probablemente no sean correctos.
+Puedes empezar a hacer este tipo de razonamiento deductivo.
+De manera equivalente, también podemos intentar tomar esto y codificarlo dentro.
+de nuestro ordenador también.
+Y será muy similar al acertijo de lógica.
+que acabamos de hacer hace un momento.
+Así que no dedicaré mucho tiempo a este código porque es bastante similar.
+Pero nuevamente, tenemos una gran cantidad de colores,
+y cuatro posiciones diferentes en las que pueden estar esos colores.
+Y luego tenemos algunos conocimientos adicionales.
+Y codifico todo ese conocimiento.
+Y puedes echar un vistazo a este código cuando quieras.
+Pero sólo quiero demostrar que cuando ejecutamos este código,
+ejecute Python mastermind.py y ejecute y vea lo que obtenemos,
+finalmente podemos calcular el rojo en la posición cero,
+azul en una posición, amarillo en las dos posiciones,
+y verde en las tres posiciones como orden de esos símbolos.
+Ahora, en última instancia, lo que quizás hayas notado
+Es que este proceso estaba tomando bastante tiempo.
+Y, de hecho, la verificación de modelos no es un algoritmo particularmente eficiente.
+Qué necesito hacer para verificar el modelo
+es tomar todas mis posibles variables diferentes
+y enumerar todas las posibilidades en las que podrían encontrarse.
+Si tengo n variables, tengo 2 entre los n mundos posibles.
+que necesito revisar para realizar esta verificación de modelo
+algoritmo.
+Y esto probablemente no sea manejable, especialmente
+a medida que comenzamos a llegar a conjuntos de datos cada vez más grandes
+donde tienes muchas, muchas más variables en juego.
+Aquí solo tenemos un número relativamente pequeño de variables,
+entonces este tipo de enfoque realmente puede funcionar.
+Pero a medida que aumenta el número de variables,
+La verificación del modelo se vuelve cada vez menos buena forma de intentarlo.
+para resolver este tipo de problemas.
+Entonces, si bien podría haber estado bien para algo como Mastermind
+concluir que esta es, de hecho, la secuencia correcta,
+donde los cuatro están en la posición correcta, lo que nos gustaría hacer
+es idear algunas formas mejores de poder hacer inferencias, en lugar de
+que simplemente enumerar todas las posibilidades.
+Y para hacerlo, a lo que vamos a pasar a continuación es a la idea de reglas de inferencia.
+Algún tipo de reglas que podemos aplicar para tomar conocimiento que ya existe.
+y traducirlo en nuevas formas de conocimiento.
+Y la forma general en que estructuraremos la regla de inferencia.
+es tener una línea horizontal aquí.
+Todo lo que esté por encima de la línea representará una premisa, algo
+que sabemos que es verdad.
+Y entonces cualquier cosa debajo de la línea será la conclusión.
+a lo que podemos llegar después de aplicar la lógica,
+o de la regla de inferencia que vamos a demostrar.
+Entonces haremos algunas de estas reglas de inferencia.
+mostrándolos primero en inglés, pero luego traduciéndolos
+en el mundo de la lógica proposicional para que puedas
+Podemos ver cómo se ven realmente esas reglas de inferencia.
+Entonces, por ejemplo, imaginemos que tengo acceso
+a dos piezas de información.
+Sé, por ejemplo, que si está lloviendo,
+entonces Harry está dentro, por ejemplo.
+Y digamos que también sé que está lloviendo.
+Entonces la mayoría de nosotros podríamos razonablemente mirar esta información.
+y concluir que, está bien, Harry debe estar adentro.
+Esta regla de inferencia se conoce como modus ponens,
+y está expresado más formalmente en lógica como este.
+Si sabemos que alfa implica beta, en otras palabras, si alfa,
+luego beta, y también sabemos que alfa es verdadera,
+entonces deberíamos poder concluir que beta también es cierta.
+Podemos aplicar esta regla de inferencia para tomar estos dos datos
+y generar esta nueva información.
+Observe que este es un enfoque totalmente diferente al de verificación del modelo.
+enfoque, donde el enfoque era mirar todos los mundos posibles
+y vea lo que es verdad en cada uno de estos mundos.
+Aquí no estamos tratando con ningún mundo específico.
+Sólo estamos lidiando con el conocimiento que sabemos.
+y a qué conclusiones podemos llegar en base a ese conocimiento.
+Que sé que A implica B, y sé que A, y la conclusión es B.
+Y esto debería parecer una regla relativamente obvia.
+Pero, por supuesto, si es alfa que beta, y conocemos alfa,
+entonces deberíamos poder concluir que beta también es cierta.
+Y eso será cierto para muchas, tal vez incluso para todas las reglas de inferencia.
+que le echaremos un vistazo.
+Deberías poder mirarlos y decir, sí,
+Por supuesto que eso va a ser cierto.
+Pero es poner todo esto junto, descubrir
+la combinación correcta de reglas de inferencia que
+se puede aplicar lo que finalmente nos va a permitir generar
+conocimiento interesante dentro de nuestra IA.
+Entonces ese es el modus ponens, esta aplicación de la implicación.
+Que si conocemos alfa y sabemos que alfa implica beta,
+entonces podemos concluir beta.
+Echemos un vistazo a otro ejemplo.
+Bastante sencillo.
+Algo así como Harry es amigo de Ron y Hermione.
+Con base en esa información, podemos razonablemente
+Concluimos que Harry es amigo de Hermione.
+Eso también debe ser cierto.
+Y esta regla de inferencia se conoce como eliminación.
+Y lo que dice la eliminación es que si tenemos una situación en la que
+alfa y beta son ambos verdaderos--
+Tengo información alfa y beta--
+Bueno, entonces sólo alfa es verdadera.
+O del mismo modo, solo la versión beta es cierta.
+Que si sé que ambas partes son ciertas, entonces una de esas partes
+también debe ser cierto.
+De nuevo, algo obvio desde el punto de vista de la intuición humana.
+Pero una computadora necesita recibir este tipo de información.
+Para poder aplicar la regla de inferencia, debemos
+Necesitas decirle a la computadora que esta es una regla de inferencia que
+puede aplicar para que la computadora tenga acceso a él,
+y es capaz de utilizarlo para traducir información
+de una forma a otra.
+Además de eso, echemos un vistazo a otro ejemplo.
+de una regla de inferencia.
+Algo así como, no es cierto que Harry no pasó la prueba.
+Es una frase un poco complicada de analizar, así que léela de nuevo.
+No es cierto, o es falso, que Harry no pasó la prueba.
+Bueno, si es falso que Harry no pasó la prueba,
+entonces la única conclusión razonable es que Harry pasó la prueba.
+Y así esto, en lugar de ser y eliminar,
+es lo que llamamos eliminación de la doble negación.
+Que si tenemos dos negativos dentro de nuestra premisa, entonces
+podemos simplemente eliminarlos por completo.
+Se anulan mutuamente.
+Uno convierte lo verdadero en falso y el otro vuelve lo falso a verdadero.
+Expresado un poco más formalmente, decimos
+que si la premisa no es alfa, entonces la conclusión que podemos sacar
+es solo alfa.
+Podemos decir que alfa es cierto.
+Echaremos un vistazo a un par más de estos.
+Si está lloviendo, entonces Harry está adentro, ¿cómo replanteo esto?
+Bueno, este es un poco más complicado.
+Pero si sé que está lloviendo, entonces Harry está dentro.
+entonces concluyo que una de dos cosas debe ser cierta.
+O no está lloviendo o Harry está adentro.
+Ahora bien, esto es más complicado, así que pensemos en ello un poco.
+Esta primera premisa aquí, si está lloviendo, entonces Harry está adentro,
+Está diciendo que si sé que está lloviendo, entonces Harry debe estar adentro.
+¿Cuál es entonces el otro caso posible?
+Bueno, si Harry no está dentro, entonces sé que no debe estar lloviendo.
+Entonces una de esas dos situaciones debe ser cierta.
+O no está lloviendo o está lloviendo, en cuyo caso Harry está adentro.
+Entonces la conclusión que puedo sacar es que o no está lloviendo o está lloviendo,
+por lo tanto, Harry está dentro.
+Entonces esta es una manera de traducir declaraciones si/entonces en declaraciones o.
+Y esto se conoce como eliminación de implicaciones.
+Y esto es similar a lo que hicimos al principio.
+cuando miramos por primera vez esas primeras frases sobre Harry y Hagrid
+y Dumbledore.
+Y expresado un poco más formalmente, esto
+dice que si tengo la implicacion alfa
+implica beta, que puedo sacar la conclusión de que o no alfa
+o beta.
+Porque sólo hay dos posibilidades.
+O alfa es verdadero o alfa no es verdadero.
+Entonces una de esas posibilidades es que alfa no es cierta.
+Pero si alfa es verdadera, entonces podemos sacar la conclusión
+esa beta debe ser cierta.
+Entonces, o alfa no es verdadera o alfa es verdadera, en cuyo caso beta también es verdadera.
+Así que esta es una manera de convertir una implicación en sólo una declaración sobre
+o.
+Además de eliminar implicaciones, también podemos
+eliminar también los bicondicionales.
+Entonces tomemos un ejemplo en inglés.
+Algo así como, está lloviendo si y sólo si Harry está dentro.
+Y esto si y sólo si realmente suena así de bicondicional,
+ese signo de doble flecha que vimos en la lógica proposicional no hace mucho.
+¿Y qué significa esto realmente si lo tradujéramos?
+Bueno, esto significa que si está lloviendo, entonces Harry está adentro.
+Y si Harry está dentro, entonces está lloviendo.
+La implicación va en ambos sentidos.
+Y esto es lo que llamaríamos eliminación bicondicional.
+Que puedo tomar un bicondicional, A si y sólo si B,
+y traducir eso en algo como esto.
+A implica B y B implica A. Muchas de estas reglas de inferencia
+están tomando lógica que usa ciertos símbolos
+y convirtiéndolos en diferentes símbolos, tomando una implicación
+y convirtiéndolo en un o.
+O tomar un bicondicional y convertirlo en implicación.
+Y otro ejemplo de ello sería algo como esto.
+No es cierto que tanto Harry como Ron hayan pasado la prueba.
+Bueno, está bien, ¿cómo traducimos eso?
+¿Qué significa eso?
+Bueno, si no es cierto que ambos pasaron la prueba,
+Bueno, entonces la conclusión razonable que podríamos sacar es que al menos uno de ellos
+no pasó la prueba.
+Entonces la conclusión es que o Harry no pasó la prueba,
+o Ron no pasó la prueba, o ambas cosas.
+Esto no es exclusivo o.
+Pero si es cierto que no es cierto, que tanto Harry como Ron pasaron
+la prueba, bueno, entonces Harry no pasó la prueba
+o Ron no pasó la prueba.
+Y este tipo de ley es una de las leyes de De Morgan.
+Bastante famoso en lógica, donde la idea es que podemos convertir un y en un o.
+Podemos tomar esto y que tanto Harry como Ron hayan pasado la prueba.
+y conviértelo en o moviendo los nots.
+Entonces, si no es cierto que Harry y Ron pasaron la prueba,
+Bueno, entonces Harry no pasó la prueba,
+o Ron tampoco pasó la prueba.
+Y la forma en que formulamos esto de manera más formal usando la lógica es decir esto.
+Si no es cierto que alfa y beta, bueno, entonces o no
+alfa o no beta.
+La forma en que me gusta pensar en esto es que si
+tener una negación delante de una expresión y,
+mueves la negación hacia adentro, por así decirlo.
+Moviendo la negación a cada una de estas oraciones individuales,
+y luego convierta y en o.
+Entonces la negación se mueve hacia adentro y el y se convierte en o.
+Entonces paso de no A y B a no A o no B.
+Y en realidad hay una inversión de la ley de De Morgan.
+eso va en la otra dirección para algo como esto.
+Si digo que no es cierto que Harry o Ron hayan pasado la prueba,
+lo que significa que ninguno de ellos pasó la prueba, bueno, entonces la conclusión que puedo sacar
+Es que Harry no pasó la prueba y Ron no pasó la prueba.
+Entonces, en este caso, en lugar de convertir un y en un o, estamos convirtiendo un
+o en un y.
+Pero la idea es la misma.
+Y éste, nuevamente, es otro ejemplo de las leyes de De Morgan.
+Y la forma en que funciona es que si no tengo A o B esta vez,
+Se aplicará la misma lógica.
+Voy a mover la negación hacia adentro y
+Esta vez vamos a voltear el o en un y.
+Entonces, si no es A o B, lo que significa que no es cierto que A o B, o alfa o beta,
+entonces puedo decir ni alfa ni beta.
+Moviendo la negación hacia adentro para llegar a esa conclusión.
+Entonces esas son las leyes de De Morgan.
+Y un par de reglas de inferencia más que vale la pena echarles un vistazo,
+Una es la ley distributiva que funciona de esta manera.
+Entonces, si tengo alfa y beta o gamma, bueno, entonces de la misma manera.
+que puedes usar, en matemáticas, usar leyes distributivas
+para distribuir operandos, como suma y multiplicación,
+Puedo hacer algo similar aquí.
+¿Dónde puedo decir si alfa y beta o gamma?
+entonces puedo decir algo como alfa y beta, o alfa y gamma.
+Que he podido distribuir esto y firmar a lo largo de esta expresión.
+Entonces este es un ejemplo de la propiedad distributiva.
+o la ley distributiva, aplicada a la lógica de la misma manera
+que distribuirías como una multiplicación sobre la suma
+de algo, por ejemplo.
+Esto también funciona al revés.
+Entonces, si, por ejemplo, tengo alfa o beta y gamma,
+Puedo distribuir el o a lo largo de la expresión.
+Puedo decir alfa o beta y alfa o gamma.
+De modo que la ley distributiva también funciona de esa manera.
+Y es útil si quiero tomar o y moverlo a la expresión.
+Y pronto veremos un ejemplo de por qué podríamos
+Me importaría hacer algo así.
+Está bien.
+Ahora hemos visto muchas reglas de inferencia diferentes.
+Y la pregunta ahora es ¿cómo podemos usar esas reglas de inferencia para realmente
+intentar sacar algunas conclusiones?
+Para intentar probar algo sobre la vinculación,
+demostrando que dada una base de conocimiento inicial,
+Nos gustaría encontrar alguna manera de demostrar que una consulta es verdadera.
+Bueno, una forma de pensarlo es en realidad
+recordar lo que hablamos la última vez,
+cuando hablamos de problemas de búsqueda.
+Recuerde nuevamente que los problemas de búsqueda tienen algún tipo de estado inicial.
+Tienen acciones que puedes llevar de un estado a otro,
+según lo definido por un modelo de transición que le indica cómo pasar de un estado
+a otro.
+Hablamos de hacer pruebas para ver si tenías un objetivo.
+Y luego alguna función de costo de ruta para ver cuántos pasos tuviste que seguir,
+o qué tan costosa fue la solución que encontró.
+Ahora que tenemos estas reglas de inferencia que
+tomar un conjunto de oraciones y lógica proposicional
+y consíguenos un nuevo conjunto de oraciones en lógica proposicional,
+De hecho, podemos tratar esas oraciones, o esos conjuntos de oraciones,
+como estados dentro de un problema de búsqueda.
+Entonces, si queremos demostrar que alguna consulta es verdadera,
+demostrar que algún teorema lógico es verdadero,
+Puede tratar la demostración de teoremas como una forma de problema de búsqueda.
+Puedo decir que comenzamos en algún estado inicial,
+donde ese estado inicial es la base de conocimientos con la que empiezo.
+El conjunto de todas las oraciones que sé que son verdaderas.
+¿Qué acciones están disponibles para mí?
+Bueno, las acciones son cualquiera de las reglas de inferencia.
+que puedo aplicar en cualquier momento.
+El modelo de transición simplemente me dice que después de aplicar la regla de inferencia,
+aquí está el nuevo conjunto de todos los conocimientos que tengo,
+cuál será el antiguo conjunto de conocimientos, más alguna inferencia adicional
+que he podido dibujar, de la misma manera que nosotros
+Vi lo que obtuvimos cuando aplicamos esas reglas de inferencia.
+y obtuve algún tipo de conclusión.
+Esa conclusión se agrega a nuestra base de conocimientos,
+y nuestro modelo de transición codificará eso.
+¿Qué es la prueba objetivo?
+Bueno, nuestra prueba objetivo es, ya sabes, comprobar
+para ver si hemos probado la afirmación que estamos tratando de probar.
+Si lo que intentamos probar está dentro de nuestra base de conocimientos.
+Y la función de costo de ruta, lo que estamos tratando de minimizar,
+Quizás sea la cantidad de reglas de inferencia que necesitábamos usar.
+El número de pasos, por así decirlo, dentro de nuestra prueba.
+Y aquí hemos podido aplicar el mismo tipo de ideas.
+que vimos la última vez con problemas de búsqueda,
+a algo como intentar demostrar algo sobre el conocimiento
+tomando nuestro conocimiento y enmarcándolo en términos que podamos entender
+como un problema de búsqueda, con un estado inicial,
+con acciones, con un modelo de transición.
+Entonces esto muestra un par de cosas.
+Uno de ellos es lo versátiles que son los problemas de búsqueda.
+Que pueden ser los mismos tipos de algoritmos que usamos para resolver un laberinto,
+o descubrir cómo llegar del punto A al punto B. Dentro de las indicaciones para llegar en coche,
+por ejemplo, también se puede utilizar como método de demostración de teoremas.
+De tomar algún tipo de base de conocimientos inicial
+y tratar de demostrar algo sobre ese conocimiento.
+Así que esta, una vez más, es una segunda forma, además de la verificación del modelo,
+para intentar demostrar que ciertas afirmaciones son ciertas.
+Pero resulta que hay otra forma en la que podemos intentar aplicar la inferencia,
+y de esto hablaremos ahora, que no es la única manera,
+pero sin duda uno de los más comunes.
+Lo que se conoce como resolución.
+Y la resolución se basa en otra regla de inferencia.
+que veremos ahora.
+Una regla de inferencia bastante poderosa que
+Probemos todo lo que pueda demostrarse sobre una base de conocimientos.
+Y se basa en esta idea básica.
+Digamos que sé que Ron está en el Gran Comedor,
+o Hermione está en la biblioteca.
+Y digamos que también sé que Ron no está en el Gran Comedor.
+Con base en esos dos datos, ¿qué puedo concluir?
+Bueno, podría concluir razonablemente que Hermione debe estar en la biblioteca.
+¿Cómo sé eso?
+Bueno, es porque estas dos declaraciones, estas dos, lo que llamaremos,
+literales complementarios: literales que se complementan entre sí,
+son opuestos el uno del otro--
+parecen entrar en conflicto entre sí.
+Esta frase nos dice que Ron está en el Gran Comedor
+o Hermione está en la biblioteca.
+Entonces, si sabemos que Ron no está en el Gran Comedor,
+eso entra en conflicto con este, lo que significa que Hermione debe estar en la biblioteca.
+Y esto podemos enmarcarlo como una regla más general, conocida como resolución unitaria.
+regla.
+Una regla que dice que si tenemos P o Q, y tampoco conocemos P, entonces
+De ahí podemos concluir razonablemente Q.
+Que si P o Q son verdaderas y sabemos que P no es verdadera,
+la única posibilidad es que Q sea verdadera.
+Y resulta que ésta es una regla de inferencia bastante poderosa.
+en términos de lo que puede hacer, en parte porque podemos rápidamente
+empezar a generalizar esta regla.
+Esta Q de aquí no necesita ser solo un símbolo proposicional único.
+Podrían ser múltiples, todos encadenados en una sola cláusula,
+como lo llamaremos.
+Entonces, si tuviera algo como P o Q1, o Q2, o Q3, y así sucesivamente,
+hasta Qn, entonces tenía n, diferentes, otras variables,
+y no tengo P, bueno, entonces que pasa cuando estos dos se complementan
+entre sí es que estas dos cláusulas resuelven, por así decirlo,
+para producir una nueva cláusula que sea solo Q1 o Q2, hasta Qn.
+Y en un or, el orden de los argumentos en or en realidad no importa.
+La P no tiene por qué ser lo primero.
+Pudo haber sido en el medio.
+Pero la idea aquí es que si tengo P en una cláusula,
+y no P y la otra cláusula, bueno, entonces
+Sé que una de estas cosas restantes debe ser cierta.
+Los he resuelto para producir una nueva cláusula.
+Pero resulta que podemos generalizar esta idea aún más, de hecho,
+y mostrar aún más poder del que podemos tener con esta regla de resolución.
+Entonces tomemos otro ejemplo.
+Digamos, por ejemplo, que conozco la misma información,
+que Ron está en el Gran Comedor o Hermione está en la biblioteca.
+Y el segundo dato que conozco
+es que Ron no está en el Gran Comedor o Harry está durmiendo.
+Así que no se trata sólo de un único dato.
+Tengo dos cláusulas diferentes y las definiremos con mayor precisión.
+en solo un momento.
+¿Qué sé yo aquí?
+Bueno, de nuevo, para cualquier símbolo proposicional, como Ron está en el Gran Comedor,
+hay solo dos posibilidades.
+O Ron está en el Gran Comedor, en cuyo caso, según la resolución,
+Sabemos que Harry debe estar durmiendo.
+O Ron no está en el Gran Comedor, en cuyo caso
+Sabemos, basándonos en la misma regla, que Hermione debe estar en la biblioteca.
+Basado en esas dos cosas en combinación,
+Puedo decir, partiendo de estas dos premisas, que
+Podemos concluir que Hermione está en la biblioteca o Harry está durmiendo.
+De nuevo, debido a que estos dos entran en conflicto entre sí,
+Sé que una de estas dos debe ser cierta.
+Y puedes mirar más de cerca e intentar razonar a través de esa lógica.
+Asegúrese de convencerse de que cree en esta conclusión.
+Dicho de manera más general, podemos nombrar esta regla de resolución.
+diciendo que si sabemos que P o Q son verdaderos,
+y también sabemos que ni P ni R son verdaderos,
+Resolvemos estas dos cláusulas juntas para obtener una nueva cláusula, Q
+o R. Que Q o R deben ser verdaderos.
+Y nuevamente, como en el último caso, Q y R
+no es necesario que sean solo símbolos proposicionales únicos.
+Podrían ser varios símbolos.
+Entonces, si tuviera una regla que tuviera una P, una Q1, una Q2 o una Q3, y así sucesivamente,
+hasta Qn, donde n es sólo algún número.
+Y de la misma manera no tenía P ni R1 ni F2, y así sucesivamente, hasta Rm, m,
+donde m, nuevamente, es simplemente otro número,
+Puedo resolver estas dos cláusulas juntas para conseguir que una de ellas sea cierta.
+Q1 o Q2, hasta Qn.
+O R1 o R2, hasta Rm.
+Y esto es sólo una generalización de la misma regla que vimos antes.
+A cada una de estas cosas aquí las llamaremos cláusula.
+Donde una cláusula se define formalmente como una disyunción de literales.
+Donde una disyunción significa que es un conjunto de cosas que están conectadas con o.
+Disyunción significa cosas relacionadas con o.
+La conjunción, por su parte, son cosas conectadas con y.
+Y un literal es un símbolo proposicional o lo contrario.
+de un símbolo proposicional.
+Entonces es algo como P o Q, o no P o no Q,
+todos esos son símbolos proposicionales, o no de los símbolos proposicionales,
+y a esos los llamamos literales.
+Entonces una cláusula es algo como esto.
+P, Q o R, por ejemplo.
+Mientras tanto, ¿qué nos da esto la capacidad de hacer?
+¿Nos da la capacidad de convertir la lógica, cualquier oración lógica,
+en algo llamado forma normal conjuntiva.
+Una oración conjuntiva en forma normal es una oración lógica.
+esa es una conjunción de cláusulas.
+Recuerde nuevamente, conjunción significa que las cosas están conectadas entre sí usando y.
+Y entonces una conjunción de cláusulas significa que
+es un y de cláusulas individuales, cada una de las cuales tiene en él.
+Entonces algo como esto.
+A o B o C, y D o no E, y F o G. Todo entre paréntesis
+es una cláusula.
+Todas las cláusulas están conectadas entre sí mediante un y,
+y todo lo que hay en la cláusula se separa mediante una or.
+Y esta es sólo una forma estándar en la que podemos traducir una oración lógica.
+en eso simplemente hace que sea fácil trabajar con él y manipularlo.
+Y resulta que podemos tomar cualquier frase en lógica.
+y convertirlo en forma normal conjuntiva,
+simplemente aplicándole algunas reglas de inferencia y transformaciones.
+Así que veremos cómo podemos hacerlo realmente.
+Entonces, ¿cuál es el proceso para tomar una fórmula lógica?
+y convertirlo en forma cautelar normal, también conocida como CNF?
+Bueno, el proceso se parece un poco a esto.
+Necesitamos tomar todos los símbolos que no lo son.
+parte de la forma normal conjuntiva: los bicondicionales y las implicaciones,
+Etcétera.
+Y convertirlos en algo más cercano
+como forma normal conjuntiva.
+Entonces el primer paso será eliminar los bicondicionales.
+Esos si y solo si flechas dobles.
+Y sabemos cómo eliminar los bicondicionales.
+porque vimos que había una regla de inferencia para hacer precisamente eso.
+Cada vez que tengo una expresión, como alfa, si y sólo si beta,
+Puedo convertir eso en alfa implica beta, y beta implica alfa, según
+en esa regla de inferencia que vimos antes.
+Asimismo, además de eliminar los bicondicionales,
+También puedo eliminar implicaciones.
+Las flechas si/entonces.
+Y también puedo hacerlo usando la misma regla de inferencia que vimos antes.
+Tomar alfa implica beta y convertirlo
+en no alfa o beta, porque eso es lógicamente
+equivalente a esto primero aquí.
+Entonces podemos mover los no hacia adentro, porque no queremos los no.
+en el exterior de nuestras expresiones.
+La forma normal conjuntiva requiere que su cláusula justa y su cláusula
+y cláusula y cláusula.
+Cualquier not debe estar inmediatamente al lado de los símbolos proposicionales.
+Pero podemos mover esos no usando las leyes de De Morgan.
+Al tomar algo como, no A y B, y convertirlo en no A o no B,
+por ejemplo, usando las leyes de Morgan para manipular eso.
+Y después de eso, todo lo que nos quedará serán y y os,
+y son fáciles de tratar.
+Podemos usar la ley distributiva para distribuir los ors de modo que los ors terminen
+arriba en el interior de la expresión, por así decirlo,
+y las y terminan en el exterior.
+Este es el patrón general de cómo tomaremos una fórmula.
+y convertirlo en forma normal conjuntiva.
+Y ahora echemos un vistazo a un ejemplo de cómo
+Haríamos esto y exploraríamos entonces por qué
+querría hacer algo como esto.
+Así es como podemos hacerlo.
+Tomemos esta fórmula, por ejemplo.
+P o Q implica R, y me gustaría convertir esto
+en forma normal conjuntiva, donde son todos y de cláusulas,
+y cada cláusula es una cláusula disyuntiva.
+Está o está juntos.
+Entonces, ¿qué es lo primero que debo hacer?
+Bueno, esto es una implicación.
+Así que déjenme seguir adelante y eliminar esa implicación.
+Usando la regla de inferencia de implicaciones, puedo convertir P o Q en...
+P o Q implica R, en lugar de P, Q o R. Ese es el primer paso.
+Me he deshecho de la implicación.
+Y a continuación, también puedo deshacerme del no del exterior de esta expresión.
+Puedo mover las notas hacia adentro para que estén más cerca de los literales.
+utilizando las leyes de De Morgan.
+Y la ley de De Morgan dice que ni P ni Q son equivalentes
+a no P y no Q. De nuevo aquí, simplemente aplicando las reglas de inferencia
+que ya hemos visto para traducir estas declaraciones.
+Y ahora tengo dos cosas que están separadas por un
+o, donde esta cosa en el interior es un y.
+Lo que realmente me gustaría es mover los os que están en el interior,
+porque la forma normal conjuntiva significa que necesito cláusula y cláusula y cláusula
+y cláusula.
+Y para hacer eso, puedo usar la ley distributiva.
+Si no tengo P ni Q o R, puedo distribuir o R ​​a ambos
+para obtener no P o R, y no Q o R usando la ley distributiva.
+Y esto ahora, aquí abajo, está en forma normal conjuntiva.
+Es una conjunción, un y, de disyunciones,
+de cláusulas que simplemente están separadas por ors.
+ Entonces este proceso puede ser usado por cualquier fórmula para tomar una oración lógica.
+y convertirlo en esta forma normal de coyuntura, donde
+Tengo cláusula y cláusula y cláusula y cláusula y cláusula, y así sucesivamente.
+Entonces, ¿por qué es útil esto?
+¿Por qué nos importa siquiera aceptar todas estas frases?
+y convertirlos en esta forma?
+Es porque una vez que estén en esta forma donde tenemos estas cláusulas,
+estas cláusulas son los insumos para la resolución, regla de inferencia que
+Vi hace un momento.
+Que si tengo dos cláusulas donde hay algo que entra en conflicto,
+o algo complementario entre esas dos cláusulas,
+Puedo resolverlos para sacar una nueva cláusula, para sacar una nueva conclusión.
+Y a este proceso lo llamamos inferencia por resolución.
+Usar la regla de resolución para sacar algún tipo de inferencia.
+Y se basa en la misma idea, que si tengo P o Q, esta cláusula,
+y no tengo P ni R, que puedo resolver estas dos cláusulas juntas
+para obtener Q o R como cláusula resultante.
+Un nuevo dato que antes no tenía.
+Ahora, un par de puntos clave que vale la pena señalar antes de continuar.
+hablar sobre el algoritmo real.
+Una cosa es que, imaginemos que tenemos P o Q o S,
+y tampoco tengo P o R o S. La regla de resolución dice
+que debido a que esta P entra en conflicto con esta no P,
+resolveríamos juntar todo lo demás, para obtener Q o S o R o S.
+Pero resulta que esta doble S es redundante: o S aquí o S allá.
+No cambia el significado de la oración.
+Entonces, en resolución, cuando hacemos este proceso de resolución,
+normalmente también hacemos un proceso conocido como factoring,
+donde tomamos cualquier variable duplicada que aparezca y simplemente la eliminamos.
+Entonces Q o S o R o S simplemente se convierte en Q o R o S. La S solo necesita aparecer una vez.
+No es necesario incluirlo varias veces.
+Ahora, una última pregunta que vale la pena considerar.
+¿Qué sucede si intento resolver P y no P juntos?
+Si sé que P es verdadera y sé que P no es verdadera,
+Bueno, la resolución dice que puedo fusionar estas cláusulas y buscar
+en todo lo demás.
+Pues en este caso no hay nada más.
+Así que me queda lo que podríamos llamar la cláusula vacía.
+Me quedo sin nada.
+Y la cláusula vacía siempre es falsa.
+La cláusula vacía equivale a ser simplemente falsa.
+Y eso es bastante razonable.
+Porque es imposible que P y no P se cumplan al mismo tiempo.
+P es verdadera o no es verdadera.
+Lo que significa que si P es verdadera, entonces esto debe ser falso.
+Y si esto es cierto, entonces debe ser falso.
+No hay manera de que ambos aguanten al mismo tiempo.
+Entonces, si alguna vez intento resolver estos dos, es una contradicción.
+y terminaré obteniendo esta cláusula vacía, donde la cláusula vacía
+Puedo llamar equivalente a falso.
+Y esta idea de que si resuelvo estos dos términos contradictorios
+obtenga la cláusula vacía, esta es la base de nuestra inferencia por resolución
+algoritmo.
+Así es como vamos a realizar la inferencia.
+por una resolución de muy alto nivel.
+Queremos demostrar que nuestra base de conocimientos implica alguna consulta alfa.
+Que basándonos en el conocimiento que tenemos, podemos demostrar de manera concluyente
+ese alfa va a ser cierto.
+¿Cómo vamos a hacer eso?
+Bueno, para hacer eso, vamos a intentar
+demostrar que si conocemos el conocimiento y no el alfa, eso
+Sería una contradicción.
+Y esta es una técnica común en la informática en general.
+Esta idea de probar algo por contradicción.
+Si quiero demostrar que algo es verdad,
+Puedo hacerlo asumiendo primero que es falso,
+y mostrando que sería contradictorio.
+Demostrando que conduce a alguna contradicción.
+Y si lo que estoy tratando de probar, si cuando asumo que es falso
+conduce a una contradicción, entonces debe ser verdad.
+Y ese es el enfoque lógico, o la idea, detrás de una prueba por contradicción.
+Y eso es lo que vamos a hacer aquí.
+Queremos demostrar que esta consulta alfa es verdadera,
+entonces vamos a asumir que no es cierto.
+Vamos a asumir que no es alfa.
+Y vamos a intentar demostrar que es una contradicción.
+Si obtenemos una contradicción, bueno, entonces
+Sabemos que nuestro conocimiento conlleva la consulta alfa.
+Si no obtenemos una contradicción, no hay implicación.
+Esta es la idea de una prueba por contradicción.
+de asumir lo contrario de lo que intentas demostrar,
+y si puedes demostrar que eso es una contradicción, entonces lo que estás demostrando
+debe ser verdad.
+Pero más formalmente, ¿cómo hacemos esto realmente?
+¿Cómo comprobamos esa base de conocimientos y no alfa?
+¿Va a conducir a una contradicción?
+Bueno, aquí es donde entra en juego la resolución.
+Para determinar si nuestra base de conocimiento conlleva alguna consulta alfa,
+vamos a convertir la base de conocimiento y no alfa a conjunción
+forma normal.
+Esa forma donde tenemos un montón de cláusulas que están todas juntas.
+Y cuando tengamos estas cláusulas individuales,
+Ahora podemos seguir comprobando si podemos usar la resolución.
+para producir una nueva cláusula.
+Podemos tomar cualquier par de cláusulas y comprobarlas.
+¿Hay algún literal que sea opuesto entre sí?
+¿O complementarios entre sí, en ambos?
+Por ejemplo, tengo una P en una cláusula y una no P en otra cláusula.
+O una R en una cláusula y no una R en otra cláusula.
+Si alguna vez tengo esa situación, donde una vez
+convertir a forma normal conjuntiva y tengo un montón de cláusulas,
+Veo dos cláusulas que puedo resolver para producir una nueva cláusula, entonces lo haré.
+Este proceso ocurre en un bucle.
+Voy a seguir comprobando si puedo usar la resolución.
+producir una nueva cláusula y seguir usando esas nuevas cláusulas para intentar generar
+Más cláusulas nuevas después de eso.
+Ahora bien, puede suceder que eventualmente,
+puede producir la cláusula vacía.
+La cláusula de la que hablábamos antes.
+Si resuelvo P y no P juntos, eso produce la cláusula vacía.
+Y sabemos que la cláusula vacía es falsa.
+Porque sabemos que no hay manera de que tanto P como no
+P para que ambos sean verdaderos simultáneamente.
+Entonces, si alguna vez presentamos la cláusula vacía, entonces tenemos una contradicción.
+Y si tenemos una contradicción, eso es exactamente lo que
+estábamos intentando hacer una prueba por contradicción.
+Si tenemos una contradicción, entonces sabemos que nuestra base de conocimientos
+debe implicar esta consulta alfa.
+Sabemos que alfa debe ser verdadera.
+Y resulta... y no entraremos en la prueba aquí...
+pero puedes demostrar que, de lo contrario, si no presentas la cláusula vacía,
+entonces no hay vinculación.
+Si nos encontramos con una situación en la que no hay más cláusulas nuevas que añadir,
+hemos hecho toda la resolución que podemos hacer,
+y todavía no hemos presentado la cláusula vacía,
+entonces no hay vinculación en este caso.
+Y este ahora es el algoritmo de resolución.
+Y tiene un aspecto muy abstracto, especialmente
+esta idea de lo que significa tener la cláusula vacía.
+Así que echemos un vistazo a un ejemplo.
+En realidad, intente probar alguna vinculación utilizando esta inferencia.
+mediante proceso de resolución.
+Así que aquí está nuestra pregunta.
+Tenemos esta base de conocimientos.
+Aquí está el conocimiento que conocemos.
+A o B, y no B o C, y no C. Y queremos saber si todo esto
+implica A.
+Esta es nuestra base de conocimientos, todo este asunto del registro.
+Y nuestra consulta alfa es solo este símbolo proposicional A.
+¿Asi que que hacemos?
+Bueno, primero queremos probar por contradicción.
+Entonces primero queremos suponer que A es falso,
+y ver si eso lleva a algún tipo de contradicción.
+Así que esto es con lo que vamos a empezar.
+A o B, y no B o C, y no C. Esta es nuestra base de conocimientos.
+Y vamos a asumir que no es A. Vamos
+asumir que lo que estamos tratando de probar es, de hecho, falso.
+Y ahora esto está en forma normal conjuntiva,
+y tengo cuatro cláusulas diferentes.
+Tengo A o B. No tengo B ni C. No tengo C. Y no tengo A.
+Y ahora puedo empezar a elegir dos cláusulas que puedo resolver y aplicar.
+la regla de resolución para ellos.
+Y entonces, mirando estas cuatro cláusulas, veo:
+Muy bien, estas dos cláusulas son las que puedo resolver.
+Puedo resolverlos porque hay literales complementarios que
+aparecer en ellos.
+Hay una C aquí y una no C aquí.
+Entonces, con solo mirar estas dos cláusulas, si sé que ni B ni C son verdaderas,
+y sé que C no es cierta, bueno, entonces
+Puedo resolver estas dos cláusulas diciendo, está bien, no B. Eso debe ser cierto.
+Puedo generar esta nueva cláusula como un nuevo dato
+que ahora sé que es verdad.
+Y está bien, ahora puedo repetir este proceso.
+Haz el proceso nuevamente.
+¿Puedo usar la resolución nuevamente para obtener una nueva conclusión?
+Bueno, resulta que puedo.
+Puedo usar esa nueva cláusula que acabo de generar, junto con esta de aquí.
+Hay literales complementarios.
+Esta B es complementaria o entra en conflicto con esta no B de aquí.
+Y entonces, si sé que A o B es verdad, y sé que B no es verdad,
+bueno, entonces la única posibilidad que queda es que A debe ser verdadera.
+Ahora tenemos A. Esa es una nueva cláusula que he podido generar.
+Y ahora puedo hacer esto una vez más, y mirando
+por dos cláusulas que se pueden resolver.
+Y puedes hacer esto programáticamente simplemente haciendo un bucle
+sobre todos los posibles pares de cláusulas y comprobando
+para literales complementarios en cada uno.
+Y aquí puedo decir, está bien, encontré dos cláusulas.
+No A y A que entran en conflicto entre sí.
+Y cuando resuelvo estos dos juntos, bueno, esto
+es lo mismo que cuando estábamos resolviendo P y no P de antes.
+Cuando resuelvo estas dos cláusulas juntas, me deshago de las As,
+y me quedo con la cláusula vacía.
+Y sabemos que la cláusula vacía es falsa, lo que significa que
+tener una contradicción.
+Lo que significa que podemos decir con seguridad que todo este conocimiento
+base implica A. Que si esta oración es verdadera,
+que sabemos que A, con seguridad, también es cierta.
+Entonces esto ahora, usando inferencia por resolución,
+es una forma completamente diferente de tomar una declaración
+e intente demostrar que, de hecho, es cierto.
+En lugar de enumerar todos los mundos posibles
+en el que podríamos estar para tratar de averiguar en qué caso
+¿Es verdadera la base de conocimientos y en cuyo caso nuestra consulta es verdadera?
+En lugar de eso usamos este algoritmo de resolución para decir:
+sigamos intentando descubrir qué conclusiones podemos sacar
+y ver si llegamos a una contradicción.
+Y si llegamos a una contradicción, entonces eso
+nos dice algo sobre si nuestro conocimiento realmente implica la consulta
+O no.
+Y resulta que hay muchos algoritmos diferentes que
+puede usarse para inferencias.
+Lo que acabamos de ver aquí son sólo un par de ellos.
+Y, de hecho, todo esto se basa únicamente en un tipo particular de lógica.
+Se basa en la lógica proposicional, donde tenemos estos símbolos individuales.
+y los conectamos usando y, y o, y no, e implica,
+y bicondicionales.
+Pero la lógica proposicional no es el único tipo de lógica que existe.
+Y de hecho, vemos que hay limitaciones.
+que existen en la lógica proposicional, especialmente
+como vimos en ejemplos como el de Mastermind,
+o con el ejemplo del acertijo de lógica
+donde teníamos diferentes Hogwarts, hay personas que pertenecen a diferentes casas,
+y estábamos tratando de averiguar quién pertenecía a qué casas.
+Había muchos símbolos proposicionales diferentes.
+que necesitábamos para representar algunas ideas bastante básicas.
+Ahora, como tema final que veremos,
+Justo antes de terminar la clase de hoy, hay un último tipo de lógica,
+diferente de la lógica proposicional, conocida
+como lógica de primer orden, que es un poco más
+poderosa que la lógica proposicional, y es
+Nos va a facilitar la expresión de cierto tipo de ideas.
+En lógica proposicional, si recordamos ese rompecabezas
+con la gente y las casas de Hogwarts,
+teníamos un montón de símbolos, y cada símbolo
+sólo podría ser verdadero o falso.
+Teníamos un símbolo para Minerva Gryffindor, que era verdadero
+si Minerva estuviera en Gryffindor, y falso en caso contrario.
+Y de la misma manera, para Minerva Hufflepuff y Minerva Ravenclaw,
+y Minerva Slytherin, etc.
+Pero esto empezaba a resultar bastante redundante.
+Que queríamos alguna manera de poder expresar
+que existe una relación entre estos símbolos proposicionales.
+Esa Minerva aparece en todos ellos.
+Y además me hubiera gustado no tener
+Tenía tantos símbolos diferentes para representar.
+lo que realmente era un problema bastante sencillo.
+Entonces la lógica de primer orden nos dará una manera diferente
+de intentar abordar esta idea dándonos
+dos tipos diferentes de símbolos.
+Tendremos símbolos constantes que representarán objetos,
+como personas o casas.
+Y luego símbolos de predicados, que puedes
+Piénselo como relaciones o funciones, que toman una entrada y la evalúan para,
+como, verdadero o falso, por ejemplo.
+Eso nos dice si alguna propiedad de alguna constante,
+o algún par de constantes, o múltiples constantes, realmente se cumplen.
+Entonces veremos un ejemplo de eso en un momento.
+Pero por ahora, en este mismo problema, nuestros símbolos constantes podrían ser objetos.
+Cosas como personas o casas.
+Entonces Minerva, Pomona, Horacio, Gildaroy.
+Todos esos son símbolos constantes.
+Como lo son mis cuatro casas.
+Gryffindor, Hufflepuff, Ravenclaw y Slytherin.
+Predicados, mientras tanto, estos símbolos de predicados
+Habrá propiedades que podrían ser verdaderas o falsas.
+de estas constantes individuales.
+Entonces una persona podría ser cierta para Minerva, pero sería falsa para Gryffindor.
+porque Gryffindor no es una persona.
+Y la casa será válida para Ravenclaw,
+pero no va a ser cierto para Horace, por ejemplo,
+porque Horace es una persona.
+Y pertenece, mientras tanto, habrá alguna relación que sea
+va a relacionar a la gente con sus casas.
+Y sólo me va a decir cuando alguien pertenece a una casa o no.
+Entonces, echemos un vistazo a algunos ejemplos de lo que es una oración en lógica de primer orden.
+realmente podría parecer.
+Una oración podría verse así.
+Persona Minerva, con Minerva entre paréntesis.
+Y la persona es un símbolo predicado, siendo Minerva un símbolo constante.
+Esta frase en lógica de primer orden significa efectivamente que Minerva es una persona,
+o la propiedad de la persona se aplica al objeto Minerva.
+Entonces, si quiero decir algo como que Minerva es una persona,
+Así es como expreso esa idea usando lógica de primer orden.
+Mientras tanto, puedo decir algo como la casa Gryffindor.
+para, asimismo, expresar la idea de que Gryffindor es una casa.
+Puedo hacerlo de esta manera.
+Y todos los mismos conectivos lógicos que vimos en la lógica proposicional,
+esos también van a funcionar aquí.
+Entonces y, o, implicación, bicondicional, no.
+De hecho, no puedo decir algo como, no casa Minerva.
+Y esta oración en lógica de primer orden significa algo así como Minerva
+no es una casa.
+No es cierto que la propiedad de la casa se aplique a Minerva.
+Mientras tanto, además de algunos de estos símbolos predicados que
+solo tome un solo argumento, algunos de nuestros símbolos de predicado
+vamos a expresar relaciones binarias.
+Relaciones entre dos de sus argumentos.
+Entonces podría decir algo como pertenece a y luego dos entradas,
+Minerva y Gryffindor para expresar la idea.
+que Minerva pertenece a Gryffindor.
+Y ahora aquí está la diferencia clave, o una de las diferencias clave,
+entre esto y la lógica proposicional.
+En lógica proposicional, necesitaba un símbolo para Minerva Gryffindor,
+y un símbolo para Minerva Hufflepuff, y un símbolo
+para todas las variables de Gryffindor y Hufflepuff de otras personas.
+En este caso, sólo necesito un símbolo para cada uno de mi pueblo,
+y un símbolo para cada una de mis casas, y luego
+puede expresar, como predicado, algo como, pertenece a,
+y digamos, pertenece a Minerva Gryffindor para expresar la idea
+que Minerva pertenece a la casa Gryffindor.
+Entonces ya podemos ver esa lógica de primer orden.
+es bastante expresivo al poder expresar este tipo de oraciones usando
+los símbolos y predicados constantes existentes que
+ya existen, minimizando al mismo tiempo el número de nuevos símbolos
+que necesito crear.
+En lugar de eso, puedo usar ocho símbolos para personas y casas.
+de 16 símbolos para cada combinación posible de cada uno.
+Pero la lógica de primer orden nos brinda un par de características adicionales.
+que podemos utilizar para expresar ideas aún más complejas.
+Y estas características adicionales se conocen generalmente como cuantificadores.
+Y hay dos cuantificadores principales en la lógica de primer orden.
+El primero de los cuales es la cuantificación universal.
+La cuantificación universal me permite expresar una idea,
+como si algo fuera a ser cierto para todos los valores de una variable.
+Como ocurre con todos los valores de x, alguna afirmación será cierta.
+Entonces, ¿cómo sería una oración en cuantificación universal?
+Bueno, vamos a utilizar esta A invertida para referirse a todos.
+Entonces, Ax invertido significa para todos los valores de x, donde x es cualquier objeto,
+esto va a ser cierto.
+Pertenece a x Gryffindor implica que no pertenece a x Hufflepuff.
+Así que intentemos analizar esto.
+Esto significa que para todos los valores de x, si esto es cierto,
+Si x pertenece a Gryffindor, entonces esto no es cierto.
+X no pertenece a Hufflepuff.
+Así traducida al inglés, esta frase
+está diciendo algo como, para todos los objetos x, si x pertenece a Gryffindor,
+entonces x no pertenece a Hufflepuff, por ejemplo.
+O dicho de manera aún más simple, nadie en Gryffindor es un Hufflepuff.
+Una forma simplificada de decir lo mismo.
+Entonces esta cuantificación universal nos permite expresar una idea,
+como si algo fuera a ser válido para todos los valores de una variable en particular.
+Sin embargo, además de la cuantificación universal, también
+tener cuantificación existencial.
+Mientras que la cuantificación universal decía que algo
+va a ser cierto para todos los valores de la variable,
+La cuantificación existencial dice que alguna expresión
+será cierto para algún valor de una variable.
+Al menos un valor de la variable.
+Entonces, echemos un vistazo a una oración de muestra usando
+cuantificación existencial.
+Una de esas oraciones se parece a esta.
+Existe una x... esta E al revés significa existe.
+Y aquí estamos diciendo que existe una x, tal que la casa x
+y pertenece a Minerva x.
+En otras palabras, existe algún objeto x, donde x es una casa,
+y Minerva pertenece a x.
+O expresado de manera un poco más sucinta en inglés, simplemente estás diciendo:
+Minerva pertenece a una casa.
+Hay un objeto que es una casa y Minerva pertenece a una casa.
+Y combinando esta cuantificación universal y existencial,
+Podemos crear declaraciones lógicas mucho más sofisticadas.
+de lo que pudimos simplemente usando la lógica proposicional.
+Podría combinarlos para decir algo como esto.
+Para todo x, la persona x implica que existe un y, tal que la casa y
+y pertenece a xy.
+Entonces están sucediendo muchas cosas allí.
+Muchos símbolos.
+Intentemos analizarlo y entender lo que dice.
+Aquí decimos que para todos los valores de x, si x es una persona, entonces esto es cierto.
+En otras palabras, lo digo para todas las personas,
+y llamamos a esa persona x, esta afirmación va a ser cierta.
+¿Qué afirmación es cierta para todas las personas?
+Bueno, existe una y que es la casa, entonces existe alguna casa,
+y x pertenece a y.
+En otras palabras, lo que digo es que para toda la gente,
+existe alguna casa, tal que x, la persona, pertenece a y, la casa.
+Digámoslo de manera más sucinta: estoy diciendo que cada persona pertenece a una casa.
+Que para todo x, si x es una persona, entonces existe una casa a la que pertenece x.
+Y ahora podemos expresar ideas mucho más poderosas usando esta idea.
+de lógica de primer orden.
+Y resulta que existen muchos otros tipos de lógica.
+Hay una lógica de segundo orden y otra lógica de orden superior, cada una de las cuales
+Nos permite expresar ideas cada vez más complejas.
+Pero todo ello, en este caso, persigue realmente el mismo objetivo, que
+es la representación del conocimiento.
+Queremos que nuestros agentes de IA puedan conocer información,
+para representar esa información, ya sea
+usando lógica proposicional, o lógica de primer orden, o alguna otra lógica.
+Y luego poder razonar basándose en eso.
+Para poder sacar conclusiones.
+Hacer inferencias.
+Averiguar si existe algún tipo de relación de vinculación,
+como mediante el uso de algún tipo de algoritmo de inferencia.
+Algo así como inferencia por resolución o verificación de modelos,
+o cualquier número de estos otros algoritmos que nosotros
+podemos utilizar para tomar información que conocemos
+y traducirlo a conclusiones adicionales.
+Todo esto nos ha ayudado a crear IA.
+que es capaz de representar información sobre lo que sabe
+y lo que no sabe.
+Sin embargo, la próxima vez veremos cómo
+Podemos hacer que nuestra IA sea aún más poderosa no solo codificando información.
+que sabemos con certeza que es verdad y que no es verdad, pero también,
+para echar un vistazo a la incertidumbre.
+Para observar qué sucede si la IA piensa que algo podría ser probable,
+o tal vez no muy probable, o en algún punto entre esos dos extremos,
+todo en la búsqueda de intentar construir nuestros sistemas inteligentes para que sean aún más
+inteligente.
+Nos vemos la próxima vez.
