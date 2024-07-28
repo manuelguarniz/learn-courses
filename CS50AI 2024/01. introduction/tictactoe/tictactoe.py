@@ -3,6 +3,7 @@ Tic Tac Toe Player
 """
 
 import math
+from utils import suma_matrices
 
 X = "X"
 O = "O"
@@ -19,10 +20,10 @@ def initial_state():
 
 
 def player(board):
-    """
-    Returns player who has the next turn on a board.
-    """
-    raise NotImplementedError
+  indicador_jugador = suma_matrices(board)
+  if indicador_jugador % 2 == 0:
+    return X
+  return O
 
 
 def actions(board):
@@ -33,10 +34,20 @@ def actions(board):
 
 
 def result(board, action):
-    """
-    Returns the board that results from making move (i, j) on the board.
-    """
-    raise NotImplementedError
+  new_board = initial_state()[:]
+  for index_y, row in enumerate(board):
+    for index_x, col in enumerate(row):
+      
+      value = action[index_y][index_x]
+      
+      if value is not EMPTY:
+        if col is not EMPTY:
+          raise NameError("Movimiento invalido")
+        else:
+          new_board[index_y][index_x] = value
+      else:
+        new_board[index_y][index_x] = col
+  return new_board
 
 
 def winner(board):
