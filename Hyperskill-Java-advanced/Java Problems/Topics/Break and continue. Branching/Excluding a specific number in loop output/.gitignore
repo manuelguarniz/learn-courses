@@ -3,8 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .class
-/bin
-!**/bin/*
+bin/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
