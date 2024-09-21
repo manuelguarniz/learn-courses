@@ -4,7 +4,7 @@ options:
   - text: 1 version
   - text: 2 versions
   - text: 3 versions
-  - text: As many versions as the total number of users
+  - text: It depends on the Java version
 files:
   - name: src/Task.java
     visible: true

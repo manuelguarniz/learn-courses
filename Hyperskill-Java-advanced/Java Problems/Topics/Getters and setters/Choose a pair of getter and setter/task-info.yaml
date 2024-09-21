@@ -1,0 +1,20 @@
+type: choice
+is_multiple_choice: true
+options:
+  - text: isCompleted
+  - text: readCompleted
+  - text: setCompleted
+  - text: completed
+  - text: getCompleted
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+  - name: bin/main/Task.class
+    visible: true
+    is_binary: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/3021#comment
+status: Solved
+record: -1
+local_check: false

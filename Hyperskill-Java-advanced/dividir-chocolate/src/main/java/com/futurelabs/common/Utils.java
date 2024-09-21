@@ -1,5 +1,6 @@
 package com.futurelabs.common;
 
+import java.io.ByteArrayInputStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,11 @@ public class Utils {
             }
         }
         return result;
+    }
+
+    public static void provideInput(String data) {
+        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
+        System.setIn(testIn);
     }
 
     private Utils() {}

@@ -2,11 +2,12 @@ type: matching
 captions:
   - Java is platform-independent
   - Java has a garbage collector
-  - Java supports numerous programming paradigms
+  - Java supports various programming techniques
 options:
-  - It automatically cleans memory from unused objects during runtime.
-  - "Such as generic programming, concurrent programming, functional programming, etc."
+  - "You can do generic programming, concurrent programming, functional programming,\
+  \ etc."
   - We can run the same Java program on multiple platforms without changes.
+  - It automatically cleans memory while the application is running.
 files:
   - name: src/Task.java
     visible: true

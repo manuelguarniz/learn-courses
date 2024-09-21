@@ -1,0 +1,15 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: SomeClass instance = new SomeClass(10);
+  - text: SomeClass instance = SomeClass.defaultConstructor();
+  - text: It's impossible.
+  - text: SomeClass instance = new SomeClass();
+files:
+  - name: src/Task.java
+    visible: true
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/2173#comment
+status: Solved
+record: -1
+local_check: false
