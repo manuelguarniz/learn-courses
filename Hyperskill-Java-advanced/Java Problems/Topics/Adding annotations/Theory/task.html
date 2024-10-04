@@ -18,7 +18,7 @@ public void printName() {
 <h5 id="built-in-annotations">Built-in annotations</h5>
 <p>Java has several built-in annotations. If you want to use other annotations, you will need to include libraries or frameworks or even create your own annotations.</p>
 <p>But first, let's discuss the three main built-in annotations that were presented to the world in Java 5:</p>
-<ul><li><p><code class="language-java">@Deprecated</code> is a simple annotation which means that the marked method (or class, field, and so on) is deprecated, that is, obsolete and should no longer be used. This annotation causes a compiler warning if the code is used.</p><pre><code class="language-java">@Deprecated
+<ul><li><p><code class="language-java">@Deprecated</code> is a simple annotation which means that the marked method (or class, field, and so on) is <a class="theory-lookup not-relevant" href="/learn/step/3622" rel="noopener noreferrer nofollow" target="_blank" title="In Java, a deprecated feature is a class, method, or field that is officially declared as obsolete and may be removed in a future version. | The use of deprecated features is discouraged, but they are typically still functional in the current version of the software. Developers are encouraged to update their code to use non-deprecated alternatives. In the example provided, the method has been deprecated since version 5.3 of the library and will be removed in the next release.">deprecated</a>, that is, obsolete and should no longer be used. This annotation causes a compiler warning if the code is used.</p><pre><code class="language-java">@Deprecated
 public void oldMethod() {
     System.out.println("Hello!");
 }</code></pre></li></ul>
@@ -50,7 +50,7 @@ public void printHello() {
 public void printHello() { ... }
 </code></pre>
 <p> <code class="language-java">"deprecation"</code>, as you might have guessed from the name, instructs the compiler to suppress warnings about the use of deprecated code.</p>
-<p>Finally, the last thing you need to know is that some annotations have a <a class="theory-lookup not-relevant" href="/learn/step/3622" rel="noopener noreferrer nofollow" target="_blank" title="In Java, a default value is a value that is automatically assigned to a variable, field, or array element if no explicit initial value is provided. | For example, an array of a primitive type is initialized with default values. Variables of type boolean are initialized to false, while numeric types are initialized to zero. For object reference types, the default value is null. When creating an object of a class, if no constructor is defined, the compiler automatically provides a default no-argument constructor that initializes all fields with their default values. However, if a specific constructor is defined, the default constructor will not be created.">default value</a> for an element, and some don't.</p>
+<p>Finally, the last thing you need to know is that some annotations have a default value for an element, and some don't.</p>
 <pre><code class="language-java">@SuppressWarnings // wrong syntax, there is no default value!
 public void printHello() {
     System.out.println("Hello!");
@@ -69,7 +69,7 @@ public void printHello() {
 <p>The <code class="language-java">@NotNull</code> annotation indicates either of the following two options:</p>
 <ul><li><p>a variable cannot be <code class="language-java">null</code>;</p></li><li><p>a method should not return <code class="language-java">null</code>.</p></li></ul>
 <p>And the <code class="language-java">@Range</code> annotation indicates either of the following options:</p>
-<ul><li><p>a variable always belongs to the specified range;</p></li><li><p>a method returns an <a class="theory-lookup not-relevant" href="/learn/step/3622" rel="noopener noreferrer nofollow" target="_blank" title="In Java, an integer number is a type of data that represents whole numbers, including positive, negative, and zero. | The most commonly used types for integer numbers in Java are `int` and `long`. The `int` type can store numbers within a certain range, while `long` can store a wider range of numbers. You can perform various arithmetic operations such as addition, subtraction, multiplication, division, and modulus with variables of integer types. Java also allows the use of the underscore character to separate groups of digits within a number for better readability.">integer number</a> that belongs to the specified range.</p></li></ul>
+<ul><li><p>a variable always belongs to the specified range;</p></li><li><p>a method returns an integer number that belongs to the specified range.</p></li></ul>
 <p>Now let's look at our class called <code class="language-java">GameCharacter</code>:</p>
 <pre><code class="language-java">class GameCharacter {
 

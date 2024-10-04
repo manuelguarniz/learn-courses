@@ -302,7 +302,6 @@ public class SomeClass {
 }
 ```
 
-
 ## `@Deprecated` annotation
 
 Desde java 9 se introdujo parametros a la anotación @Deprecated:  `since` y `forRemoval`. We will quickly break them down because there is a big chance you will meet them in practice.
@@ -316,3 +315,223 @@ public void printHello() {
     System.out.println("Hello!");
 }
 ```
+
+### @Overriding
+
+Se puede sobre escribir un metodo, y asi obtener un comportamiento espial al metodo heredado. Debe cumplir los siguientes requicitos:
+
+- El nombre del metodo y variables debe ser el mismo
+- La cantidad, tipo de dato y orden de los parametros debe ser el mismo
+- El valor debe ser el mismo al hererado
+- Se puede cambiar el nivel de acceso, siempre y cuando sea mayor
+- No se puede sobreescribir metodos estaticos
+- Si se agrega la palabra clave "final", no permite sobreescribir
+
+Las anotaciones no son obligatorias, son una conveniencia
+
+### Polimorfismo
+
+Es el hecho transformar un objeto o metodo con una nueva forma. Existen de 2 tipos, estaticos (compile-time) y dinamicos (runtime).
+
+**Ad-hoc polymorphism**: Es la sobrecarga de metodos basandose en parametros
+
+**[Subtype polymorphism](https://hyperskill.org/learn/step/3587):** Es cuando podemos utilizar una subclase, pero en su lugar usamos la instancia de la clase base.
+
+**Parametric polymorphism**: Es cuando se utiliza un parametro sin especificar o de tipo generico.
+
+**Ejemplo de polimorfismo por subtype**
+
+```java
+class MythicalAnimal {  
+
+    public void hello() {
+        System.out.println("Hello, I'm an unknown animal");
+    }
+}
+
+class Chimera extends MythicalAnimal {
+    @Override
+    public void hello() {
+        System.out.println("Hello! Hello!");
+    }
+}
+
+class Dragon extends MythicalAnimal {
+    @Override
+    public void hello() {
+        System.out.println("Rrrr...");
+    }
+}
+```
+
+```java
+MythicalAnimal chimera = new Chimera();
+MythicalAnimal dragon = new Dragon();
+MythicalAnimal animal = new MythicalAnimal();
+```
+
+```java
+chimera.hello(); // Hello! Hello!
+dragon.hello(); // Rrrr...
+animal.hello(); // Hello, I'm an unknown animal
+```
+
+**Ejemplo de polimorfismo runtime**
+
+Este permine modificar un metodo de la clase base, y sin que la subclase modifique un metodo de la clase padre y este ejecute el metodo de la clase hijo.
+
+```java
+class File {
+
+    protected String fullName;
+
+    // constructor with a single parameter
+
+    // getters and setters
+
+    public void printFileInfo() {
+        String info = this.getFileInfo(); // here is polymorphic behavior!!!
+        System.out.println(info);
+    }
+
+    protected String getFileInfo() {
+        return "File: " + fullName;
+    }
+}
+
+class ImageFile extends File {
+
+    protected int width;
+    protected int height;
+    protected byte[] content;
+
+    // constructor
+
+    // getters and setters
+
+    @Override
+    protected String getFileInfo() {
+        return String.format("Image: %s, width: %d, height: %d", fullName, width, height); 
+    }
+}
+```
+
+```java
+File img = new ImageFile("/path/to/file/img.png", 480, 640, someBytes); // assigning an object
+```
+
+```java
+img.printFileInfo(); // It prints "Image: /path/to/file/img.png, width: 480, height: 640"
+```
+
+**Ejercicio complejo de herencia y polimorfismo**
+
+```java
+class Test {
+
+    public static void main(String[] args) {
+        new TeamLead(1);
+	// Expected:
+	// 1 programmer
+	// 1 teamlead
+    }
+
+    public static class TeamLead extends Programmer {
+
+        private final int numTeamLead;
+
+        public TeamLead(int numTeamLead) {
+            super(numTeamLead);
+            this.numTeamLead = numTeamLead;
+            employ();
+        }
+
+        protected void employ() {
+            System.out.println(numTeamLead + " teamlead");
+        }
+
+    }
+
+    public static class Programmer {
+
+        private final int numProgrammer;
+
+        public Programmer(int numProgrammer) {
+            this.numProgrammer = numProgrammer;
+            employ();
+        }
+
+        protected void employ() { // OK, change protected -> private
+            System.out.println(numProgrammer + " programmer");
+        }
+    }
+}
+
+```
+
+### Interfaces
+
+Es la defición que puede tener cierto comportamiento de una clase, por ejemplo: El lapiz, pincel, lapicero, todos comparten caracteristicas similares, sin embargo todos sirven para dibujar.
+
+```java
+interface DrawingTool {
+    void draw(Curve curve);
+}
+class Pencil implements DrawingTool {
+    ...
+    public void draw(Curve curve) {...}
+}
+
+class Brush implements DrawingTool {
+    ...
+    public void draw(Curve curve) {...}
+}
+```
+
+Las interfaces pueden considerarse un tipo especial de clase que no se puede instanciar. Estas pueden contener:
+
+- constantes publicas
+- metodos abstractos sin implementar
+- metodos por defecto con implementación
+- metodos estaticos con implementación
+
+```java
+interface Interface {
+  
+    int INT_CONSTANT = 0; // it's a constant, the same as public static final int INT_CONSTANT = 0
+  
+    void instanceMethod1();
+  
+    void instanceMethod2();
+  
+    static void staticMethod() {
+        System.out.println("Interface: static method");
+    }
+  
+    default void defaultMethod() {
+        System.out.println("Interface: default method");
+    }
+
+    private void privateMethod() {
+        System.out.println("Interface: private method");
+    }
+}
+```
+
+### Random
+
+Los numeros random, son aquellos que se consideran casi impredesibles. Por detras no son realmente impredesibles, por que se basan en un valor inicial y un algoritmo.
+
+##### Consideraciones
+
+Generalmente la clase Random no puede hacer ciertas cosas, por ejemplo si quisiera obtener numeros random entre 2 y 5, no existe una funcion para devolver estos valores. Debido a que el valor aleatorio empieza en 0 y se va hasta el valor inicial ingresado por parametro.
+
+![1727760972590](image/java-notes/1727760972590.png)
+
+Para poder implementar esta funcion, donde incluye los extremos (2 y 5), podemos hacer una funcion, donde tomemos el valor final, menos el valor inicial para obtener el rango a iterar luego sumar uno. Con esto obtendremos numeros aleatorios en el rango especificado. Sin embargo nos falta igualar los resultados al rango esperado, Para ellos se recomienda sumar el valor minimoi:
+
+```java
+int next = random.nextInt(upper - lower + 1) + lower;
+```
+
+De esta forma obtendremos un aleatorio en el rango necesario e igualamos el resultado al rango de numeros que nos interesa.

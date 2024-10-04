@@ -25,7 +25,7 @@ class Patient {
 <h5 id="creating-objects">Creating objects</h5>
 <p>Let's create an <strong>instance</strong> of the class <code class="language-java">Patient</code> using the keyword <strong>new</strong>:</p>
 <pre><code class="language-java">Patient patient = new Patient(); </code></pre>
-<p>When you create a new object, each field is initialized with the <a class="theory-lookup not-relevant" href="/learn/step/3618" rel="noopener noreferrer nofollow" target="_blank" title="In Java, a default value is a value that is automatically assigned to a variable, field, or array element if no explicit initial value is provided. | For example, an array of a primitive type is initialized with default values. Variables of type boolean are initialized to false, while numeric types are initialized to zero. For object reference types, the default value is null. When creating an object of a class, if no constructor is defined, the compiler automatically provides a default no-argument constructor that initializes all fields with their default values. However, if a specific constructor is defined, the default constructor will not be created.">default value</a> of the corresponding type.</p>
+<p>When you create a new object, each field is initialized with the default value of the corresponding type.</p>
 <pre><code class="language-java">System.out.println(patient.name); // it prints null
 System.out.println(patient.age); // it prints 0</code></pre>
 <h5 id="creating-multiple-objects-of-the-same-class">Creating multiple objects of the same class</h5>
@@ -58,7 +58,7 @@ class Patient {
     int age;
     float height;
 }</code></pre>
-<p>Note that<strong> </strong>both classes are placed in the same file named <code class="language-java">PatientDemo.java</code>. If we place two or more classes in the same <code class="language-java">.java</code> file, only one of them can be declared as public, and the name of the <code class="language-java">.java</code> file must match the <a class="theory-lookup not-relevant" href="/learn/step/3618" rel="noopener noreferrer nofollow" target="_blank" title="In Java, a public class is the fundamental unit of a Java program and serves as the entry point for execution. | Every Java program must have at least one public class, which must be named appropriately and cannot start with a digit. The public class can contain fields, methods, and constructors, which define the properties and behavior of objects created from the class. It's important to note that a public class can be accessed from other packages, making it visible and usable outside of its defining package. This is in contrast to a package-private class, which is only visible to other classes within the same package.">public class</a> in the <code class="language-java">.java</code> file.</p>
+<p>Note that<strong> </strong>both classes are placed in the same file named <code class="language-java">PatientDemo.java</code>. If we place two or more classes in the same <code class="language-java">.java</code> file, only one of them can be declared as public, and the name of the <code class="language-java">.java</code> file must match the public class in the <code class="language-java">.java</code> file.</p>
 <p>In the code above, we've created two patients, John and Alice, defined the values of their fields and then printed out the information about them. So, the output of the code above is:</p>
 <pre><code class="language-java">John 30 180.0
 Alice 22 165.0</code></pre>
