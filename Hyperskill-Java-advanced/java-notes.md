@@ -535,3 +535,171 @@ int next = random.nextInt(upper - lower + 1) + lower;
 ```
 
 De esta forma obtendremos un aleatorio en el rango necesario e igualamos el resultado al rango de numeros que nos interesa.
+
+### Jerarquia de Excepciones:
+
+El lenguaje de programación de java es orientado a objetos, basado en este principio, todas las excepciones tienen una jerarquia de clases.
+
+![1729225461135](image/java-notes/1729225461135.png)
+
+Como se observa en el grafico, la clase padre es `Throwable`, que tiene metodos comunes para todas las excepciones. Existen 2 conjuntos de execpciones:
+
+1. Error: son excepciones de bajo nivel en la JVM como `OutOfMemoryError` o `StackOverflowError`.
+2. Exception: son excepciones de la aplicacion como `RuntimeException ` o `IOException`.
+
+Las siguientes excepciones no requieres importación: `Throwable`, `Exception`, `RuntimeException` and `Error`
+
+### Reflection
+
+Es una caracteristica de java que te permite modificar tu propio codigo en tiempo de ejecución, se puede considerar "magia negra" por que rompe los principios de diseño. Se puede hacer un bypass para acceder ciertos atributos, metodos de una clase que no son publicos.
+
+Las principales clases que se puede encontrar en java.lang.reflect son:
+
+- **Field**: Permite modificar los nombres, tipo de retorno, modificador de acceso, valor.
+- **Method**: permite modificar el nombre, parametros, modificador de acceso y excepciones del atributo.
+- **Constructor**: Permite modificar el nombre, parametros, nivel de acceso del contrucctor
+- **Modifier**: puedes obtener información acerca de algun modificador de acceso.
+
+Los metodos para manipular las clases se deben extraer de `jaba.lang.Class`.
+
+- getConstructors()
+- getFields()
+- etc
+
+##### Riegos y desventajas
+
+- agrega una capa de sobrecarga de metodos y atributos que afecta directamente los recursos de la aplicacion
+- al tenern una capa adicional de logica, puede ser mas dificil de mantener
+- puede que el comportamiento del codigo no sea lo esperado
+- se debe definir el uso en lugares especificos y no en todo el codigo. Se recomienda en frameworks donde se necesita abstracción.
+
+##### Obteniedo instancias de una clase:
+
+Existe 2 formas para poder obtener instancias de una clase:
+
+1. tiempo de compilación: "ClassName".class, esto implica conocer como esta construida una clase
+2. tiempo de ejecución: forName("java.lang.String"), esto implica concocer como se va a comportar la clase al momento de ejecución.
+
+Buscando tipos de datos en matrices de datos, el carancter [ representa la profundidad en la matriz y se busca por tipo de dato:
+
+- boolean – Z
+
+* byte – B
+* char – C
+* class or interface – L*classname;*
+* double – D
+* float – F
+* int – I
+* long – J
+* short – S
+
+Ejemplo
+
+```java
+Class floatArrayClass = Class.forName("[F");
+Class objectArrayClass = Class.forName("[[Ljava.lang.Object;");
+Class scannerArrayClass = Class.forName("[Ljava.util.Scanner;");
+```
+
+##### Empaquetado un .jar
+
+https://docs.oracle.com/javase/7/docs/technotes/guides/jar/jar.html
+
+Un .jar es un archivo comprimido con el algoritmo ZIP, en este contiene el codigo compilado en bytes de una aplicacion java, recursos y archivos de configuracion del programa (MANIFEST)
+
+```
+example.jar
+├── META-INF
+│   └── MANIFEST.MF
+├── second
+│   ├── Main.class
+│   └── MyIcon.png
+└── third
+    └── another
+        └── OneMore.class
+```
+
+Este es un ejemplo de manifiesto (recuerda siempre agregar un salto de linea al final):
+
+```
+Manifest-Version: 1.0
+Created-By: 9.0.1 (Oracle Corporation)
+Main-Class: second.Main
+```
+
+En caso no especifiques un Main-Class, tendras que mencionarlo al momento de ejecutar:
+
+```bash
+java -cp app-without-main-class-header.jar path.to.Main
+```
+
+en cualquier otro caso, simplemente:
+
+```bash
+java -jar app-with-main-class-header.jar
+```
+
+### Gradle
+
+Gradle tiene 2 conceptos importantes, project y task.
+
+- Project es como tal una aplicacion o programa que se va a ejecutar
+- Task es una secuencia de ejecución que realizará gradle, aqui puede ser compilar, unit test, configuraciones, etc.
+
+En pocas palabras, cada proyecto en gradle son un conjunto de tareas.
+
+![gradle project tasks](https://ucarecdn.com/2ad089d5-37be-4d25-af1e-b26138a4af76/)
+
+Empezando:
+
+```bash
+gradle init
+```
+
+![1730611197859](image/java-notes/1730611197859.png)
+
+```
+.
+├── build.gradle
+├── gradle
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
+├── gradlew.bat
+└── settings.gradle
+```
+
+- `build.gradle`: archivo principal donde especifica las tareas a ejecutar
+- `gradle-wrapper.jar`, `gradle-wrapper.properties`, `gradlew` y `gradlew.bat`: Permiten ejecutar gradle sin una instalación (Es un script que descarga automáticamente Gradle y ejecuta los comandos pasados).
+- `settings.gradle`: Especifica que proyectos se debe compilar, util cuando se tiene mas de un proyecto.
+
+`gradle tasks --all`: Ver todos los comendos
+
+1. Tomar en cuenta que puedes escribir archivos de configuración utilizando groovy o kotlin.
+
+Ejemplo:
+
+```gradle
+plugins {
+  id 'java'
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'com.google.guava:guava:30.1-jre'
+}
+
+task hello {
+    doLast {
+        println 'Hello, Gradle!'
+    }
+}
+```
+
+##### StringBuilder
+
+Las cadenas (String) son inmutables, cuando se modifica otra cadena, esta suele ocupar otro espacio en memoria con un nuevo valor. Una buena practica es utilizar StringBuilder, que te permite crear cadenas que cambian en tiempo de ejecución.
