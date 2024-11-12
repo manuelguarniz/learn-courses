@@ -703,3 +703,15 @@ task hello {
 ##### StringBuilder
 
 Las cadenas (String) son inmutables, cuando se modifica otra cadena, esta suele ocupar otro espacio en memoria con un nuevo valor. Una buena practica es utilizar StringBuilder, que te permite crear cadenas que cambian en tiempo de ejecución.
+
+##### Clases abstractas
+
+Se declara con la palabra `abstract`, tiene las siguientes caracteristicas
+
+- es imposible instanciar
+- contiene metodos que se deben implementar en una subclase no abstracta
+- puede incluir atributos y metodos no abstractos
+- puede externder otras clases incluido otra abstracta
+- puede tener constructor
+
+>  los metodos estaticos no pueden ser abstractos
