@@ -1,6 +1,8 @@
 package com.futurelabs.annotation;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BooCounter {
     public static void main(String[] args) {
@@ -21,7 +23,8 @@ public class BooCounter {
     }
 
     public static int countBoos(String str) {
-        String regex = "[Bb][Oo][Oo]";
-        return str.split(regex).length - 1;
+        Pattern pattern = Pattern.compile("[Bb][Oo][Oo]");
+        Matcher matcher = pattern.matcher(str);
+        return (int) matcher.results().count();
     }
 }
