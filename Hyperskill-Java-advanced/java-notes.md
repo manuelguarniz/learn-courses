@@ -714,7 +714,7 @@ Se declara con la palabra `abstract`, tiene las siguientes caracteristicas
 - puede externder otras clases incluido otra abstracta
 - puede tener constructor
 
->  los metodos estaticos no pueden ser abstractos
+> los metodos estaticos no pueden ser abstractos
 
 ##### Remove large file
 
@@ -725,3 +725,99 @@ git filter-branch --force --index-filter \
 ```
 
 ![1731420852603](image/java-notes/1731420852603.png)
+
+##### Enum
+
+Los enumerados con clases con un comportamiento definido para declarar algunos valores predefinidos a manera de constantes. Se puede considerar que es una clase instanciada.
+
+Para acceder al valor podemos utilizar `valueOf`, pero hay que tener en cuenta que es `case-sentivive` y esté puede dar un `IllegalArgumentException` si no encuentra el valor.
+
+##### Bugs
+
+![The image of that bug](https://ucarecdn.com/edda6615-12d0-4213-836e-60c7f5b3444c/)
+
+##### Arreglos Multidimencionales
+
+Los arreglos multidimencionales son estructuras de datos utilices cuando se quiere repsentar objetos en más de una dimención, puede ser 2D, 3D, 4D, realmente el limite no está definido por nuestra realidad en 3D. Y para acceder a ellos, no es mas que llamar indices de arreglos anidados.
+
+```java
+int[][] twoDimArray = new int[2][10];
+
+// Crear
+for (int i = 0; i < twoDimArray.length; i++) {
+    for (int j = 0; j < twoDimArray[i].length; j++) {
+        twoDimArray[i][j] = 1;
+    }
+}
+
+// Imprimir
+for (int i = 0; i < twoDimArray.length; i++) {
+    for (int j = 0; j < twoDimArray[i].length; j++) {
+        twoDimArray[i][j]++;
+        System.out.print(twoDimArray[i][j] + " ");
+    }
+    System.out.println();
+}
+
+// 2 2 2 2 2 2 2 2 2 2 
+// 2 2 2 2 2 2 2 2 2 2
+```
+
+Un ejemplo más practico son los arreglos de 3 dimenciones, por que estos se pueden representar en nuestra relidad, luego es cosa de acostumbrar a las dimensiones mayores.
+
+![three-dimensional array in the form of a cube](https://ucarecdn.com/831f0c5e-ef6c-4311-9c49-94b841b7fec7/)
+
+### Literales numericos
+
+Existen diferentes formatos numericos en java, algunos con tipificación especial:
+
+* **int** -> valores enteros
+* **long** -> valores largos, se representa con L o l (se recomienda en mayusculas para evitar confusiones con el 1)
+
+* **hexadecinal** -> Es la presentación de 16 números del 0 al 9 y de A a la F para representar del 10 al 15, luego se suman para obtener el valor entero:
+
+ *Ejemplo:*
+
+    -`int a = 0x29 -> 16^1 * 2 + 16^0 * 9 = 41`
+
+    -`int b = 0x4B -> 16^1 * 4 + 16^0 * 11 = 75`
+
+* **octales** -> es un valor númerico entre el 0 y el 7, el resultado se suma y da el valor entero. (el valor 0 es obligatorio)
+
+  *Ejemplo:*
+
+    -`int c = 027 -> 8^1 * 2 + 8^0 * 7 = 23`
+
+    -`int d = 27 -> 27` (no confundir con los valores entros)
+
+* **binarios** -> para escribir un número binario esté debe empezar con 0b
+
+ *Ejemplo:*
+
+    -`int e = 0b110110 -> 2^5*1 + 2^4*1 + 2^3*0 + 2^2*1 + 2^1*1 + 2^0*0 = 54`
+
+    -`int f = 110110 -> 110110` (no confundir cuando no tiene prefijo)
+
+* **flotante** -> son números decimales que requieren de un punto flotante pare reconocerlos, además tambien soporte indicador exporencial con la `E` o `e`
+
+*Ejemplo:*
+
+    -`float num1 = 0.05e3F; // = 0.05 * 10^3 = 50`
+    - `double num2 = 25.255e-4;  // = 25.255 * 10^(-4) = 0.0025255`
+
+* **char literas** -> es la representación númerica de los caracteres liberales, estos valores númericos almacenan un caracter unicode de 16-bit.
+
+*Ejemplo:*
+
+    -`int characterLiteral = 'a'; // this is 97 en hexadecimal 0x0061`
+
+#### Adicionales
+
+Tambien podemos separar los valores numericos con separadores de 3 decimales con un guion bajo (_).
+
+*Ejemplo*
+
+    - `int million = 1_000_000;`
+	- `long creditCardNumber = 1234_5678_1234_5678L;`
+	- `int hex = 0x1FF_A91;`
+	- `float floatNum = 123_000.500_2f;`
