@@ -1,0 +1,28 @@
+gcloud compute  -  Comandos relacionados con Compute engine disponibles de forma general
+
+Disponibilidad general significa que son comandos que se consideran totalmente estables y disponibles para su uso en produccion. Cloud nos advertira anticipadamente para los comandos que rompen la funcionalidad actual y se documentaran en la nota de versiones
+
+beta: los comandos son completos en cuanto a sus funciones, pero aun pueden tener algunos problemas. Pueden realizarse cambios rotundos en estos comandos sin aviso.
+
+alfa etiqueta alpha : los comandos estan en su actualizacion temprana y pueden cambiar sin aviso.
+
+
+ gcloud compute - Comandos relacionados con instancias de Compute Engine disponibles
+
+
+  gcloud beta compute comandos relacionados con Compute Engine en beta.
+
+gclaud apha app -  comando relacionado con la administracion de implementaciones de App Engine en Alfa
+
+
+
+gcloud projects list - vemos los proyectos creados
+
+
+formatos : 
+gcloud projects list --format=json \
+    --limit=1
+
+
+gcloud projects list \
+    --format=flattened --limit=1

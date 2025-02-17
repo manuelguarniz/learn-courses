@@ -1,0 +1,90 @@
+[
+  {
+    "createTime": "2025-02-08T04:45:13.537Z",
+    "lifecycleState": "ACTIVE",
+    "name": "chat-trivia",
+    "projectId": "chat-trivia-450304",
+    "projectNumber": "664539722344"
+  },
+  {
+    "createTime": "2020-09-09T14:42:54.573Z",
+    "lifecycleState": "ACTIVE",
+    "name": "hudbay-pry-sso",
+    "projectId": "hudbay-pry-sso",
+    "projectNumber": "1097622299072"
+  },
+  {
+    "createTime": "2020-04-10T16:32:57.096Z",
+    "labels": {
+      "firebase": "enabled"
+    },
+    "lifecycleState": "ACTIVE",
+    "name": "blog-angular",
+    "projectId": "blog-angular-546de",
+    "projectNumber": "31171756365"
+  },
+  {
+    "createTime": "2019-06-22T04:42:19.626Z",
+    "labels": {
+      "firebase": "enabled"
+    },
+    "lifecycleState": "ACTIVE",
+    "name": "GameAngularFirebase",
+    "projectId": "gameangularfirebase",
+    "projectNumber": "693162419831"
+  },
+  {
+    "createTime": "2019-04-02T16:19:17.679Z",
+    "lifecycleState": "ACTIVE",
+    "name": "Quickstart",
+    "projectId": "quickstart-1554221955123",
+    "projectNumber": "142668447029"
+  },
+  {
+    "createTime": "2019-04-02T16:19:13.135Z",
+    "lifecycleState": "ACTIVE",
+    "name": "Quickstart",
+    "projectId": "quickstart-1554221949833",
+    "projectNumber": "202806796763"
+  },
+  {
+    "createTime": "2018-12-01T12:51:52.652Z",
+    "labels": {
+      "firebase": "enabled"
+    },
+    "lifecycleState": "ACTIVE",
+    "name": "NuncaFueTanFacilComer",
+    "projectId": "nuncafuetanfacilescoger",
+    "projectNumber": "352668059327"
+  },
+  {
+    "createTime": "2016-11-22T02:36:47.900Z",
+    "labels": {
+      "firebase": "enabled"
+    },
+    "lifecycleState": "ACTIVE",
+    "name": "MedicApp",
+    "projectId": "medicapp-8b49d",
+    "projectNumber": "637091621762"
+  },
+  {
+    "createTime": "2016-11-18T17:09:39.097Z",
+    "labels": {
+      "firebase": "enabled"
+    },
+    "lifecycleState": "ACTIVE",
+    "name": "PostFirebase",
+    "projectId": "postfirebase-b3226",
+    "projectNumber": "510872300651"
+  },
+  {
+    "createTime": "2016-11-16T18:54:08.896Z",
+    "labels": {
+      "firebase": "enabled"
+    },
+    "lifecycleState": "ACTIVE",
+    "name": "CrudAndroidFirebase",
+    "projectId": "crudandroidfirebase-da47c",
+    "projectNumber": "1025103095524"
+  }
+]
