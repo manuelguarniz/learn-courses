@@ -1,0 +1,50 @@
+PASO 1:
+
+Crear una entidad cliente que puede ser persona jurídica o natural. Esta entidad deberá realizar cotizaciones de tipo de cambio y, como cliente, podrá obtener una tasa preferencial. El modelo debe soportar alta concurrencia.
+ 
+PASO 2:
+
+En nuevo proyecto de Spring Boot , crear un modelo o DTO para almacenar las cotizaciones del cliente, con los datos sugeridos  son: “client”,“originCurrency”, “finalCurrency”, “date” y “value”. 
+ 
+PASO 3:
+
+Para obtener la cotización del cliente se debe invocar a un servicio local que se levantará en el paso 4.  Para eso se debe preparar las librerías de integración. 
+ 
+PASO 4:
+
+Levantar el siguiente servicio en su entorno local con Docker, deberá seguir los pasos del archivo README.MD del siguiente repositorio: https://github.com/localtestcase/api-currency-thirdparty  
+ 
+PASO 5:
+
+Hacer la integración o llamada al servicio local levantado en el paso4 y obtener los datos:” date” y “value”, para eso deberá enviar los dos parámetros indicados:  
+ 
+Ejemplo URL a consumir: http://Localhost:3000/fixer/latest?base=$MO&symbols=$MD 
+
+Donde:
+
+$MO->originCurrency
+
+$MD->finalCurrency
+ 
+PASO 6:
+ 
+Crear el endPoint “postSaveClientSimulation”, el cual recibirá dos objetos:
+ 
+datosCliente: {dni, nombre, apellidos, … }
+
+datosSimulación: {m origen, m destino, date}
+
+ Evaluar
+ 
+PASO 7:
+ 
+Almacenar en BD todos los parámetros de la simulación: “cliente”,“originCurrency”, “finalCurrency”, “date” y “value”.
+ 
+ 
+PASO 8: 
+
+En el endpoint “postSaveClientSimulation” , agregar la validación, si el cliente ya existe, se debe actualizar sus datos.
+ 
+GitHub - localtestcase/api-currency-thirdparty
+Contribute to localtestcase/api-currency-thirdparty development by creating an account on GitHub.
+ 

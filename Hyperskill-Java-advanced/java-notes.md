@@ -773,7 +773,6 @@ Existen diferentes formatos numericos en java, algunos con tipificación especia
 
 * **int** -> valores enteros
 * **long** -> valores largos, se representa con L o l (se recomienda en mayusculas para evitar confusiones con el 1)
-
 * **hexadecinal** -> Es la presentación de 16 números del 0 al 9 y de A a la F para representar del 10 al 15, luego se suman para obtener el valor entero:
 
  *Ejemplo:*
@@ -786,10 +785,9 @@ Existen diferentes formatos numericos en java, algunos con tipificación especia
 
   *Ejemplo:*
 
-    -`int c = 027 -> 8^1 * 2 + 8^0 * 7 = 23`
+  -`int c = 027 -> 8^1 * 2 + 8^0 * 7 = 23`
 
-    -`int d = 27 -> 27` (no confundir con los valores entros)
-
+  -`int d = 27 -> 27` (no confundir con los valores entros)
 * **binarios** -> para escribir un número binario esté debe empezar con 0b
 
  *Ejemplo:*
@@ -817,7 +815,23 @@ Tambien podemos separar los valores numericos con separadores de 3 decimales con
 
 *Ejemplo*
 
-    - `int million = 1_000_000;`
+    -`int million = 1_000_000;`
 	- `long creditCardNumber = 1234_5678_1234_5678L;`
 	- `int hex = 0x1FF_A91;`
 	- `float floatNum = 123_000.500_2f;`
+
+### Docker
+
+```bash
+docker run --name localdb-postgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=postgresDB -d postgres
+
+# CREATE USER dbuser WITH PASSWORD '12345678' SUPERUSER;
+```
+
+```bash
+docker run --name mongodb -d -p 27017:27017 \
+        -v mongo_data:/data/db \
+        -e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
+        -e MONGO_INITDB_ROOT_PASSWORD=71854508 \
+        mongo:latest
+```
