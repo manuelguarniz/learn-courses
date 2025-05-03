@@ -31,5 +31,20 @@ int main()
     cout << "Nose que hora es" << endl;
   }
 
+  cout << "=============" << endl;
+  cout << "otros prints" << endl;
+
+  int a = 10, b = 5;
+  cout << a + b << endl;
+  cout << (a > b) << endl;
+  cout << (a < b) << endl;
+
+  cout << "=============" << endl;
+  cout << "trabajando con inputs" << endl;
+
+  cout << "Cual es tu edad?" << endl;
+  cin >> edad;
+  cout << "Tienes " << edad << " años, y eres " << ((edad >= 18) ? "mayor" : "menor") << " de edad" << endl;
+
   return 0;
 }

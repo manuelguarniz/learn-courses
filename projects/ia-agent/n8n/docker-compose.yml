@@ -1,0 +1,23 @@
+version: '3'
+services:
+  n8n:
+    image: n8nio/n8n
+    container_name: ai-n8n-service
+    restart: unless-stopped
+    ports:
+      - "5678:5678"  # Puerto para acceder a la interfaz web
+    volumes:
+      - ~/n8n/data:/home/node/.n8n  # Persistencia de datos
+      - ~/n8n/shared:/data/shared
+      - ~/n8n/backup:/backup
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true  # Opcional: Proteger con usuario/contraseña
+      - N8N_BASIC_AUTH_USER=admin    # Usuario
+      - N8N_BASIC_AUTH_PASSWORD=71854508  # Contraseña
+      - TZ=America/Lima              # Zona horaria (ajusta)
+    networks:
+      - n8n_network
+
+networks:
+  n8n_network:
+    driver: bridge
