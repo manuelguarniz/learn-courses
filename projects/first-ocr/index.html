@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lectura de Píxeles - OCR desde Cero</title>
+    <style>
+      canvas {
+        border: 1px solid #ccc;
+      }
+      #resultado {
+        white-space: pre-wrap;
+        font-family: monospace;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Lectura de Imagen - Paso 1</h2>
+    <input type="file" accept="image/*" onchange="cargarImagen(event)" />
+    <canvas id="canvas" width="400" height="600"></canvas>
+    <div id="resultado"></div>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      function cargarImagen(event) {
+        const img = new Image();
+        img.src = URL.createObjectURL(event.target.files[0]);
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const imageData = ctx.getImageData(0, 0, img.width, img.height);
+          const data = imageData.data;
+
+          // Binarización
+          for (let y = 0; y < img.height; y++) {
+            for (let x = 0; x < img.width; x++) {
+              const i = (y * img.width + x) * 4;
+              const r = data[i];
+              const g = data[i + 1];
+              const b = data[i + 2];
+
+              const brightness = (r + g + b) / 3;
+
+              if (brightness < 75) {
+                // Negro (posible texto)
+                data[i] = 0;
+                data[i + 1] = 0;
+                data[i + 2] = 0;
+              } else {
+                // Blanco
+                data[i] = 255;
+                data[i + 1] = 255;
+                data[i + 2] = 255;
+              }
+            }
+          }
+
+          const visited = new Set();
+          const boxes = [];
+
+          function getIndex(x, y) {
+            return (y * img.width + x) * 4;
+          }
+
+          function isBlack(x, y) {
+            const i = getIndex(x, y);
+            return (
+              x >= 0 &&
+              x < img.width &&
+              y >= 0 &&
+              y < img.height &&
+              data[i] === 0 &&
+              data[i + 1] === 0 &&
+              data[i + 2] === 0
+            );
+          }
+
+          function bfs(x, y) {
+            const queue = [[x, y]];
+            let minX = x,
+              minY = y,
+              maxX = x,
+              maxY = y;
+            const key = (x, y) => `${x},${y}`;
+            visited.add(key(x, y));
+
+            while (queue.length > 0) {
+              const [cx, cy] = queue.shift();
+
+              minX = Math.min(minX, cx);
+              maxX = Math.max(maxX, cx);
+              minY = Math.min(minY, cy);
+              maxY = Math.max(maxY, cy);
+
+              for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                  const nx = cx + dx;
+                  const ny = cy + dy;
+                  const nkey = key(nx, ny);
+                  if (isBlack(nx, ny) && !visited.has(nkey)) {
+                    visited.add(nkey);
+                    queue.push([nx, ny]);
+                  }
+                }
+              }
+            }
+
+            // Solo guardar si es suficientemente grande
+            if (maxX - minX > 8.5 && maxY - minY > 8.5) {
+              boxes.push({ minX, minY, maxX, maxY });
+            }
+          }
+
+          // Escanear toda la imagen
+          for (let y = 0; y < img.height; y++) {
+            for (let x = 0; x < img.width; x++) {
+              const key = `${x},${y}`;
+              if (isBlack(x, y) && !visited.has(key)) {
+                bfs(x, y);
+              }
+            }
+          }
+
+          // Dibuja las cajas
+          // ctx.putImageData(imageData, 0, 0);
+          // ctx.strokeStyle = "red";
+          // ctx.lineWidth = 1;
+
+          const resultado = document.getElementById("resultado");
+          let texto = [];
+          texto.length = boxes.length;
+
+          boxes.forEach((box, index) => {
+            const margen = 2;
+            const startX = box.minX - margen;
+            const startY = box.minY - margen;
+            const width = box.maxX - box.minX + margen * 2;
+            const height = box.maxY - box.minY + margen * 2;
+            const boxImageData = ctx.getImageData(
+              startX,
+              startY,
+              width,
+              height
+            );
+
+            const div = document.createElement("div");
+            div.id = `canvas-${index}`;
+            const tempCanvas = document.createElement("canvas");
+            const tmpBreakLine = document.createElement("br");
+            tempCanvas.width = width;
+            tempCanvas.height = height;
+            const tempCtx = tempCanvas.getContext("2d");
+            tempCtx.putImageData(boxImageData, 0, 0);
+            div.appendChild(tempCanvas);
+            resultado.appendChild(div);
+            // resultado.appendChild(tempCanvas);
+            // resultado.appendChild(tmpBreakLine);
+
+            ocr(tempCanvas, index);
+          });
+
+          function ocr(tempCanvas, index) {
+            // OCR
+            Tesseract.recognize(tempCanvas, "spa", {
+              logger: (m) => console.log(m),
+            }).then(({ data: { text } }) => {
+              console.log(`Caja ${index}:`, text.trim());
+
+              const span = document.createElement("span");
+              const getTmpCanvas = document.getElementById(`canvas-${index}`);
+
+              span.textContent = text.trim();
+              getTmpCanvas.appendChild(span);
+            });
+          }
+        };
+      }
+    </script>
+    <script src="https://unpkg.com/tesseract.js@v4.0.2/dist/tesseract.min.js"></script>
+  </body>
+</html>
